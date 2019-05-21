@@ -1,6 +1,7 @@
 package se.nackademin.restcms.Entities;
 
 import lombok.Data;
+
 import javax.persistence.*;
 
 @Data
@@ -10,8 +11,7 @@ public class Admin {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "admin_id")
-    private Integer id;
+    private long id;
     private String email;
     private String password;
 
