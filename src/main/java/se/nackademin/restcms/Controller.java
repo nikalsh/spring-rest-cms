@@ -9,7 +9,7 @@ public class Controller {
 
     @GetMapping("/")
     public String HelloWorld() {
-        return "HELLO WORLD";
+        return "HELLO WORLD FROM SPRING BOOT";
     }
 
 }
