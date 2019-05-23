@@ -1,4 +1,4 @@
-package se.nackademin.restcms.entities;
+package se.nackademin.restcms.Entities;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,12 +19,16 @@ public class Admin {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
     private String email;
     private String password;
 
     //fk
     @JoinColumn(name = "blog_id", table = "blog")
     private int blogid;
+
+    @Lob
+    @Column(name = "photo", columnDefinition = "BLOB")
+    private byte[] photo;
 
 }

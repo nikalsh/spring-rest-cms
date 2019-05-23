@@ -1,4 +1,4 @@
-package se.nackademin.restcms.entities;
+package se.nackademin.restcms.Entities;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -6,8 +6,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Data
@@ -20,7 +20,11 @@ public class Blog {
     @Column(name = "blog_id")
     private int id;
 
+
     private String blogName;
+
+    @OneToMany(mappedBy = "blog")
+    private Set<Post> posts;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
