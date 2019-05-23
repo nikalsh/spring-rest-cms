@@ -9,7 +9,7 @@ import se.nackademin.restcms.Entities.Admin;
 
 @RepositoryRestResource(collectionResourceRel = "admin", path = "admin")
 public interface AdminRepository extends PagingAndSortingRepository<Admin, Long> {
-
+    
     List<Admin> findByEmail(@Param("email") String email);
 
 }

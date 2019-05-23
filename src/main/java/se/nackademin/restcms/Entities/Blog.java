@@ -5,6 +5,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Data
@@ -16,6 +17,9 @@ public class Blog {
     @Column(name = "blog_id")
     private int id;
 
+    @OneToMany(mappedBy="blog")
+    private Set<Post> posts;
+    
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "create_date")

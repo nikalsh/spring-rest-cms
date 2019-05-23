@@ -19,4 +19,8 @@ public class Admin {
     @JoinColumn(name = "blog_id", table = "blog")
     private int blogid;
 
+    @Lob
+    @Column(name = "photo", columnDefinition="BLOB")
+    private byte[] photo;
+    
 }
