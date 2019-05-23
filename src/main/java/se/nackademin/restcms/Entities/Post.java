@@ -14,6 +14,7 @@ public class Post {
 
 @Id
 @GeneratedValue(strategy = GenerationType.AUTO)
+@Column(name = "post_id")
 private long id;
 
 @ManyToOne
