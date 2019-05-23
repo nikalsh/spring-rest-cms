@@ -16,11 +16,18 @@ public class BlogAdmin {
         this.password = password;
     }
 
+    public BlogAdmin(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String email;
+    private String name;
     private String password;
 
     //fk

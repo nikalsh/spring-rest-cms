@@ -2,6 +2,7 @@ package se.nackademin.restcms.oauth2;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -9,6 +10,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+
+import javax.xml.ws.http.HTTPBinding;
 
 @Configuration
 @EnableWebSecurity
@@ -32,12 +35,23 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/test/**").hasAnyRole("USER", "ADMIN")
-                
+                .antMatchers(HttpMethod.GET, "/blogadmin/**").permitAll()
+                .antMatchers("/blogadmin/**").hasAnyRole("USER", "ADMIN")
+
+                .antMatchers(HttpMethod.GET, "/post/**").permitAll()
+                .antMatchers("/post/**").hasAnyRole("USER", "ADMIN")
+
+                .antMatchers(HttpMethod.GET, "/blog/**").permitAll()
+                .antMatchers("/blog/**").hasAnyRole("USER", "ADMIN")
+
+
+
                 .and()
+
                 .csrf().disable()
                 .formLogin().disable();
     }
+
 
 //    @Bean
 //    public UserDetailsService userDetailsService() {
