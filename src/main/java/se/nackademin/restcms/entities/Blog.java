@@ -1,13 +1,17 @@
-package se.nackademin.restcms.Entities;
+package se.nackademin.restcms.entities;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
 @Data
+@NoArgsConstructor
 @Table(name = "blog")
 public class Blog {
 
@@ -15,6 +19,8 @@ public class Blog {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "blog_id")
     private int id;
+
+    private String blogName;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
