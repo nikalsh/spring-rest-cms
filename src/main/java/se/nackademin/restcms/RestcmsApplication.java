@@ -4,8 +4,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import se.nackademin.restcms.CrudRepositories.AdminRepository;
-import se.nackademin.restcms.Entities.Admin;
+import se.nackademin.restcms.CrudRepositories.BlogAdminRepository;
+import se.nackademin.restcms.Entities.BlogAdmin;
 
 
 @SpringBootApplication
@@ -18,13 +18,13 @@ public class RestcmsApplication {
 
 
     @Bean
-    public CommandLineRunner demo(AdminRepository repo) {
+    public CommandLineRunner demo(BlogAdminRepository repo) {
         return (args) -> {
-            repo.save(new Admin("kuk@huvud.se", "kukhuve"));
-            repo.save(new Admin("root@root.root", "root"));
-            repo.save(new Admin("niklas@niklas.niklas", "niklas"));
-            repo.save(new Admin("josef@josef.josef", "josef"));
-            repo.save(new Admin("johan@johan.johan", "johan"));
+            repo.save(new BlogAdmin("kuk@huvud.se", "kukhuve"));
+            repo.save(new BlogAdmin("root@root.root", "root"));
+            repo.save(new BlogAdmin("niklas@niklas.niklas", "niklas"));
+            repo.save(new BlogAdmin("josef@josef.josef", "josef"));
+            repo.save(new BlogAdmin("johan@johan.johan", "johan"));
         };
     }
 }

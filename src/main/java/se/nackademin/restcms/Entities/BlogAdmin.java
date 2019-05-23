@@ -8,10 +8,10 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "admin")
-public class Admin {
+@Table(name = "blogAdmin")
+public class BlogAdmin {
 
-    public Admin(String email, String password) {
+    public BlogAdmin(String email, String password) {
         this.email = email;
         this.password = password;
     }
