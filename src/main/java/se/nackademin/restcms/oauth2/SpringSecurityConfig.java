@@ -30,6 +30,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     //Specify protected endpoints here by chaining .antMatchers
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.headers().frameOptions().disable();
 
         http
                 .httpBasic()
