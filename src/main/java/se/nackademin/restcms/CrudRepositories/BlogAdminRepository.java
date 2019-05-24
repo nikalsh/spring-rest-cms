@@ -12,6 +12,6 @@ import java.util.List;
 public interface BlogAdminRepository extends JpaRepository<BlogAdmin, Long> {
 
     List<BlogAdmin> findByEmail(@Param("email") String email);
-
+    BlogAdmin findByName(String name);
 
 }

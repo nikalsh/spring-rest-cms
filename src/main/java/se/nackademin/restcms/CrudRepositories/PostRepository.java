@@ -10,5 +10,4 @@ import se.nackademin.restcms.Entities.Post;
 public interface PostRepository extends JpaRepository<Post, Long> {
 
 
-
 }
