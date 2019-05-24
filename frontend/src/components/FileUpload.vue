@@ -57,7 +57,7 @@ export default {
             /*
           Make the request to the POST /single-file URL
         */
-            axios.post('http://localhost:8080/uploadImage',
+            axios.post('http://localhost:8080/uploadFile',
                 formData,
                 {
                     headers: {
