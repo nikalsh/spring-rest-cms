@@ -1,4 +1,4 @@
-package se.nackademin.restcms.controller;
+package se.nackademin.restcms.Controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
