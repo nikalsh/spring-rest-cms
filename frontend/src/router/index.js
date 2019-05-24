@@ -1,15 +1,15 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import FileUpload from '../components/FileUpload'
 
 Vue.use(Router)
-
+/* eslint-disable */
 export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
-    }
-  ]
+    routes: [
+        {
+            path: '/',
+            name: 'FileUpload',
+            component: FileUpload
+        }
+    ]
 })

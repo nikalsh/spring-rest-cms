@@ -24,6 +24,7 @@ public class BlogAdmin {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "blogadmin_id")
     private Long id;
 
     private String email;

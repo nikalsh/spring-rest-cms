@@ -21,6 +21,10 @@ module.exports = {
   ],
   // add your custom rules here
   rules: {
+    indent: ['error', 4],
+    'linebreak-style': ['error', 'unix'],
+    quotes: ['error', 'single'],
+    semi: ['error', 'never'],
     // allow async-await
     'generator-star-spacing': 'off',
     // allow debugger during development
