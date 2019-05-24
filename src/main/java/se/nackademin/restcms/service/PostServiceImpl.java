@@ -2,41 +2,44 @@ package se.nackademin.restcms.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
+import se.nackademin.restcms.CrudRepositories.BlogRepository;
 import se.nackademin.restcms.CrudRepositories.PostRepository;
+import se.nackademin.restcms.Entities.ImageFile;
 import se.nackademin.restcms.Entities.Post;
+import se.nackademin.restcms.exception.FileStorageException;
+import se.nackademin.restcms.exception.MyFileNotFoundException;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class PostServiceImpl implements PostService {
 
-	// Replaces @AutoWired
-	private final PostRepository postRepository;
-public PostServiceImpl (PostRepository postRepository) {
-	this.postRepository = postRepository;
-}
+    @Autowired
+    private BlogRepository blogRepository;
+    @Autowired
+    private PostRepository postRepository;
 
-// Needs implementation
-@Override
-public List<Post> findAll () {
-	return null;
-}
+    @Override
+    public Post storePost(String file) {
 
-// Needs implementation
-@Override
-public Optional<Post> findById (Long id) {
-	return Optional.empty ();
-}
 
-// Needs implementation
-@Override
-public void deleteById (Long id) {
-}
+            Post post = new Post ( file);
 
-// Needs implementation
-@Override
-public Post save (Post post) {
-	return null;
-}
+            post.setBlog (blogRepository.getOne ((long) 2));
+
+            return postRepository.save (post);
+
+    }
+
+    @Override
+    public Post getPost(String fileId) {
+
+        return postRepository.findById (fileId)
+                .orElseThrow (() -> new MyFileNotFoundException("File not found with id " + fileId));
+    }
+
 }

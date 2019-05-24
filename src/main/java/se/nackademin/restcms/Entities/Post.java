@@ -2,6 +2,7 @@ package se.nackademin.restcms.Entities;
 
 
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -13,9 +14,9 @@ import java.sql.Clob;
 public class Post {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "post_id")
-    private long id;
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    private String id;
 
     @ManyToOne
     @JoinColumn(name = "blog_id", nullable = false)
@@ -28,6 +29,13 @@ public class Post {
     private LocalDate lastUpdated;
 
     @Column
-    private Clob postData;
+    @Lob
+    private String postData;
 
+    public Post() {
+    }
+
+    public Post(String postData) {
+        this.postData = postData;
+    }
 }

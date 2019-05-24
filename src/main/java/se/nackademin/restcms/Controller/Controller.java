@@ -1,4 +1,4 @@
-package se.nackademin.restcms;
+package se.nackademin.restcms.Controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;

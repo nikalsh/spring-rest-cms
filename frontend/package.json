@@ -11,7 +11,15 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^12.1.0",
+    "@ckeditor/ckeditor5-dev-utils": "^12.0.1",
+    "@ckeditor/ckeditor5-dev-webpack-plugin": "^8.0.1",
+    "@ckeditor/ckeditor5-vue": "^1.0.0-beta.2",
+    "axios": "^0.18.0",
+    "raw-loader": "^0.5.1",
     "vue": "^2.5.2",
+    "vue-axios": "^2.1.4",
+    "vue-ckeditor5": "^0.4.1",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {
@@ -46,7 +54,7 @@
     "ora": "^1.2.0",
     "portfinder": "^1.0.13",
     "postcss-import": "^11.0.0",
-    "postcss-loader": "^2.0.8",
+    "postcss-loader": "^2.1.6",
     "postcss-url": "^7.2.1",
     "rimraf": "^2.6.0",
     "semver": "^5.3.0",

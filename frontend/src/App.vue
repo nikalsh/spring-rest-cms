@@ -1,12 +1,13 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+
     <router-view/>
   </div>
 </template>
 
 <script>
-export default {
+/* eslint-disable */
+  export default {
   name: 'App'
 }
 </script>

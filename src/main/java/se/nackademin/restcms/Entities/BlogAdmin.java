@@ -24,18 +24,31 @@ public class BlogAdmin {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "blogadmin_id")
     private Long id;
 
     private String email;
     private String name;
     private String password;
 
-    //fk
-    @JoinColumn(name = "blog_id", table = "blog")
-    private int blogid;
+    @OneToOne(mappedBy = "blogAdmin",
+            cascade = CascadeType.ALL, orphanRemoval = true)
+    private Blog blog;
 
     @Lob
     @Column(name = "photo", columnDefinition = "BLOB")
     private byte[] photo;
+
+    public void addBlog(Blog blog) {
+        this.blog = blog;
+        blog.setBlogAdmin(this);
+    }
+
+    public void removeBlog(Blog blog) {
+        if (blog != null) {
+            blog.setBlogAdmin(null);
+        }
+        this.blog = null;
+    }
 
 }
