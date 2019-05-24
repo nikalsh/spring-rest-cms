@@ -35,11 +35,12 @@ export default {
             Add the form data we need to submit
         */
             formData.append('file', this.file)
-            let xhr = new XMLHttpRequest()
-            xhr.open('POST', '/uploadFile')
-
-            xhr.onload = function () {
-                console.log(xhr.responseText)
+          console.log(this.file);
+          // let xhr = new XMLHttpRequest()
+          //   xhr.open('POST', '/uploadFile')
+          //
+          //   xhr.onload = function () {
+          //       console.log(xhr.responseText)
                 // var response = JSON.parse(xhr.responseText)
                 // if (xhr.status == 200) {
                 //     singleFileUploadError.style.display = 'none'
@@ -49,14 +50,14 @@ export default {
                 //     singleFileUploadSuccess.style.display = 'none'
                 //     singleFileUploadError.innerHTML = (response && response.message) || 'Some Error Occurred'
                 // }
-            }
-
-            xhr.send(formData)
+            // }
+            //
+            // xhr.send(formData)
 
             /*
           Make the request to the POST /single-file URL
         */
-            axios.post('http://localhost:8080/uploadFile',
+            axios.post('http://localhost:8080/uploadImage',
                 formData,
                 {
                     headers: {

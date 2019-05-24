@@ -24,7 +24,10 @@ private BlogAdmin blogAdmin;
 
     @Lob
     private byte[] data;
-    
+
+    public ImageFile() {
+    }
+
     public ImageFile (String fileName, String fileType, byte[] data) {
         this.fileName = fileName;
         this.fileType = fileType;

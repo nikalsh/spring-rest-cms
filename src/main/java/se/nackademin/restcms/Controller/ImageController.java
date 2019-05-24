@@ -1,38 +1,68 @@
 package se.nackademin.restcms.Controller;
 
-
-
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import se.nackademin.restcms.CrudRepositories.ImageRepository;
-import se.nackademin.restcms.ImageTest;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import se.nackademin.restcms.Entities.ImageFile;
+import se.nackademin.restcms.CKResponse;
+import se.nackademin.restcms.payload.UploadedImageResponse;
+import se.nackademin.restcms.service.ImageFileStorageServiceImpl;
 
 @RestController
 public class ImageController {
-    @Autowired
-    ImageRepository imageRepository;
 
-//    @PostMapping("/uploadFile")
-//    public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file) {
-//        String fileName = fileStorageService.storeFile(file);
-//
-//        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-//                .path("/downloadFile/")
-//                .path(fileName)
-//                .toUriString();
-//
-//        return new UploadFileResponse(fileName, fileDownloadUri,
-//                file.getContentType(), file.getSize());
-//    }
-@CrossOrigin(origins = "http://localhost:8081")
+    private static final Logger logger = LoggerFactory.getLogger(ImageController.class);
+
+    private final ImageFileStorageServiceImpl imageFileStorageService;
+
+    public ImageController (ImageFileStorageServiceImpl imageFileStorageService) {
+        this.imageFileStorageService = imageFileStorageService;
+    }
+
+    @CrossOrigin(origins = "http://localhost:8081")
+    @PostMapping("/uploadFile")
+    public UploadedImageResponse uploadFile(@RequestParam("file") MultipartFile file) {
+        ImageFile imageFile = imageFileStorageService.storeImageFile (file);
+
+        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/downloadFile/")
+                .path(imageFile.getId())
+                .toUriString();
+
+        return new UploadedImageResponse (imageFile.getFileName(), fileDownloadUri,
+                file.getContentType(), file.getSize());
+    }
+
+
+    @CrossOrigin(origins = "http://localhost:8081")
     @PostMapping("/uploadImage")
-    public ResponseEntity<ImageTest> uploadImage() {
-    ImageTest obj = new ImageTest();
-    obj.setUrl("https://img.purch.com/w/660/aHR0cDovL3d3dy5saXZlc2NpZW5jZS5jb20vaW1hZ2VzL2kvMDAwLzEwNC84MTkvb3JpZ2luYWwvY3V0ZS1raXR0ZW4uanBn");
-    return new ResponseEntity<>(obj,HttpStatus.OK);
+    public ResponseEntity<CKResponse> uploadImage(@RequestParam("file") MultipartFile file) {
+        ImageFile imageFile = imageFileStorageService.storeImageFile (file);
+        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/downloadFile/")
+                .path(imageFile.getId())
+                .toUriString();
+        return new ResponseEntity<>(new CKResponse(fileDownloadUri), HttpStatus.OK);
 
+    }
+
+    @GetMapping("/downloadFile/{fileId}")
+    public ResponseEntity<Resource> downloadFile(@PathVariable String fileId) {
+        // Load file from database
+        ImageFile imageFile = imageFileStorageService.getFile(fileId);
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(imageFile.getFileType()))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + imageFile.getFileName() + "\"")
+                .body(new ByteArrayResource (imageFile.getData()));
     }
 
 }

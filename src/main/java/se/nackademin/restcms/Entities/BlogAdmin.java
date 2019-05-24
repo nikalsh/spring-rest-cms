@@ -31,24 +31,24 @@ public class BlogAdmin {
     private String name;
     private String password;
 
-@OneToOne(mappedBy = "blogAdmin",
-        cascade = CascadeType.ALL, orphanRemoval = true)
-private Blog blog;
+    @OneToOne(mappedBy = "blogAdmin",
+            cascade = CascadeType.ALL, orphanRemoval = true)
+    private Blog blog;
 
     @Lob
     @Column(name = "photo", columnDefinition = "BLOB")
     private byte[] photo;
 
-public void addBlog(Blog blog) {
-    this.blog = blog;
-    blog.setBlogAdmin (this);
-}
-
-public void removeBlog(Blog blog) {
-    if (blog != null) {
-        blog.setBlogAdmin (null);
+    public void addBlog(Blog blog) {
+        this.blog = blog;
+        blog.setBlogAdmin(this);
     }
-    this.blog = null;
-}
+
+    public void removeBlog(Blog blog) {
+        if (blog != null) {
+            blog.setBlogAdmin(null);
+        }
+        this.blog = null;
+    }
 
 }
