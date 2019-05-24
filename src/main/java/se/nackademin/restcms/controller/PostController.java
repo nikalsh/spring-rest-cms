@@ -1,23 +1,16 @@
-package se.nackademin.restcms.Controller;
+package se.nackademin.restcms.controller;
 
 
 
         import org.slf4j.Logger;
         import org.slf4j.LoggerFactory;
-        import org.springframework.core.io.ByteArrayResource;
-        import org.springframework.core.io.Resource;
-        import org.springframework.http.HttpHeaders;
         import org.springframework.http.HttpStatus;
         import org.springframework.http.MediaType;
         import org.springframework.http.ResponseEntity;
         import org.springframework.web.bind.annotation.*;
-        import org.springframework.web.multipart.MultipartFile;
         import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-        import se.nackademin.restcms.Entities.ImageFile;
         import se.nackademin.restcms.CKResponse;
-        import se.nackademin.restcms.Entities.Post;
-        import se.nackademin.restcms.payload.UploadedImageResponse;
-        import se.nackademin.restcms.service.ImageFileStorageServiceImpl;
+        import se.nackademin.restcms.entities.Post;
         import se.nackademin.restcms.service.PostService;
 
 @RestController

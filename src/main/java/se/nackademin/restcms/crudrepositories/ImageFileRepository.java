@@ -1,9 +1,8 @@
-package se.nackademin.restcms.CrudRepositories;
+package se.nackademin.restcms.crudrepositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
-import org.springframework.stereotype.Repository;
-import se.nackademin.restcms.Entities.ImageFile;
+import se.nackademin.restcms.entities.ImageFile;
 
 @RepositoryRestResource(collectionResourceRel = "image", path = "image")
 public interface ImageFileRepository extends JpaRepository<ImageFile, String> {

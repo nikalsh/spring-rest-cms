@@ -5,8 +5,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import se.nackademin.restcms.CrudRepositories.BlogAdminRepository;
-import se.nackademin.restcms.Entities.BlogAdmin;
+import se.nackademin.restcms.crudrepositories.BlogAdminRepository;
+import se.nackademin.restcms.entities.BlogAdmin;
 
 @Service
 public class MyUserDetailsService implements UserDetailsService {

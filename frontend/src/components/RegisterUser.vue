@@ -1,7 +1,7 @@
 <template>
-<div>
-  <FileUpload></FileUpload>
-  <p>
+  <div>
+    <FileUpload/>
+    <p>
       <label for="name">Name</label>
       <input
         id="name"
@@ -9,9 +9,9 @@
         type="text"
         name="name"
       >
-      </p>
+    </p>
 
-  <p>
+    <p>
       <label for="email">Email</label>
       <input
         id="email"
@@ -20,8 +20,8 @@
         name="email"
         min="0"
       >
-  </p>
-  <p>
+    </p>
+    <p>
       <label for="password">Password</label>
       <input
         id="password"
@@ -30,18 +30,18 @@
         name="password"
         min="0"
       >
-  </p>
-  <p>
+    </p>
+    <p>
       <input
         type="submit"
         value="Submit"
       >
-  </p>
-</div>
+    </p>
+  </div>
 </template>
 
 <script>
-import FileUpload from './FileUpload'
+import FileUpload from './FileUpload';
 export default {
     components: {
         FileUpload
@@ -51,7 +51,7 @@ export default {
             password: '',
             name: '',
             email: ''
-        }
+        };
     }
-}
+};
 </script>

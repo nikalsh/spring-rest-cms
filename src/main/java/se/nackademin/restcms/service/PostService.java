@@ -1,12 +1,6 @@
 package se.nackademin.restcms.service;
 
-import org.springframework.web.multipart.MultipartFile;
-import se.nackademin.restcms.Entities.ImageFile;
-import se.nackademin.restcms.Entities.Post;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import se.nackademin.restcms.entities.Post;
 
 public interface PostService {
 

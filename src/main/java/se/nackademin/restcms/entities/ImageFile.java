@@ -1,4 +1,4 @@
-package se.nackademin.restcms.Entities;
+package se.nackademin.restcms.entities;
 
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;

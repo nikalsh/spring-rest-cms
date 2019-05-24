@@ -1,9 +1,9 @@
 package se.nackademin.restcms.service;
 
 import org.springframework.stereotype.Service;
-import se.nackademin.restcms.CrudRepositories.BlogAdminRepository;
-import se.nackademin.restcms.Entities.Blog;
-import se.nackademin.restcms.Entities.BlogAdmin;
+import se.nackademin.restcms.crudrepositories.BlogAdminRepository;
+import se.nackademin.restcms.entities.Blog;
+import se.nackademin.restcms.entities.BlogAdmin;
 
 import javax.annotation.PostConstruct;
 

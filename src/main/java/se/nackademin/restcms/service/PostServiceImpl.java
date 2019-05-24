@@ -2,18 +2,10 @@ package se.nackademin.restcms.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
-import org.springframework.web.multipart.MultipartFile;
-import se.nackademin.restcms.CrudRepositories.BlogRepository;
-import se.nackademin.restcms.CrudRepositories.PostRepository;
-import se.nackademin.restcms.Entities.ImageFile;
-import se.nackademin.restcms.Entities.Post;
-import se.nackademin.restcms.exception.FileStorageException;
+import se.nackademin.restcms.crudrepositories.BlogRepository;
+import se.nackademin.restcms.crudrepositories.PostRepository;
+import se.nackademin.restcms.entities.Post;
 import se.nackademin.restcms.exception.MyFileNotFoundException;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class PostServiceImpl implements PostService {

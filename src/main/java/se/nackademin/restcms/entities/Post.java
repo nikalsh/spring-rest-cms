@@ -1,4 +1,4 @@
-package se.nackademin.restcms.Entities;
+package se.nackademin.restcms.entities;
 
 
 import lombok.Data;
@@ -6,7 +6,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.sql.Clob;
 
 @Data
 @Entity

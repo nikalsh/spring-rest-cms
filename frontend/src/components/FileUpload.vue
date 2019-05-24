@@ -2,54 +2,48 @@
   <div class="container">
     <div class="large-12 medium-12 small-12 cell">
       <label>File
-        <input type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
+        <input 
+          id="file" 
+          ref="file" 
+          type="file" 
+          @change="handleFileUpload()">
       </label>
-      <button v-on:click="submitFile()">Submit</button>
+      <button @click="submitFile()">Submit</button>
     </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
+import axios from 'axios';
 export default {
-    /*
-      Defines the data used by the component
-    */
     data () {
         return {
             file: ''
-        }
+        };
     },
 
     methods: {
-        /*
-        Submits the file to the server
-      */
         submitFile () {
-        /*
-                Initialize the form data
-            */
-            let formData = new FormData()
+            let formData = new FormData();
+            formData.append('file', this.file);
 
-            /*
-            Add the form data we need to submit
-        */
-            formData.append('file', this.file)
-          console.log(this.file);
-          // let xhr = new XMLHttpRequest()
-          //   xhr.open('POST', '/uploadFile')
-          //
-          //   xhr.onload = function () {
-          //       console.log(xhr.responseText)
-                // var response = JSON.parse(xhr.responseText)
-                // if (xhr.status == 200) {
-                //     singleFileUploadError.style.display = 'none'
-                //     singleFileUploadSuccess.innerHTML = '<p>File Uploaded Successfully.</p><p>DownloadUrl : <a href=\'' + response.fileDownloadUri + '\' target=\'_blank\'>' + response.fileDownloadUri + '</a></p>'
-                //     singleFileUploadSuccess.style.display = 'block'
-                // } else {
-                //     singleFileUploadSuccess.style.display = 'none'
-                //     singleFileUploadError.innerHTML = (response && response.message) || 'Some Error Occurred'
-                // }
+            // eslint-disable-next-line no-console
+            console.log(this.file);
+
+            // let xhr = new XMLHttpRequest()
+            //   xhr.open('POST', '/uploadFile')
+            //
+            //   xhr.onload = function () {
+            //       console.log(xhr.responseText)
+            // var response = JSON.parse(xhr.responseText)
+            // if (xhr.status == 200) {
+            //     singleFileUploadError.style.display = 'none'
+            //     singleFileUploadSuccess.innerHTML = '<p>File Uploaded Successfully.</p><p>DownloadUrl : <a href=\'' + response.fileDownloadUri + '\' target=\'_blank\'>' + response.fileDownloadUri + '</a></p>'
+            //     singleFileUploadSuccess.style.display = 'block'
+            // } else {
+            //     singleFileUploadSuccess.style.display = 'none'
+            //     singleFileUploadError.innerHTML = (response && response.message) || 'Some Error Occurred'
+            // }
             // }
             //
             // xhr.send(formData)
@@ -65,19 +59,23 @@ export default {
                     }
                 }
             ).then(function () {
-                console.log('SUCCESS!!')
+
+                // eslint-disable-next-line no-console
+                console.log('SUCCESS!!');
             })
                 .catch(function () {
-                    console.log('FAILURE!!')
-                })
+
+                    // eslint-disable-next-line no-console
+                    console.log('FAILURE!!');
+                });
         },
 
         /*
         Handles a change on the file upload
       */
         handleFileUpload () {
-            this.file = this.$refs.file.files[0]
+            this.file = this.$refs.file.files[0];
         }
     }
-}
+};
 </script>

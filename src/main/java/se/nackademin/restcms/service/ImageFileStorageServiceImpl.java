@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
-import se.nackademin.restcms.CrudRepositories.BlogAdminRepository;
-import se.nackademin.restcms.CrudRepositories.ImageFileRepository;
-import se.nackademin.restcms.Entities.ImageFile;
+import se.nackademin.restcms.crudrepositories.BlogAdminRepository;
+import se.nackademin.restcms.crudrepositories.ImageFileRepository;
+import se.nackademin.restcms.entities.ImageFile;
 import se.nackademin.restcms.exception.FileStorageException;
 import se.nackademin.restcms.exception.MyFileNotFoundException;
 

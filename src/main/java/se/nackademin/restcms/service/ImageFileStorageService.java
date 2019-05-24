@@ -1,7 +1,7 @@
 package se.nackademin.restcms.service;
 
 import org.springframework.web.multipart.MultipartFile;
-import se.nackademin.restcms.Entities.ImageFile;
+import se.nackademin.restcms.entities.ImageFile;
 
 public interface ImageFileStorageService {
 
