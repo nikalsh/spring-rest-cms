@@ -18,9 +18,9 @@ public class ImageFile {
 
     private String fileType;
 
-@OneToOne
-@JoinColumn(name = "blogadmin_id", nullable = false)
-private BlogAdmin blogAdmin;
+    @OneToOne
+    @JoinColumn(name = "blogadmin_id", nullable = false)
+    private BlogAdmin blogAdmin;
 
     @Lob
     private byte[] data;
@@ -28,10 +28,10 @@ private BlogAdmin blogAdmin;
     public ImageFile() {
     }
 
-    public ImageFile (String fileName, String fileType, byte[] data) {
+    public ImageFile(String fileName, String fileType, byte[] data) {
         this.fileName = fileName;
         this.fileType = fileType;
         this.data = data;
     }
-    
+
 }

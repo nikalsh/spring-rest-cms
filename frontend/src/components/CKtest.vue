@@ -1,17 +1,17 @@
 <template>
   <div id="CKtest">
 
-    <ckeditor :editor="editor" v-model="editorData" :config="editorConfig" ></ckeditor>
+    <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
     <button v-on:click="emptyEditor()">Empty the editor</button>
 
     <h2>Editor data</h2>
     <code>{{ editorData }}</code>
-
+    <button v-on:click="SubmitPost()">Submit</button>
   </div>
 </template>
 
 <script>
-
+  import axios from 'axios';
   import UploadAdapter from "../scripts/UploadAdapter";
   import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
@@ -19,7 +19,7 @@
     name: 'CKtest',
     data: function () {
       return {
-        editor:ClassicEditor,
+        editor: ClassicEditor,
         editorData: '<p>Content of the editor.</p>',
         editorConfig: {
           extraPlugins: [this.MyCustomUploadAdapterPlugin]
@@ -34,6 +34,33 @@
       },
       emptyEditor() {
         this.editorData = '';
+      },
+      SubmitPost() {
+        let data = new FormData();
+
+        let url = 'http://localhost:8080/uploadPost';
+        let data2=this.editorData;
+        //console.log(data2);
+        data.append('file', data2);
+        axios.post(url, data, {
+          headers: {
+            'Content-Type': 'text/html'
+          }
+        })
+           .then(response => {
+
+            console.log(response);
+          //   if (response.data.uploaded) {
+          //     resolve({
+          //       default: response.data.url,
+          //     });
+          //   } else {
+          //     reject(response.data.error.message);
+          //   }
+          }).catch(error => {
+          console.log(error);
+        });
+
       }
     }
   }

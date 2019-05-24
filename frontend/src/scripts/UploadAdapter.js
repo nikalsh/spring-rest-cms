@@ -11,6 +11,7 @@ export default class UploadAdapter {
         return new Promise((resolve, reject) => {
           let image = new FormData();
           let url = 'http://localhost:8080/uploadImage';
+          console.log(uploadedFile);
           image.append('file', uploadedFile);
           axios.post(url, image, {
             headers: {
