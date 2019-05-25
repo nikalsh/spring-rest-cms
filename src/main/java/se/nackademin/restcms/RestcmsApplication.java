@@ -14,6 +14,7 @@ public class RestcmsApplication {
 
 // could not get cascade to work from here (onetone blogadmin - blog)
 
+
 //    @Bean
 //    public CommandLineRunner demo(BlogAdminRepository repo) {
 //        return (args) -> {

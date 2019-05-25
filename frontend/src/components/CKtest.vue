@@ -1,12 +1,15 @@
 <template>
   <div id="CKtest">
 
-    <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
-    <button v-on:click="emptyEditor()">Empty the editor</button>
+    <ckeditor
+      :editor="editor"
+      v-model="editorData"
+      :config="editorConfig"/>
+    <button @click="emptyEditor()">Empty the editor</button>
 
     <h2>Editor data</h2>
     <code>{{ editorData }}</code>
-    <button v-on:click="SubmitPost()">Submit</button>
+    <button @click="SubmitPost()">Submit</button>
   </div>
 </template>
 
@@ -16,7 +19,7 @@
   import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
   import autosave from '@ckeditor/ckeditor5-autosave';
 
-  export default {
+export default {
     name: 'CKtest',
     data: function () {
       return {
@@ -29,16 +32,16 @@
       }
     },
     methods: {
-      MyCustomUploadAdapterPlugin(editor) {
-        editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
-          return new UploadAdapter(loader);
-        };
-      },
-      emptyEditor() {
-        this.editorData = '';
-      },
-      SubmitPost() {
-        let data = new FormData();
+        MyCustomUploadAdapterPlugin(editor) {
+            editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+                return new UploadAdapter(loader);
+            };
+        },
+        emptyEditor() {
+            this.editorData = '';
+        },
+        SubmitPost() {
+            let data = new FormData();
 
         let url = 'http://localhost:8080/uploadPost';
         let data2=this.editorData;
@@ -63,7 +66,7 @@
           console.log(error);
         });
 
-      }
+        }
     }
-  }
+};
 </script>

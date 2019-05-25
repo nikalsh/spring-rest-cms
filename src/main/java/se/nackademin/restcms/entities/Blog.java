@@ -1,4 +1,4 @@
-package se.nackademin.restcms.Entities;
+package se.nackademin.restcms.entities;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,13 +18,16 @@ public class Blog {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "blog_id")
-    private int id;
+    private Long id;
 
 
     private String blogName;
 
     @OneToMany(mappedBy = "blog")
-    private Set<Post> posts;
+    private Set<BlogPost> blogPosts;
+
+    @OneToOne
+    private BlogAdmin blogAdmin;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)

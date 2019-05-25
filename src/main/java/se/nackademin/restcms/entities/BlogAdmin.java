@@ -1,4 +1,4 @@
-package se.nackademin.restcms.Entities;
+package se.nackademin.restcms.entities;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "blogAdmin")
+@Table(name = "blogadmin")
 public class BlogAdmin {
 
     public BlogAdmin(String email, String password) {
@@ -31,7 +31,7 @@ public class BlogAdmin {
     private String name;
     private String password;
 
-    @OneToOne(mappedBy = "blogAdmin",
+    @OneToOne(mappedBy = "blogAdmin", /* referes to the VARIABLE NAME */
             cascade = CascadeType.ALL, orphanRemoval = true)
     private Blog blog;
 

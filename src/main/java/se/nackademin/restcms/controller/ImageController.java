@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import se.nackademin.restcms.Entities.ImageFile;
+import se.nackademin.restcms.entities.ImageFile;
 import se.nackademin.restcms.payload.UploadedImageResponse;
 import se.nackademin.restcms.service.ImageFileStorageServiceImpl;
 
@@ -49,5 +49,5 @@ public ImageController (ImageFileStorageServiceImpl imageFileStorageService) {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + imageFile.getFileName() + "\"")
                 .body(new ByteArrayResource (imageFile.getData()));
     }
-    
+
 }
