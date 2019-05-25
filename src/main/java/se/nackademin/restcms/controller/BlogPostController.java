@@ -1,4 +1,4 @@
-package se.nackademin.restcms.Controller;
+package se.nackademin.restcms.controller;
 
 
 import org.slf4j.Logger;
@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import se.nackademin.restcms.CKResponse;
-import se.nackademin.restcms.Entities.BlogPost;
+import se.nackademin.restcms.entities.BlogPost;
 import se.nackademin.restcms.service.BlogPostService;
 
 @RestController

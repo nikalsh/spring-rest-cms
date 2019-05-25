@@ -1,4 +1,4 @@
-package se.nackademin.restcms.Controller;
+package se.nackademin.restcms.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import se.nackademin.restcms.Entities.ImageFile;
+import se.nackademin.restcms.entities.ImageFile;
 import se.nackademin.restcms.payload.UploadedImageResponse;
 import se.nackademin.restcms.service.ImageFileStorageServiceImpl;
 

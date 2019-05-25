@@ -1,9 +1,8 @@
 package se.nackademin.restcms.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import se.nackademin.restcms.CrudRepositories.BlogRepository;
-import se.nackademin.restcms.Entities.Blog;
+import se.nackademin.restcms.crudrepositories.BlogRepository;
+import se.nackademin.restcms.entities.Blog;
 
 import java.util.List;
 import java.util.Optional;

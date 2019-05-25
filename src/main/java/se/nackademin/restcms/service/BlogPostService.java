@@ -1,6 +1,6 @@
 package se.nackademin.restcms.service;
 
-import se.nackademin.restcms.Entities.BlogPost;
+import se.nackademin.restcms.entities.BlogPost;
 
 public interface BlogPostService {
 

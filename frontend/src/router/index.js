@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import CKtest from '../components/CKtest'
 import FileUpload from '../components/FileUpload'
 import CKEditor from '@ckeditor/ckeditor5-vue';
+import RegisterUser from "../components/RegisterUser";
 
 Vue.use(CKEditor);
 Vue.use(Router)
@@ -18,8 +19,8 @@ export default new Router({
     },
     {
       path: '/',
-      name: 'FileUpload',
-      component: FileUpload
+      name: 'RegisterUser',
+      component: RegisterUser, FileUpload
     }
   ]
 })
