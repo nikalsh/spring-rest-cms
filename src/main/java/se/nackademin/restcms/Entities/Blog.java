@@ -18,16 +18,13 @@ public class Blog {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "blog_id")
-    private Long id;
+    private int id;
 
 
     private String blogName;
 
     @OneToMany(mappedBy = "blog")
     private Set<Post> posts;
-
-    @OneToOne
-    private BlogAdmin blogAdmin;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
