@@ -1,4 +1,4 @@
-package se.nackademin.restcms.oauth2;
+package se.nackademin.restcms.security;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;

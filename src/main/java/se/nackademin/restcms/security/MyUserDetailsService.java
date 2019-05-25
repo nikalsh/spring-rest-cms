@@ -1,4 +1,4 @@
-package se.nackademin.restcms.oauth2;
+package se.nackademin.restcms.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
