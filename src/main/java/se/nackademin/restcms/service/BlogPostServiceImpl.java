@@ -7,9 +7,6 @@ import se.nackademin.restcms.crudrepositories.PostRepository;
 import se.nackademin.restcms.entities.BlogPost;
 import se.nackademin.restcms.exception.MyFileNotFoundException;
 
-<<<<<<<HEAD:src/main/java/se/nackademin/restcms/service/BlogPostServiceImpl.java
-        =======
-        >>>>>>>535d15005d8f32888694fdf9eac5bac6f50e3f97:src/main/java/se/nackademin/restcms/service/PostServiceImpl.java
 
 @Service
 public class BlogPostServiceImpl implements BlogPostService {
