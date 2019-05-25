@@ -31,7 +31,7 @@ public class BlogAdmin {
     private String name;
     private String password;
 
-    @OneToOne(mappedBy = "blogadmin",
+    @OneToOne(mappedBy = "blogAdmin", /* referes to the VARIABLE NAME */
             cascade = CascadeType.ALL, orphanRemoval = true)
     private Blog blog;
 

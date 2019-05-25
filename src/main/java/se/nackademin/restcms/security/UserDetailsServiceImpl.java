@@ -9,7 +9,7 @@ import se.nackademin.restcms.crudrepositories.BlogAdminRepository;
 import se.nackademin.restcms.entities.BlogAdmin;
 
 @Service
-public class MyUserDetailsService implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     private BlogAdminRepository blogAdminRepository;
