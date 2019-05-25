@@ -14,6 +14,7 @@
   import axios from 'axios';
   import UploadAdapter from "../scripts/UploadAdapter";
   import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+  import autosave from '@ckeditor/ckeditor5-autosave';
 
   export default {
     name: 'CKtest',
@@ -22,7 +23,8 @@
         editor: ClassicEditor,
         editorData: '<p>Content of the editor.</p>',
         editorConfig: {
-          extraPlugins: [this.MyCustomUploadAdapterPlugin]
+          extraPlugins: [this.MyCustomUploadAdapterPlugin,
+          autosave]
         }
       }
     },
