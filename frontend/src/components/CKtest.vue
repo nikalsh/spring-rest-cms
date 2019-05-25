@@ -42,7 +42,7 @@
         let data2=this.editorData;
         //console.log(data2);
         data.append('file', data2);
-        axios.post(url, data, {
+        axios.blogPost(url, data, {
           headers: {
             'Content-Type': 'text/html'
           }

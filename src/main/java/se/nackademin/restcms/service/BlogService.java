@@ -1,7 +1,6 @@
 package se.nackademin.restcms.service;
 
 import se.nackademin.restcms.Entities.Blog;
-import se.nackademin.restcms.Entities.Post;
 
 import java.util.List;
 import java.util.Optional;
