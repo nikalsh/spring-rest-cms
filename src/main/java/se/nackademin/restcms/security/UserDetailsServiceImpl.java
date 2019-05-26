@@ -16,7 +16,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) {
-        BlogAdmin user = blogAdminRepository.findByEmail(email).get(0);
+        BlogAdmin user = blogAdminRepository.findByEmail(email);
         if (user == null) {
             throw new UsernameNotFoundException(email);
         }

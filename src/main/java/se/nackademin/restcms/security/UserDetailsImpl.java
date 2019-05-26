@@ -1,5 +1,6 @@
 package se.nackademin.restcms.security;
 
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -8,7 +9,9 @@ import se.nackademin.restcms.entities.BlogAdmin;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
+@Data
 public class UserDetailsImpl implements UserDetails {
+
     private BlogAdmin user;
 
     public UserDetailsImpl(BlogAdmin user) {
@@ -17,7 +20,7 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return user.getAuthorities()
+        return user.getRole()
                 .stream()
                 .map(authority -> new SimpleGrantedAuthority(authority.getName().toString())).collect(Collectors.toList());
     }
