@@ -15,12 +15,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private BlogAdminRepository blogAdminRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
-        BlogAdmin blogAdmin = blogAdminRepository.findByName(name);
-        if (blogAdmin == null) {
-            throw new UsernameNotFoundException(name);
+    public UserDetails loadUserByUsername(String email) {
+        BlogAdmin user = blogAdminRepository.findByEmail(email).get(0);
+        if (user == null) {
+            throw new UsernameNotFoundException(email);
         }
-        return new MyUserPrincipal(blogAdmin);
+        return new UserDetailsImpl(user);
     }
 }
-

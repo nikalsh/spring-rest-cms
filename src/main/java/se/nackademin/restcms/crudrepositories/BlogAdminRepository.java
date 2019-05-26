@@ -11,7 +11,6 @@ import java.util.List;
 @RepositoryRestResource(collectionResourceRel = "blogadmin", path = "blogadmin")
 public interface BlogAdminRepository extends JpaRepository<BlogAdmin, Long> {
 
-    @PostAuthorize("hasRole('ROLE_USER')")
     List<BlogAdmin> findByEmail(@Param("email") String email);
 
     BlogAdmin findByName(@Param("name") String name);

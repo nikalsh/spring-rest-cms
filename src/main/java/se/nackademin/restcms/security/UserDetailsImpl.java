@@ -6,30 +6,30 @@ import org.springframework.security.core.userdetails.UserDetails;
 import se.nackademin.restcms.entities.BlogAdmin;
 
 import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.stream.Collectors;
 
-public class MyUserPrincipal implements UserDetails {
-    private BlogAdmin blogAdmin;
+public class UserDetailsImpl implements UserDetails {
+    private BlogAdmin user;
 
-    public MyUserPrincipal(BlogAdmin blogAdmin) {
-        this.blogAdmin = blogAdmin;
+    public UserDetailsImpl(BlogAdmin user) {
+        this.user = user;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        final List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
-        return authorities;
+        return user.getAuthorities()
+                .stream()
+                .map(authority -> new SimpleGrantedAuthority(authority.getName().toString())).collect(Collectors.toList());
     }
 
     @Override
     public String getPassword() {
-        return this.blogAdmin.getPassword();
+        return user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return this.blogAdmin.getName();
+        return user.getEmail();
     }
 
     @Override
@@ -51,9 +51,4 @@ public class MyUserPrincipal implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
-    public BlogAdmin getBlogAdmin() {
-        return blogAdmin;
-    }
 }
-

@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -11,7 +13,8 @@ import javax.persistence.*;
 @Table(name = "blogadmin")
 public class BlogAdmin {
 
-    public BlogAdmin(String email, String password) {
+    public BlogAdmin(String email, String password, Authority authority) {
+        this.authorities.add(authority);
         this.email = email;
         this.password = password;
     }
@@ -50,5 +53,11 @@ public class BlogAdmin {
         }
         this.blog = null;
     }
+
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_authority",
+            joinColumns = {@JoinColumn(name = "blogadmin_id")},
+            inverseJoinColumns = {@JoinColumn(name = "authority_id")})
+    private Set<Authority> authorities = new HashSet<>();
 
 }
