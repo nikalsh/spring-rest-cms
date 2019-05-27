@@ -35,22 +35,11 @@ public class BlogPost {
     public BlogPost() {
     }
 
-    public BlogPost(String postData) {
-        this.postData = postData;
-    }
 
-    public BlogPost(Blog blog) {
-        this.blog = blog;
-    }
-
-    public BlogPost(Blog blog, String postData) {
-        this.blog = blog;
-        this.postData = postData;
-    }
-
-    public BlogPost(Blog blog, LocalDateTime created, String postData) {
+    public BlogPost(Blog blog, LocalDateTime created, LocalDateTime lastUpdated, String postData) {
         this.blog = blog;
         this.created = created;
+        this.lastUpdated = lastUpdated;
         this.postData = postData;
     }
 }

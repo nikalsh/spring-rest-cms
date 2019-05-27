@@ -5,6 +5,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import se.nackademin.restcms.crudrepositories.BlogPostRepository;
 import se.nackademin.restcms.crudrepositories.BlogRepository;
+import se.nackademin.restcms.entities.Blog;
 import se.nackademin.restcms.entities.BlogPost;
 import se.nackademin.restcms.exception.MyFileNotFoundException;
 import se.nackademin.restcms.security.UserDetailsImpl;
@@ -21,35 +22,34 @@ public class BlogPostServiceImpl implements BlogPostService {
     @Autowired
     private BlogPostRepository blogPostRepository;
 
-    @Override
-    public BlogPost storePost(String file) {
 
+    public BlogPost storePost(String file, String postId) {
         //get the current authenticated user
-        UserDetailsImpl user =  (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+       // UserDetailsImpl user = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         //check the current users blog id
-        user.getUser().getBlog().getBlogAdmin().getId();
+       // user.getUser().getBlog().getBlogAdmin().getId();
 
         //decide if they can create a blogpost
         //...
-
-        BlogPost blogPost = new BlogPost(file);
-
-        blogPost.setBlog(blogRepository.getOne(user.getUser().getBlog().getBlogAdmin().getId()));
-
-        return blogPostRepository.save(blogPost);
-    public BlogPost storePost(String file, String postId) {
-        Optional<BlogPost> blogPostOptional = postRepository.findById(postId);
+        LocalDateTime localDateTime = LocalDateTime.now();
+        Optional<BlogPost> blogPostOptional = blogPostRepository.findById(postId);
         BlogPost blogPost;
         if (blogPostOptional.isPresent()) {
             blogPost = blogPostOptional.get();
             blogPost.setPostData(file);
-            blogPost.setLastUpdated(LocalDateTime.now());
+            blogPost.setLastUpdated(localDateTime);
         } else {
-            blogPost = new BlogPost(blogRepository.getOne((long) 2), LocalDateTime.now(), file);
+            blogPost = new BlogPost(
+                   // blogRepository.getOne(user.getUser().getBlog().getBlogAdmin().getId()),
+                    blogRepository.getOne(4L),
+                    localDateTime,
+                    localDateTime,
+                    file
+            );
         }
-        blogPost.setPostData(file);
-        return postRepository.save(blogPost);
+
+        return blogPostRepository.save(blogPost);
 
     }
 
@@ -57,7 +57,7 @@ public class BlogPostServiceImpl implements BlogPostService {
     public BlogPost getPost(String fileId) {
 
         return blogPostRepository.findById(fileId)
-                .orElseThrow (() -> new MyFileNotFoundException("File not found with id " + fileId));
+                .orElseThrow(() -> new MyFileNotFoundException("File not found with id " + fileId));
     }
 
 }
