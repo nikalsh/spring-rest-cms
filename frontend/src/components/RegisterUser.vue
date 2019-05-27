@@ -1,6 +1,17 @@
 <template>
   <div>
-    <FileUpload/>
+    <div class="container">
+      <div class="large-12 medium-12 small-12 cell">
+        <label>File
+          <input
+            id="file"
+            ref="file"
+            type="file"
+            @change="handleFileUpload()">
+        </label>
+        <button @click="submitNewAccountData()">Register</button>
+      </div>
+    </div>
     <p>
       <label for="name">Name</label>
       <input
@@ -42,6 +53,34 @@
 
 <script>
 import FileUpload from './FileUpload';
+import axios from 'axios';
+
+function submitFile() {
+    let formData = new FormData();
+    formData.append('file', this.file);
+
+    // eslint-disable-next-line no-console
+    console.log(this.file);
+
+    axios.post('http://localhost:8080/uploadFile',
+        formData,
+        {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        }
+    ).then(function () {
+
+    // eslint-disable-next-line no-console
+        console.log('SUCCESS!!');
+    })
+        .catch(function () {
+
+            // eslint-disable-next-line no-console
+            console.log('FAILURE!!');
+        });
+}
+
 export default {
     components: {
         FileUpload
@@ -50,8 +89,20 @@ export default {
         return {
             password: '',
             name: '',
-            email: ''
+            email: '',
+            file: '',
+            handleFileUpload(){
+            }
         };
-    }
+    },
+    methods: {
+        submitFile () {
+
+        },
+        submitNewAccountData() {
+            submitFile();
+        }
+
+    },
 };
 </script>

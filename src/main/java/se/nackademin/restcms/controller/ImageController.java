@@ -2,8 +2,10 @@ package se.nackademin.restcms.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
+import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -14,16 +16,15 @@ import se.nackademin.restcms.entities.ImageFile;
 import se.nackademin.restcms.payload.UploadedImageResponse;
 import se.nackademin.restcms.service.ImageFileStorageServiceImpl;
 
-@RestController
+@RepositoryRestController
 public class ImageController {
 
     private static final Logger logger = LoggerFactory.getLogger(ImageController.class);
 
-    private final ImageFileStorageServiceImpl imageFileStorageService;
+    @Autowired
+    private ImageFileStorageServiceImpl imageFileStorageService;
 
-public ImageController (ImageFileStorageServiceImpl imageFileStorageService) {
-    this.imageFileStorageService = imageFileStorageService;
-}
+
 
 @CrossOrigin(origins = "http://localhost:8081")
 @PostMapping("/uploadFile")
