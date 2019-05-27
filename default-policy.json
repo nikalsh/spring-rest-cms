@@ -2,13 +2,25 @@
 	{
 		"name": "Admin",
 		"description": "Admin can do all.",
-		"target": "subject.role.name() == 'ADMIN'",
+		"target": "subject.role.name() == 'ROLE_ADMIN'",
 		"condition": "true"
+	},
+	{
+		"name": "Blogadmin creates post",
+		"description": "Blogadmin can create post to his blog only",
+		"target": "subject.role.name() == 'ROLE_ADMIN' && action == 'CREATE_BLOGPOST'",
+		"condition": "subject.blog.id == resource.id"
+	},
+	{
+		"name": "Blogadmin can get blogadmin details",
+		"description": "Blogadmin can only get blogadmin details about himself",
+		"target": "subject.role.name() == 'ROLE_ADMIN' && action == 'READ_BLOGADMIN'",
+		"condition": "subject.id == resource.id"
 	},
 	{
 		"name": "PM view his project",
 		"description": "PM read the details of his project only.",
-		"target": "subject.role.name() == 'PM' && action == 'PROJECTS_VIEW'",
+		"target": "subject.role.name() == 'ADMIN' && action == 'PROJECTS_VIEW'",
 		"condition": "subject.project.id == resource.id"
 	},
 	{

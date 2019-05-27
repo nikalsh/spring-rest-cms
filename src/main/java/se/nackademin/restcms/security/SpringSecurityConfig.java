@@ -8,8 +8,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-
-import javax.sql.DataSource;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
@@ -17,13 +16,26 @@ import javax.sql.DataSource;
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
+    @Autowired
+    PasswordEncoder encoder;
+
+    @Autowired
+    UserDetailsServiceImpl userDetailsService;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("user").password("{noop}user").roles("USER")
-                .and()
-                .withUser("admin").password("{noop}admin").roles("USER", "ADMIN");
+        auth.userDetailsService((userDetailsService)).passwordEncoder(encoder);
+
     }
+
+// regular in-memory auth
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.inMemoryAuthentication()
+//                .withUser("user").password("{noop}user").roles("USER")
+//                .and()
+//                .withUser("admin").password("{noop}admin").roles("USER", "ADMIN");
+//    }
 
 
     @Override
@@ -36,7 +48,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
 
-//                .antMatchers(HttpMethod.GET, "/blogadmin/**").permitAll()
+
                 .antMatchers(HttpMethod.POST, "/blogadmin/**").permitAll()
                 .antMatchers("/blogadmin/**").hasAnyRole("USER", "ADMIN")
 
@@ -53,15 +65,5 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().disable();
     }
 
-
-//    @Bean
-//    public UserDetailsService userDetailsService() {
-//        User.UserBuilder users = User.withDefaultPasswordEncoder();
-//
-//        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-//        manager.createUser(users.username("user").password("password").roles("USER").build());
-//        manager.createUser(users.username("admin").password("password").roles("USER", "ADMIN").build());
-//        return manager;
-//    }
 
 }
