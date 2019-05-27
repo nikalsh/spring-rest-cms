@@ -5,6 +5,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import se.nackademin.restcms.crudrepositories.BlogPostRepository;
 import se.nackademin.restcms.crudrepositories.BlogRepository;
+import se.nackademin.restcms.entities.BlogAdmin;
 import se.nackademin.restcms.entities.BlogPost;
 import se.nackademin.restcms.exception.MyFileNotFoundException;
 import se.nackademin.restcms.security.UserDetailsImpl;
@@ -23,6 +24,7 @@ public class BlogPostServiceImpl implements BlogPostService {
 
         //get the current authenticated user
         UserDetailsImpl user =  (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        BlogAdmin blogAdmin = user.getUser();
 
         //check the current users blog id
         user.getUser().getBlog().getBlogAdmin().getId();
@@ -32,7 +34,7 @@ public class BlogPostServiceImpl implements BlogPostService {
 
         BlogPost blogPost = new BlogPost(file);
 
-        blogPost.setBlog(blogRepository.getOne(user.getUser().getBlog().getBlogAdmin().getId()));
+        blogPost.setBlog(blogRepository.getOne(blogAdmin.getBlog().getBlogAdmin().getId()));
 
         return blogPostRepository.save(blogPost);
 
