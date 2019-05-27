@@ -1,7 +1,6 @@
 package se.nackademin.restcms.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import se.nackademin.restcms.crudrepositories.BlogPostRepository;
@@ -9,8 +8,6 @@ import se.nackademin.restcms.crudrepositories.BlogRepository;
 import se.nackademin.restcms.entities.BlogPost;
 import se.nackademin.restcms.exception.MyFileNotFoundException;
 import se.nackademin.restcms.security.UserDetailsImpl;
-
-import java.security.Principal;
 
 
 @Service
@@ -32,10 +29,10 @@ public class BlogPostServiceImpl implements BlogPostService {
 
         //decide if they can create a blogpost
         //...
-        
+
         BlogPost blogPost = new BlogPost(file);
 
-            blogPost.setBlog (blogRepository.getOne ((long) 2));
+        blogPost.setBlog(blogRepository.getOne(user.getUser().getBlog().getBlogAdmin().getId()));
 
         return blogPostRepository.save(blogPost);
 

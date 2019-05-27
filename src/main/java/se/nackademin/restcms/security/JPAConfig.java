@@ -10,7 +10,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 public class JPAConfig {
 
-
     @Bean
     public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder(11);
