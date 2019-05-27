@@ -24,7 +24,7 @@ public class Blog {
     private String blogName;
 
     @OneToMany(mappedBy = "blog")
-    private Set<Post> posts;
+    private Set<BlogPost> blogPosts;
 
     @OneToOne
     private BlogAdmin blogAdmin;

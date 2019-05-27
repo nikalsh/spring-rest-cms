@@ -1,74 +1,140 @@
 <template>
   <div id="CKtest">
 
-    <ckeditor 
-      :editor="editor" 
-      v-model="editorData" 
-      :config="editorConfig"/>
+    <h2>Editor</h2>
+    <ckeditor style="border: lightgrey 1px solid;"
+              @ready="onEditorReady"
+              :editor="editor"
+              v-model="editorData"
+              :config="editorConfig"></ckeditor>
     <button @click="emptyEditor()">Empty the editor</button>
-
-    <h2>Editor data</h2>
-    <code>{{ editorData }}</code>
+    <button @click="readOnly()">set read only</button>
     <button @click="SubmitPost()">Submit</button>
+    <br/>
+    <h2>Raw data</h2>
+    <code>{{ editorData }}</code>
+    <h2>blogpost from server</h2>
+    <div class="ck ck-content ck-editor__editable ck-rounded-corners ck-editor__editable_inline ck-blurred"
+         style="border: lightgrey 1px solid;"
+         v-html="returnData">
+      {{returnData}}
+    </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
-import UploadAdapter from '../scripts/UploadAdapter';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+  import axios from 'axios';
+  import UploadAdapter from "../scripts/UploadAdapter";
+  // import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+  import InlineEditor from '@ckeditor/ckeditor5-build-inline';
+ // import Autosave from '@ckeditor/ckeditor5-autosave/src/autosave'
 
-export default {
+  export default {
     name: 'CKtest',
     data: function () {
-        return {
-            editor: ClassicEditor,
-            editorData: '<p>Content of the editor.</p>',
-            editorConfig: {
-                extraPlugins: [this.MyCustomUploadAdapterPlugin]
-            }
-        };
+      return {
+        instance: '',
+        returnData: '',
+        postId: '',
+        editor: InlineEditor,
+        editorData: '<p>Content of the editor.</p>',
+
+        editorConfig: {
+          extraPlugins: [
+            this.MyCustomUploadAdapterPlugin
+
+          ]
+        }
+      }
     },
     methods: {
-        MyCustomUploadAdapterPlugin(editor) {
-            editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
-                return new UploadAdapter(loader);
-            };
-        },
-        emptyEditor() {
-            this.editorData = '';
-        },
-        SubmitPost() {
-            let data = new FormData();
+      onEditorReady(editor) {
+        this.instance = editor;
+      },
+      MyCustomUploadAdapterPlugin(editor) {
+        editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+          return new UploadAdapter(loader);
+        };
+      },
+      readOnly() {
+        this.instance.isReadOnly = !this.instance.isReadOnly;
 
-            let url = 'http://localhost:8080/uploadPost';
-            let data2=this.editorData;
-            //console.log(data2);
-            data.append('file', data2);
-            axios.post(url, data, {
-                headers: {
-                    'Content-Type': 'text/html'
-                }
-            })
-                .then(response => {
+      }, emptyEditor() {
+        this.editorData = '';
+      },
+      SubmitPost() {
+        let data = new FormData();
+        let url = 'http://localhost:8080/uploadPost';
+        data.append('file', this.editorData);
+        data.append('id', this.postId);
+        axios.post(url, data, {
+          headers: {
+            'Content-Type': 'text/html'
+          }
+        })
+          .then(response => {
+            this.postId = response.data.url
+            axios.get('http://localhost:8080/downloadPost/' + response.data.url).then(resp => {
 
-                    // eslint-disable-next-line no-console
-                    console.log(response);
+              this.returnData = resp.data
+            });
+            console.log(response);
+            //   if (response.data.uploaded) {
+            //     resolve({
+            //       default: response.data.url,
+            //     });
+            //   } else {
+            //     reject(response.data.error.message);
+            //   }
+          }).catch(error => {
+          console.log(error);
+        });
 
-                    //   if (response.data.uploaded) {
-                    //     resolve({
-                    //       default: response.data.url,
-                    //     });
-                    //   } else {
-                    //     reject(response.data.error.message);
-                    //   }
-                }).catch(error => {
-
-                    // eslint-disable-next-line no-console
-                    console.log(error);
-                });
-
-        }
+      }
     }
-};
+  };
 </script>
+<style>
+
+
+  :root {
+    --ck-image-style-spacing: 1.5em;
+  }
+
+
+  .image-style-side {
+    max-width: 50%;
+  }
+
+
+  .image-style-side {
+    float: right;
+    margin-left: var(--ck-image-style-spacing);
+  }
+
+  .image-style-side > img {
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+  }
+
+
+  .image-style-align-left {
+    float: left;
+    margin-right: var(--ck-image-style-spacing);
+  }
+
+
+  .image-style-align-center {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+
+  .image-style-align-right {
+    float: right;
+    margin-left: var(--ck-image-style-spacing);
+  }
+
+
+</style>

@@ -4,23 +4,22 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "blogAdmin")
+@Table(name = "blogadmin")
 public class BlogAdmin {
 
-    public BlogAdmin(String email, String password) {
+    public BlogAdmin(String email, String password, Authority authority) {
+        this.role.add(authority);
         this.email = email;
         this.password = password;
     }
 
-    public BlogAdmin(String name, String email, String password) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-    }
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,7 +30,7 @@ public class BlogAdmin {
     private String name;
     private String password;
 
-    @OneToOne(mappedBy = "blogAdmin",
+    @OneToOne(mappedBy = "blogAdmin", /* referes to the VARIABLE NAME */
             cascade = CascadeType.ALL, orphanRemoval = true)
     private Blog blog;
 
@@ -50,5 +49,11 @@ public class BlogAdmin {
         }
         this.blog = null;
     }
+
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_authority",
+            joinColumns = {@JoinColumn(name = "blogadmin_id")},
+            inverseJoinColumns = {@JoinColumn(name = "authority_id")})
+    private Set<Authority> role = new HashSet<>();
 
 }

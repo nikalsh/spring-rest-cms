@@ -6,11 +6,12 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name = "post")
-public class Post {
+@Table(name = "blogpost")
+public class BlogPost {
 
     @Id
     @GeneratedValue(generator = "uuid")
@@ -22,19 +23,23 @@ public class Post {
     private Blog blog;
 
     @Column
-    private LocalDate created;
+    private LocalDateTime created;
 
     @Column
-    private LocalDate lastUpdated;
+    private LocalDateTime lastUpdated;
 
     @Column
     @Lob
     private String postData;
 
-    public Post() {
+    public BlogPost() {
     }
 
-    public Post(String postData) {
+
+    public BlogPost(Blog blog, LocalDateTime created, LocalDateTime lastUpdated, String postData) {
+        this.blog = blog;
+        this.created = created;
+        this.lastUpdated = lastUpdated;
         this.postData = postData;
     }
 }

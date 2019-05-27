@@ -7,4 +7,7 @@ import se.nackademin.restcms.entities.Blog;
 @RepositoryRestResource(collectionResourceRel = "blog", path = "blog")
 public interface BlogRepository extends JpaRepository<Blog, Long> {
 
+
+
+
 }
