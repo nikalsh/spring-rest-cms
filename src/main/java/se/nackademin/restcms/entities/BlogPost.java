@@ -5,7 +5,7 @@ import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -22,10 +22,10 @@ public class BlogPost {
     private Blog blog;
 
     @Column
-    private LocalDate created;
+    private LocalDateTime created;
 
     @Column
-    private LocalDate lastUpdated;
+    private LocalDateTime lastUpdated;
 
     @Column
     @Lob
@@ -34,7 +34,11 @@ public class BlogPost {
     public BlogPost() {
     }
 
-    public BlogPost(String postData) {
+
+    public BlogPost(Blog blog, LocalDateTime created, LocalDateTime lastUpdated, String postData) {
+        this.blog = blog;
+        this.created = created;
+        this.lastUpdated = lastUpdated;
         this.postData = postData;
     }
 }

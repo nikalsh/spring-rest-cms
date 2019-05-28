@@ -17,11 +17,11 @@ public interface BlogAdminRepository extends JpaRepository<BlogAdmin, Long> {
 
     BlogAdmin findByName(@Param("name") String name);
 
-    @Override
-    default BlogAdmin save(BlogAdmin blogAdmin) {
-
-        return new BlogAdmin();
-    }
+//    @Override
+//    default BlogAdmin save(BlogAdmin blogAdmin) {
+//
+//        return new BlogAdmin();
+//    }
 
 
 

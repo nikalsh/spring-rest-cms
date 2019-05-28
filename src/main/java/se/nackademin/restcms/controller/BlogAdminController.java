@@ -1,11 +1,9 @@
 package se.nackademin.restcms.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.rest.webmvc.BasePathAwareController;
+import org.springframework.web.bind.annotation.RestController;
 import se.nackademin.restcms.crudrepositories.BlogAdminRepository;
-import se.nackademin.restcms.service.BlogAdminServiceImpl;
 
-@BasePathAwareController
+@RestController
 public class BlogAdminController {
 
     private final BlogAdminRepository blogAdminRepository;
