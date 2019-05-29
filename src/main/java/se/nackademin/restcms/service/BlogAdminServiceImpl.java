@@ -25,7 +25,7 @@ public class BlogAdminServiceImpl implements BlogAdminService {
     public BlogAdmin saveBlogAdmin(BlogAdmin blogAdmin) {
 
         if (blogAdmin.getRole().isEmpty()) {
-            blogAdmin.addRole(authorityRepository.getOne(1));
+            blogAdmin.addRole(authorityRepository.findAll().get(0));
         }
 
         blogAdmin.setPassword(passwordEncoder.encode(blogAdmin.getPassword()));
