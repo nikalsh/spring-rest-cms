@@ -4,6 +4,7 @@ import CKtest from '../components/CKtest'
 import FileUpload from '../components/FileUpload'
 import CKEditor from '@ckeditor/ckeditor5-vue';
 import RegisterUser from "../components/RegisterUser";
+import LandingPage from '../components/LandingPage'
 // import Autosave from '@ckeditor/ckeditor5-autosave/src/autosave'
 // const options = {
 //
@@ -27,9 +28,14 @@ export default new Router({
       component: CKtest
     },
     {
-      path: '/',
+      path: '/RegisterUser',
       name: 'RegisterUser',
       component: RegisterUser, FileUpload
+    },
+    {
+      path: '/',
+      name: 'LandingPage',
+      component: LandingPage
     }
   ]
 })
