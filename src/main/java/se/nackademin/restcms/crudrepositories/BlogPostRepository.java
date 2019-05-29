@@ -5,7 +5,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import se.nackademin.restcms.entities.BlogPost;
 
 
-@RepositoryRestResource(collectionResourceRel = "blogpost", path = "blogpost")
+@RepositoryRestResource(exported = false)
 public interface BlogPostRepository extends JpaRepository<BlogPost, String> {
 
 

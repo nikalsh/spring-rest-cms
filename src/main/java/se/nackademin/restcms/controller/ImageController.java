@@ -11,8 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import se.nackademin.restcms.entities.ImageFile;
 import se.nackademin.restcms.CKResponse;
+import se.nackademin.restcms.entities.ImageFile;
 import se.nackademin.restcms.payload.UploadedImageResponse;
 import se.nackademin.restcms.service.ImageFileStorageServiceImpl;
 
@@ -23,7 +23,7 @@ public class ImageController {
 
     private final ImageFileStorageServiceImpl imageFileStorageService;
 
-    public ImageController (ImageFileStorageServiceImpl imageFileStorageService) {
+    public ImageController(ImageFileStorageServiceImpl imageFileStorageService) {
         this.imageFileStorageService = imageFileStorageService;
     }
 
@@ -41,11 +41,11 @@ public class ImageController {
                 file.getContentType(), file.getSize());
     }
 
-//ta inte bort
+    //ta inte bort
     @CrossOrigin(origins = "http://localhost:8081")
     @PostMapping("/uploadImage")
     public ResponseEntity<CKResponse> uploadImage(@RequestParam("file") MultipartFile file) {
-        ImageFile imageFile = imageFileStorageService.storeImageFile (file);
+        ImageFile imageFile = imageFileStorageService.storeImageFile(file);
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/downloadFile/")
                 .path(imageFile.getId())

@@ -1,6 +1,7 @@
 package se.nackademin.restcms;
 
 import java.io.Serializable;
+
 /*
 Needed for response when saving data with ckeditor
  */

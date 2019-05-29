@@ -1,5 +1,6 @@
 package se.nackademin.restcms.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,10 +12,16 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @Table(name = "blogadmin")
+@JsonIgnoreProperties(value = {"blog"})
 public class BlogAdmin {
 
     public BlogAdmin(String email, String password, Authority authority) {
         this.role.add(authority);
+        this.email = email;
+        this.password = password;
+    }
+
+    public BlogAdmin(String email, String password) {
         this.email = email;
         this.password = password;
     }
@@ -38,6 +45,14 @@ public class BlogAdmin {
     @Column(name = "photo", columnDefinition = "BLOB")
     private byte[] photo;
 
+
+
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_authority",
+            joinColumns = {@JoinColumn(name = "blogadmin_id")},
+            inverseJoinColumns = {@JoinColumn(name = "authority_id")})
+    private Set<Authority> role = new HashSet<>();
+
     public void addBlog(Blog blog) {
         this.blog = blog;
         blog.setBlogAdmin(this);
@@ -50,10 +65,7 @@ public class BlogAdmin {
         this.blog = null;
     }
 
-    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-    @JoinTable(name = "user_authority",
-            joinColumns = {@JoinColumn(name = "blogadmin_id")},
-            inverseJoinColumns = {@JoinColumn(name = "authority_id")})
-    private Set<Authority> role = new HashSet<>();
-
+    public void addRole(Authority authority) {
+        this.role.add(authority);
+    }
 }

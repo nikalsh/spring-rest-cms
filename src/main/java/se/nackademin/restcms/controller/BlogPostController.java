@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import se.nackademin.restcms.CKResponse;
 import se.nackademin.restcms.entities.BlogPost;
 import se.nackademin.restcms.service.BlogPostService;
@@ -26,9 +25,9 @@ public class BlogPostController {
 
     @CrossOrigin(origins = "http://localhost:8081")
     @PostMapping("/uploadPost")
-    public ResponseEntity<CKResponse> uploadImage(@RequestParam("file") String file,@RequestParam("id") String postId) {
+    public ResponseEntity<CKResponse> uploadImage(@RequestParam("file") String file, @RequestParam("id") String postId) {
 
-        BlogPost blogPost = blogPostService.storePost(file,postId);
+        BlogPost blogPost = blogPostService.storePost(file, postId);
 //        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
 //                .path("/downloadPost/")
 //                .path(blogPost.getId())
@@ -38,7 +37,7 @@ public class BlogPostController {
     }
 
     @CrossOrigin(origins = "http://localhost:8081")
-    @GetMapping(value="/downloadPost/{postId}",produces=MediaType.TEXT_HTML_VALUE)
+    @GetMapping(value = "/downloadPost/{postId}", produces = MediaType.TEXT_HTML_VALUE)
     public ResponseEntity<String> downloadFile(@PathVariable String postId) {
         // Load file from database
         BlogPost blogPost = blogPostService.getPost(postId);
