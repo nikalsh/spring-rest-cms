@@ -22,8 +22,8 @@ public class BlogPostServiceImpl implements BlogPostService {
 
     public BlogPost storePost(String file, String postId) {
         //get the current authenticated user
-//        UserDetailsImpl user =  (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        BlogAdmin blogAdmin = user.getUser();
+        //UserDetailsImpl user =  (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        //BlogAdmin blogAdmin = user.getUser();
         // UserDetailsImpl user = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         //check the current users blog id
