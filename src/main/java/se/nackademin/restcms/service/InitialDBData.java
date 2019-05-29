@@ -3,8 +3,8 @@ package se.nackademin.restcms.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import se.nackademin.restcms.crudrepositories.AuthorityRepository;
-import se.nackademin.restcms.crudrepositories.BlogAdminRepository;
+import se.nackademin.restcms.crudRepositories.AuthorityRepository;
+import se.nackademin.restcms.crudRepositories.BlogAdminRepository;
 import se.nackademin.restcms.entities.Authority;
 import se.nackademin.restcms.entities.AuthorityType;
 import se.nackademin.restcms.entities.Blog;
@@ -17,14 +17,15 @@ public class InitialDBData {
 
 	private final BlogAdminRepository blogAdminRepository;
 
-	@Autowired
-	AuthorityRepository authorityRepository;
+	private final AuthorityRepository authorityRepository;
 
-	@Autowired
-	PasswordEncoder passwordEncoder;
+	private final PasswordEncoder passwordEncoder;
 
-public InitialDBData (BlogAdminRepository blogAdminRepository) {
+@Autowired
+public InitialDBData(BlogAdminRepository blogAdminRepository, AuthorityRepository authorityRepository, PasswordEncoder passwordEncoder) {
 	this.blogAdminRepository = blogAdminRepository;
+	this.authorityRepository = authorityRepository;
+	this.passwordEncoder = passwordEncoder;
 }
 
 @PostConstruct

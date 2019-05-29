@@ -16,11 +16,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
-    @Autowired
-    PasswordEncoder encoder;
+    private final PasswordEncoder encoder;
+
+    private final UserDetailsServiceImpl userDetailsService;
 
     @Autowired
-    UserDetailsServiceImpl userDetailsService;
+    public SpringSecurityConfig(PasswordEncoder encoder, UserDetailsServiceImpl userDetailsService) {
+        this.encoder = encoder;
+        this.userDetailsService = userDetailsService;
+    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

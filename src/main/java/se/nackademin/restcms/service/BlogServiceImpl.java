@@ -1,7 +1,7 @@
 package se.nackademin.restcms.service;
 
 import org.springframework.stereotype.Service;
-import se.nackademin.restcms.crudrepositories.BlogRepository;
+import se.nackademin.restcms.crudRepositories.BlogRepository;
 import se.nackademin.restcms.entities.Blog;
 
 import java.util.List;
