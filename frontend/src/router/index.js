@@ -6,6 +6,7 @@ import CKEditor from '@ckeditor/ckeditor5-vue';
 import RegisterUser from "../components/RegisterUser";
 import LandingPage from '../components/LandingPage'
 import Blog from "../components/Blog";
+import Login from '../components/Login'
 // import Autosave from '@ckeditor/ckeditor5-autosave/src/autosave'
 // const options = {
 //
@@ -41,6 +42,11 @@ export default new Router({
       path: '/',
       name: 'LandingPage',
       component: LandingPage
+    },
+    {
+      path: '/Login',
+      name: 'Login',
+      component: Login
     }
   ]
 })

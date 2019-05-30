@@ -4,6 +4,10 @@
       <a>Register Here</a>
 
     </router-link>
+    <router-link tag="li" to="/Login">
+      <a>Login</a>
+
+    </router-link>
   </div>
 </template>
 
