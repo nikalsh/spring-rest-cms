@@ -7,4 +7,5 @@ import se.nackademin.restcms.entities.ImageFile;
 @RepositoryRestResource(exported = false)
 public interface ImageFileRepository extends JpaRepository<ImageFile, String> {
 
+
 }

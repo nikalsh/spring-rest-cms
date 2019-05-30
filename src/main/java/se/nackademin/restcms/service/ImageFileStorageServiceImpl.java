@@ -15,13 +15,17 @@ import java.io.IOException;
 @Service
 public class ImageFileStorageServiceImpl implements ImageFileStorageService {
 
-@Autowired
-private ImageFileRepository imageFileRepository;
+private final ImageFileRepository imageFileRepository;
 
-@Autowired
-private BlogAdminRepository blogAdminRepository;
+private final BlogAdminRepository blogAdminRepository;
 
-@Override
+	@Autowired
+	public ImageFileStorageServiceImpl(ImageFileRepository imageFileRepository, BlogAdminRepository blogAdminRepository) {
+		this.imageFileRepository = imageFileRepository;
+		this.blogAdminRepository = blogAdminRepository;
+	}
+
+	@Override
 public ImageFile storeImageFile (MultipartFile file) {
 	String fileName = StringUtils.cleanPath (file.getOriginalFilename ());
 	try {
@@ -31,7 +35,7 @@ public ImageFile storeImageFile (MultipartFile file) {
 		
 		ImageFile imageFile = new ImageFile (fileName, file.getContentType (), file.getBytes ());
 		
-		imageFile.setBlogAdmin (blogAdminRepository.getOne ((long) 1));
+		imageFile.setBlogAdmin (blogAdminRepository.getOne (3L));
 		
 		return imageFileRepository.save (imageFile);
 	} catch (IOException ex) {
