@@ -25,8 +25,9 @@ public class BlogAdminServiceImpl implements BlogAdminService {
     public BlogAdmin saveBlogAdmin(BlogAdmin blogAdmin) {
 
         if (blogAdmin.getRole().isEmpty()) {
-            blogAdmin.addRole(authorityRepository.getOne(1));
+            blogAdmin.addRole(authorityRepository.findAll().get(0));
         }
+
         blogAdmin.setPassword(passwordEncoder.encode(blogAdmin.getPassword()));
 
         return blogAdminRepository.save(blogAdmin);
@@ -34,11 +35,19 @@ public class BlogAdminServiceImpl implements BlogAdminService {
 
     @Override
     public BlogAdmin getCurrentBlogAdmin() {
-
         //get the current authenticated user
         UserDetailsImpl user = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         BlogAdmin blogAdmin = user.getUser();
 
         return blogAdmin;
+    }
+
+    @Override
+    public BlogAdmin updatePassword(String password) {
+        BlogAdmin blogAdmin = blogAdminRepository.findById(getCurrentBlogAdmin().getId()).get();
+        blogAdmin.setPassword(passwordEncoder.encode(password));
+        blogAdminRepository.save(blogAdmin);
+
+        return getCurrentBlogAdmin();
     }
 }

@@ -47,7 +47,7 @@ public class BlogAdmin {
 
 
 
-    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinTable(name = "user_authority",
             joinColumns = {@JoinColumn(name = "blogadmin_id")},
             inverseJoinColumns = {@JoinColumn(name = "authority_id")})

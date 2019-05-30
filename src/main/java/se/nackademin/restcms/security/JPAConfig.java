@@ -13,5 +13,6 @@ public class JPAConfig {
     @Bean
     public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder(11);
+
     }
 }

@@ -7,4 +7,6 @@ public interface BlogAdminService {
     BlogAdmin saveBlogAdmin(BlogAdmin blogAdmin);
 
     BlogAdmin getCurrentBlogAdmin();
+
+    BlogAdmin updatePassword(String password);
 }

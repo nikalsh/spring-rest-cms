@@ -1,17 +1,16 @@
 <template>
-  <div>
-    <div class="container">
-      <div class="large-12 medium-12 small-12 cell">
-        <label>File
-          <input
-            id="file"
-            ref="file"
-            type="file"
-            @change="handleFileUpload()">
-        </label>
-        <button @click="submitNewAccountData()">Register</button>
-      </div>
+  <div class="container">
+    <div class="large-12 medium-12 small-12 cell">
+      <label>File
+        <input
+          id="file"
+          ref="file"
+          type="file"
+          @change="handleFileUpload()">
+      </label>
+      <button @click="submitFile()">Submit</button>
     </div>
+
     <p>
       <label for="name">Name</label>
       <input
@@ -42,67 +41,65 @@
         min="0"
       >
     </p>
-    <p>
-      <input
-        type="submit"
-        value="Submit"
-      >
-    </p>
+    <!--  <p>-->
+    <!--    <input-->
+    <!--      type="submit"-->
+    <!--      value="Submit"-->
+    <!--    >-->
+    <!--  </p>-->
   </div>
 </template>
 
+<!--org.h2.jdbc.JdbcSQLException: Referential integrity constraint violation: "FKA5CO4Q37J6P04SWIBHECBWLFA: PUBLIC.FILES FOREIGN KEY(BLOGADMIN_ID) REFERENCES PUBLIC.BLOGADMIN(BLOGADMIN_ID) (1)"; SQL statement:-->
+<!--insert into files (blogadmin_id, data, file_name, file_type, id) values (?, ?, ?, ?, ?) [23506-193]-->
+
 <script>
-import FileUpload from './FileUpload';
 import axios from 'axios';
 
-function submitFile() {
-    let formData = new FormData();
-    formData.append('file', this.file);
-
-    // eslint-disable-next-line no-console
-    console.log(this.file);
-
-    axios.post('http://localhost:8080/uploadFile',
-        formData,
-        {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        }
-    ).then(function () {
-
-    // eslint-disable-next-line no-console
-        console.log('SUCCESS!!');
-    })
-        .catch(function () {
-
-            // eslint-disable-next-line no-console
-            console.log('FAILURE!!');
-        });
-}
-
 export default {
-    components: {
-        FileUpload
-    },
-    data () {
+    data() {
         return {
             password: '',
             name: '',
             email: '',
             file: '',
-            handleFileUpload(){
-            }
         };
     },
     methods: {
-        submitFile () {
+        submitFile() {
+            let formData = new FormData();
+            formData.append('file', this.file);
+            formData.append('password', this.password);
+            formData.append('name', this.name);
+            formData.append('email', this.email);
+            // eslint-disable-next-line no-console
+            console.log(this.file);
 
+            axios.post('http://localhost:8080/registerUser',
+
+                formData,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }
+            ).then(function () {
+
+                // eslint-disable-next-line no-console
+                console.log('SUCCESS!!');
+            })
+                .catch(function () {
+
+                    // eslint-disable-next-line no-console
+                    console.log('FAILURE!!');
+                });
         },
-        submitNewAccountData() {
-            submitFile();
-        }
 
-    },
+        /*
+*/
+        handleFileUpload() {
+            this.file = this.$refs.file.files[0];
+        }
+    }
 };
 </script>
