@@ -9,8 +9,13 @@ import se.nackademin.restcms.crudrepositories.BlogAdminRepository;
 @RestController
 public class Controller {
 
-    @Autowired
+    private final
     BlogAdminRepository blogAdminRepository;
+
+    @Autowired
+    public Controller(BlogAdminRepository blogAdminRepository) {
+        this.blogAdminRepository = blogAdminRepository;
+    }
 
     @GetMapping("/test")
     public String result() {
