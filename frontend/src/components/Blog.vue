@@ -1,4 +1,4 @@
-<template>
+  <template>
   <div id="blog">
     <button @click="onClick">Click to insert</button>
     <div ref="container">
