@@ -1,8 +1,8 @@
 <template>
   <div id="login">
     <h1>Login</h1>
-    <input type="text" name="username" v-model="input.username" placeholder="Username"/>
-    <input type="password" name="password" v-model="input.password" placeholder="Password"/>
+    <input type="text" name="email" v-model="email" placeholder="Email"/>
+    <input type="password" name="password" v-model="password" placeholder="Password"/>
     <button type="button" v-on:click="login()">Login</button>
   </div>
 </template>
@@ -14,18 +14,30 @@
     name: 'Login',
     data() {
       return {
-        input: {
           email: "",
-          password: ""
-        }
+        password: "",
       }
     },
     methods: {
+
+
       login() {
-        if (this.input.email != "" && this.input.password != "") {
+        console.log(this.email)
+        console.log(this.password)
+        if (this.email != "" && this.password != "") {
 
+          axios.post('http://localhost:8080/blogadmin/me', {
+              headers: {
+                Authorization: 'Basic ' + btoa(this.email + ':' + this.password)
+              }
+            }
+          ).then((response => {
+            console.log(response)
+          })).catch((error => {
+            console.log(error)
+          }))
 
-          if (true) {
+          if ('auth') {
 
           } else {
             console.log("Fel email eller lösenord!");

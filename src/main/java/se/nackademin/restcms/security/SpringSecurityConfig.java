@@ -24,18 +24,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService((userDetailsService)).passwordEncoder(encoder);
+        auth.userDetailsService(userDetailsService).passwordEncoder(encoder);
 
     }
-
-// regular in-memory auth
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication()
-//                .withUser("user").password("{noop}user").roles("USER")
-//                .and()
-//                .withUser("admin").password("{noop}admin").roles("USER", "ADMIN");
-//    }
 
 
     @Override

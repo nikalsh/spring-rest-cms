@@ -10,6 +10,7 @@ import se.nackademin.restcms.service.BlogAdminServiceImpl;
 
 import java.util.Map;
 
+@CrossOrigin(origins = "0.0.0.0/0")
 @RestController
 @RequestMapping("/blogadmin")
 public class BlogAdminController {
@@ -23,25 +24,21 @@ public class BlogAdminController {
         this.blogAdminService = blogAdminService;
     }
 
-
     @PostMapping
     public BlogAdmin newBlogAdmin(@RequestBody BlogAdmin blogAdmin) {
         return blogAdminService.saveBlogAdmin(blogAdmin);
     }
 
-    @GetMapping(path = "/me")
+    @CrossOrigin(origins = "0.0.0.0/0")
+    @PostMapping(path = "/me")
     public BlogAdmin me() {
         return blogAdminService.getCurrentBlogAdmin();
     }
 
-    @PutMapping(path = "update_password")
+    @PutMapping(path = "/update_password")
     public BlogAdmin newPassword(@RequestBody Map<String, Object> password) {
         return blogAdminService.updatePassword(password.get("password").toString());
     }
-
-
-
-
 
 
 }
