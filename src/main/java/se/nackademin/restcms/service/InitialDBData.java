@@ -17,14 +17,15 @@ public class InitialDBData {
 
 	private final BlogAdminRepository blogAdminRepository;
 
-	@Autowired
-	AuthorityRepository authorityRepository;
+	private final AuthorityRepository authorityRepository;
 
-	@Autowired
-	PasswordEncoder passwordEncoder;
+	private final PasswordEncoder passwordEncoder;
 
-public InitialDBData (BlogAdminRepository blogAdminRepository) {
+@Autowired
+public InitialDBData(BlogAdminRepository blogAdminRepository, AuthorityRepository authorityRepository, PasswordEncoder passwordEncoder) {
 	this.blogAdminRepository = blogAdminRepository;
+	this.authorityRepository = authorityRepository;
+	this.passwordEncoder = passwordEncoder;
 }
 
 @PostConstruct
@@ -38,7 +39,7 @@ public void init () {
 //	Blog blog = new Blog ();
 //	blogAdmin.addBlog (blog);
 //	blogAdminRepository.save (blogAdmin);
-//
+
 //	blogAdmin = new BlogAdmin("root@root.root", passwordEncoder.encode("root"), admin);
 //	blog = new Blog ();
 //	blogAdmin.addBlog (blog);

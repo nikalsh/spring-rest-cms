@@ -11,8 +11,12 @@ import se.nackademin.restcms.entities.BlogAdmin;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
+    private final BlogAdminRepository blogAdminRepository;
+
     @Autowired
-    private BlogAdminRepository blogAdminRepository;
+    public UserDetailsServiceImpl(BlogAdminRepository blogAdminRepository) {
+        this.blogAdminRepository = blogAdminRepository;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String email) {

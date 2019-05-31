@@ -1,16 +1,20 @@
 package se.nackademin.restcms.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
 @Entity
 @Table(name = "blogpost")
-public class BlogPost {
+@JsonIgnoreProperties(value = { "blog" })
+public class BlogPost implements Serializable {
 
     @Id
     @GeneratedValue(generator = "uuid")

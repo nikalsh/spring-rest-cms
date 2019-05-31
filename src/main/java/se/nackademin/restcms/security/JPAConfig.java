@@ -15,4 +15,6 @@ public class JPAConfig {
         return new BCryptPasswordEncoder(11);
 
     }
+
+
 }

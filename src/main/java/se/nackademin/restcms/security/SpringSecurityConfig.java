@@ -16,26 +16,21 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
-    @Autowired
-    PasswordEncoder encoder;
+    private final PasswordEncoder encoder;
+
+    private final UserDetailsServiceImpl userDetailsService;
 
     @Autowired
-    UserDetailsServiceImpl userDetailsService;
+    public SpringSecurityConfig(PasswordEncoder encoder, UserDetailsServiceImpl userDetailsService) {
+        this.encoder = encoder;
+        this.userDetailsService = userDetailsService;
+    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService((userDetailsService)).passwordEncoder(encoder);
+        auth.userDetailsService(userDetailsService).passwordEncoder(encoder);
 
     }
-
-// regular in-memory auth
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication()
-//                .withUser("user").password("{noop}user").roles("USER")
-//                .and()
-//                .withUser("admin").password("{noop}admin").roles("USER", "ADMIN");
-//    }
 
 
     @Override

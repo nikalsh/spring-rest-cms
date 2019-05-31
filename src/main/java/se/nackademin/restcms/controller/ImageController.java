@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import se.nackademin.restcms.CKResponse;
 import se.nackademin.restcms.entities.ImageFile;
 import se.nackademin.restcms.payload.UploadedImageResponse;
 import se.nackademin.restcms.service.ImageFileStorageServiceImpl;
@@ -30,27 +29,29 @@ public class ImageController {
     @CrossOrigin(origins = "http://localhost:8081")
     @PostMapping("/uploadFile")
     public UploadedImageResponse uploadFile(@RequestParam("file") MultipartFile file) {
-        ImageFile imageFile = imageFileStorageService.storeImageFile (file);
+        ImageFile imageFile = imageFileStorageService.storeImageFile(file);
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/downloadFile/")
                 .path(imageFile.getId())
                 .toUriString();
 
-        return new UploadedImageResponse (imageFile.getFileName(), fileDownloadUri,
+        return new UploadedImageResponse(imageFile.getFileName(), fileDownloadUri,
                 file.getContentType(), file.getSize());
     }
 
     //ta inte bort
     @CrossOrigin(origins = "http://localhost:8081")
     @PostMapping("/uploadImage")
-    public ResponseEntity<CKResponse> uploadImage(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<String> uploadImage(@RequestParam("file") MultipartFile file) {
         ImageFile imageFile = imageFileStorageService.storeImageFile(file);
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/downloadFile/")
                 .path(imageFile.getId())
                 .toUriString();
-        return new ResponseEntity<>(new CKResponse(fileDownloadUri), HttpStatus.OK);
+        return ResponseEntity.ok()
+                .contentType(MediaType.TEXT_HTML)
+                .body(fileDownloadUri);
 
     }
 
@@ -62,7 +63,7 @@ public class ImageController {
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType(imageFile.getFileType()))
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + imageFile.getFileName() + "\"")
-                .body(new ByteArrayResource (imageFile.getData()));
+                .body(new ByteArrayResource(imageFile.getData()));
     }
 
 }
