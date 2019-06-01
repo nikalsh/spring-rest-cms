@@ -6,6 +6,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import se.nackademin.restcms.crudrepositories.BlogAdminRepository;
 import se.nackademin.restcms.crudrepositories.ImageFileRepository;
+import se.nackademin.restcms.entities.BlogAdmin;
 import se.nackademin.restcms.entities.ImageFile;
 import se.nackademin.restcms.exception.FileStorageException;
 import se.nackademin.restcms.exception.MyFileNotFoundException;
@@ -44,8 +45,18 @@ public ImageFile storeImageFile (MultipartFile file) {
 }
 
 @Override
+public ImageFile storeImageFile (MultipartFile file, BlogAdmin blogAdmin) {
+	return null;
+}
+
+@Override
 public ImageFile getFile (String fileId) {
 	return imageFileRepository.findById (fileId)
 			.orElseThrow (() -> new MyFileNotFoundException ("File not found with id " + fileId));
+}
+
+@Override
+public ImageFile getProfilePicture (BlogAdmin blogAdmin) {
+	return null;
 }
 }
