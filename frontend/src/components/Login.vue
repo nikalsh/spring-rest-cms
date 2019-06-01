@@ -39,10 +39,8 @@ export default {
             console.log(this.password);
             if (this.email !== '' && this.password !== '') {
 
-
                 axios.post('http://localhost:8080/blogadmin/me', {
                     withCredentials: true,
-
                 },{
                     auth: {
                         username: this.email,
@@ -52,6 +50,7 @@ export default {
                 ).then((response => {
                     // eslint-disable-next-line no-console
                     console.log(response.data);
+                    this.$router.push({name: 'LandingPage'});
                 })).catch((error => {
                     // eslint-disable-next-line no-console
                     console.log(error);
