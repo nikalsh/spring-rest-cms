@@ -41,25 +41,24 @@ export default {
 
 
                 axios.post('http://localhost:8080/blogadmin/me', {
-                    headers: {
-                        Authorization: 'Basic ' + btoa(this.email + ':' + this.password)
+                    withCredentials: true,
+
+                },{
+                    auth: {
+                        username: this.email,
+                        password: this.password
                     }
                 }
                 ).then((response => {
                     // eslint-disable-next-line no-console
-                    console.log(response);
+                    console.log(response.data);
                 })).catch((error => {
                     // eslint-disable-next-line no-console
                     console.log(error);
+
                 }));
 
-                if ("auth") {
-
-                } else {
-                    // eslint-disable-next-line no-console
-                    console.log('Fel email eller lösenord!');
-                }
-            } else {
+            }   else {
                 // eslint-disable-next-line no-console
                 console.log('Email eller lösenord kan inte vara tomt');
             }
