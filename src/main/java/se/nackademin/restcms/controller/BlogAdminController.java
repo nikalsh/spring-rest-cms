@@ -14,7 +14,7 @@ import se.nackademin.restcms.service.BlogAdminServiceImpl;
 import java.util.Map;
 
 @RestController
-//@CrossOrigin("http://localhost:8081")
+@CrossOrigin("http://localhost:8081")
 @RequestMapping("/blogadmin")
 public class BlogAdminController {
 

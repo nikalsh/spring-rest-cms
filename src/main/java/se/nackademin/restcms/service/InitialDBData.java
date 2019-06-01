@@ -40,10 +40,10 @@ public void init () {
 //	blogAdmin.addBlog (blog);
 //	blogAdminRepository.save (blogAdmin);
 
-//	blogAdmin = new BlogAdmin("root@root.root", passwordEncoder.encode("root"), admin);
-//	blog = new Blog ();
-//	blogAdmin.addBlog (blog);
-//	blogAdminRepository.save (blogAdmin);
+	BlogAdmin blogAdmin = new BlogAdmin("root@root.root", passwordEncoder.encode("root"), admin);
+	Blog blog = new Blog();
+	blogAdmin.addBlog(blog);
+	blogAdminRepository.save(blogAdmin);
 //
 //	blogAdmin = new BlogAdmin("niklas@niklas.niklas", passwordEncoder.encode("niklas"), admin);
 //	blog = new Blog ();
