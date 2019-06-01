@@ -3,6 +3,7 @@ package se.nackademin.restcms.entities;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -11,6 +12,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @Entity
+@ToString(exclude = {"blog"})
 @Table(name = "blogadmin")
 @JsonIgnoreProperties(value = {"blog"})
 public class BlogAdmin {

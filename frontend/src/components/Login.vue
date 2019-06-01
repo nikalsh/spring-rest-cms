@@ -26,9 +26,10 @@
         console.log(this.password)
         if (this.email != "" && this.password != "") {
 
-          axios.post('http://localhost:8080/blogadmin/me', null, {
+          axios.post('http://localhost:8080/blogadmin/me', {
               headers: {
-                Authorization: 'Basic ' + btoa(this.email + ':' + this.password)
+                'Authorization': 'Basic ' + btoa(this.email + ':' + this.password),
+
               }
             }
           ).then((response => {

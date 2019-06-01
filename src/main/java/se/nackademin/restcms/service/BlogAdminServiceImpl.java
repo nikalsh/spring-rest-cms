@@ -1,5 +1,7 @@
 package se.nackademin.restcms.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -11,6 +13,7 @@ import se.nackademin.restcms.security.UserDetailsImpl;
 
 @Service
 public class BlogAdminServiceImpl implements BlogAdminService {
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     BlogAdminRepository blogAdminRepository;
@@ -36,6 +39,7 @@ public class BlogAdminServiceImpl implements BlogAdminService {
     @Override
     public BlogAdmin getCurrentBlogAdmin() {
         //get the current authenticated user
+        log.info(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString());
         UserDetailsImpl user = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         BlogAdmin blogAdmin = user.getUser();
 

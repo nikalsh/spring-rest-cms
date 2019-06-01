@@ -2,6 +2,7 @@ package se.nackademin.restcms.entities;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -9,8 +10,9 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
 
-@Entity
 @Data
+@Entity
+@ToString(exclude = {"blogAdmin"})
 @NoArgsConstructor
 @Table(name = "blog")
 public class Blog {
@@ -23,7 +25,7 @@ public class Blog {
 
     private String blogName;
 
-    @OneToMany(mappedBy = "blog")
+    @OneToMany(mappedBy = "blog", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<BlogPost> blogPosts;
 
     @OneToOne
@@ -41,5 +43,6 @@ public class Blog {
 
     @Column(name = "is_active", columnDefinition = "boolean default true")
     private boolean active;
+
 
 }
