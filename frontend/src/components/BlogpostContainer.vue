@@ -59,10 +59,17 @@
       },
       SubmitPost() {
         let data = new FormData();
-        let url = 'http://localhost:8080/uploadPost';
+        let url = 'http://localhost:8080/post/uploadPost';
         data.append('file', this.editorData);
         data.append('id', this.postId);
         axios.post(url, data, {
+
+          withCredentials: true,
+          auth: {
+            // username: 'root@root.root',
+            password: 'root',
+          },
+
           headers: {
             'Content-Type': 'text/html'
           }
@@ -76,7 +83,7 @@
 
       },
       getPost(postId) {
-        axios.get('http://localhost:8080/downloadPost/' + postId).then(resp => {
+        axios.get('http://localhost:8080/post/downloadPost/' + postId).then(resp => {
           this.editorData = resp.data
         });
       }
