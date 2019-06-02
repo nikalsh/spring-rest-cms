@@ -7,7 +7,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -22,7 +21,7 @@ public class BlogPost implements Serializable {
     private String id;
 
     @ManyToOne
-    @JoinColumn(name = "blog_id", nullable = false)
+    @JoinColumn(name = "blog_id")
     private Blog blog;
 
     @Column

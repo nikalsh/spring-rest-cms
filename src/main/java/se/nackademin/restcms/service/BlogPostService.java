@@ -10,6 +10,7 @@ import java.util.Set;
 public interface BlogPostService {
 
     BlogPost storePost(String file, String id);
+    BlogPost INIT__storePost(String file, String postId, Blog blog);
     BlogPost getPost (String fileId);
     List<BlogPost> getAllPostsForBlog(Long blogId);
     List<String> getAllPostIdsForBlog(Long blogId);
