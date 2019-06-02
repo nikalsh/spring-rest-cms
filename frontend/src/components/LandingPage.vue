@@ -1,5 +1,7 @@
 <template>
-  <div>
+  <div id="container">
+    <UserPanel/>
+    <br>
     <router-link 
       tag="li" 
       to="/RegisterUser">
@@ -16,9 +18,13 @@
 </template>
 
 <script>
+import UserPanel from './UserPanel';
 
 export default {
-    name: 'LandingPage'
+    name: 'LandingPage',
+    components: {
+        UserPanel
+    }
 };
 </script>
 
