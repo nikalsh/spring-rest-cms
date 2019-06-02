@@ -38,7 +38,7 @@ export default {
         },
         getPosts() {
             this.now=Date.now();
-            axios.get('http://localhost:8080/downloadPostIds/' + '4').then(resp => {
+            axios.get('http://localhost:8080/post/downloadPosts/' + '4').then(resp => {
                 console.log(resp.data);
                 this.posts = resp.data;
             });

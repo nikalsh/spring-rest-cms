@@ -51,7 +51,6 @@ public class BlogPostServiceImpl implements BlogPostService {
         Blog blog = user.getUser().getBlog();
 
         //decide if they can create a blogpost
-        //...
         Optional<BlogPost> blogPostOptional = blogPostRepository.findById(postId);
         BlogPost blogPost;
         if (blogPostOptional.isPresent()) {
@@ -65,34 +64,9 @@ public class BlogPostServiceImpl implements BlogPostService {
                     file
             );
         }
-
-
         return blogPostRepository.save(blogPost);
-
     }
 
-    @Override
-    public BlogPost INIT__storePost(String file, String postId, Blog blog) {
-
-        LocalDateTime localDateTime = LocalDateTime.now();
-        Optional<BlogPost> blogPostOptional = blogPostRepository.findById(postId);
-        BlogPost blogPost;
-        if (blogPostOptional.isPresent()) {
-            blogPost = blogPostOptional.get();
-            blogPost.setPostData(file);
-
-        } else {
-            blogPost = new BlogPost(
-                    blog,
-
-                    file
-            );
-        }
-
-
-        return blogPostRepository.save(blogPost);
-
-    }
 
     @Override
     public BlogPost getPost(String fileId) {

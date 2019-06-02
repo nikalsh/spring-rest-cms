@@ -48,9 +48,8 @@ public class BlogPostController {
         return "HELLO";
     }
 
-//    @CrossOrigin(origins = "http://localhost:8081")
     @GetMapping(value = "/downloadPost/{postId}", produces = MediaType.TEXT_HTML_VALUE)
-    public ResponseEntity<String> downloadFile(@PathVariable String postId) {
+    public ResponseEntity<String> getPostById(@PathVariable String postId) {
         // Load file from database
         BlogPost blogPost = blogPostService.getPost(postId);
         System.out.println(blogPost.getPostData());
@@ -59,18 +58,9 @@ public class BlogPostController {
                 .body(blogPost.getPostData());
     }
 
-//    @CrossOrigin(origins = "http://localhost:8081")
     @GetMapping(value = "/downloadPosts/{blogId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody
-    ResponseEntity<List<BlogPost>> getPostsByBlog(@PathVariable String blogId) {
+    public @ResponseBody ResponseEntity<List<BlogPost>> getPostsByBlog(@PathVariable String blogId) {
         List<BlogPost> allPostsForBlog = blogPostService.getAllPostsForBlog(Long.parseLong(blogId));
-        return new ResponseEntity<>(allPostsForBlog, HttpStatus.OK);
-    }
-    @CrossOrigin(origins = "http://localhost:8081")
-    @GetMapping(value = "/downloadPostIds/{blogId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody
-    ResponseEntity<List<String>> getPostsByBlogId(@PathVariable String blogId) {
-        List<String> allPostsForBlog = blogPostService.getAllPostIdsForBlog(Long.parseLong(blogId));
         return new ResponseEntity<>(allPostsForBlog, HttpStatus.OK);
     }
 
