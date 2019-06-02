@@ -54,10 +54,17 @@ public class BlogPostController {
     }
 
     @CrossOrigin(origins = "http://localhost:8081")
-    @GetMapping(value = "/downloadPostIds/{blogId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/downloadPosts/{blogId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
     ResponseEntity<List<BlogPost>> getPostsByBlog(@PathVariable String blogId) {
         List<BlogPost> allPostsForBlog = blogPostService.getAllPostsForBlog(Long.parseLong(blogId));
+        return new ResponseEntity<>(allPostsForBlog, HttpStatus.OK);
+    }
+    @CrossOrigin(origins = "http://localhost:8081")
+    @GetMapping(value = "/downloadPostIds/{blogId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody
+    ResponseEntity<List<String>> getPostsByBlogId(@PathVariable String blogId) {
+        List<String> allPostsForBlog = blogPostService.getAllPostIdsForBlog(Long.parseLong(blogId));
         return new ResponseEntity<>(allPostsForBlog, HttpStatus.OK);
     }
 

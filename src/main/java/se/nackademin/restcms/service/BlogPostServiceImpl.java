@@ -26,16 +26,17 @@ public class BlogPostServiceImpl implements BlogPostService {
 
     @Override
     public List<String> getAllPostIdsForBlog(Long blogId) {
-        return blogPostRepository
-                .findByBlogOrderByCreatedDesc(blogRepository.getOne(blogId))
+        List<String> l=blogPostRepository
+                .findByBlogOrderByDateCreatedDesc(blogRepository.getOne(blogId))
                 .stream()
                 .map(BlogPost::getId)
                 .collect(Collectors.toList());
+        return l;
     }
     @Override
     public List<BlogPost> getAllPostsForBlog(Long blogId) {
         return blogPostRepository
-                .findByBlogOrderByCreatedDesc(blogRepository.getOne(blogId))
+                .findByBlogOrderByDateCreatedDesc(blogRepository.getOne(blogId))
                 ;
     }
 
@@ -49,19 +50,15 @@ public class BlogPostServiceImpl implements BlogPostService {
 
         //decide if they can create a blogpost
         //...
-        LocalDateTime localDateTime = LocalDateTime.now();
         Optional<BlogPost> blogPostOptional = blogPostRepository.findById(postId);
         BlogPost blogPost;
         if (blogPostOptional.isPresent()) {
             blogPost = blogPostOptional.get();
             blogPost.setPostData(file);
-            blogPost.setLastUpdated(localDateTime);
         } else {
             blogPost = new BlogPost(
                     // blogRepository.getOne(user.getUser().getBlog().getBlogAdmin().getId()),
                     blogRepository.getOne(4L),
-                    localDateTime,
-                    localDateTime,
                     file
             );
         }

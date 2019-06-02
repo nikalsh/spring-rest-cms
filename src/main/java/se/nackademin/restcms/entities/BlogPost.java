@@ -3,12 +3,15 @@ package se.nackademin.restcms.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 @Entity
@@ -25,11 +28,17 @@ public class BlogPost implements Serializable {
     @JoinColumn(name = "blog_id", nullable = false)
     private Blog blog;
 
-    @Column
-    private LocalDateTime created;
 
+
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
     @Column
-    private LocalDateTime lastUpdated;
+    private Date dateUpdated;
+
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column
+    private Date dateCreated;
 
     @Column
     @Lob
@@ -39,10 +48,8 @@ public class BlogPost implements Serializable {
     }
 
 
-    public BlogPost(Blog blog, LocalDateTime created, LocalDateTime lastUpdated, String postData) {
+    public BlogPost(Blog blog,  String postData) {
         this.blog = blog;
-        this.created = created;
-        this.lastUpdated = lastUpdated;
         this.postData = postData;
     }
 }
