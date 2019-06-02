@@ -25,5 +25,12 @@
 body {
   padding: 0;
   margin: 0;
+
 }
+
+html {
+  overflow-y:scroll;
+}
+
+
 </style>
