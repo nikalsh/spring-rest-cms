@@ -35,30 +35,30 @@ public void init () {
 	authorityRepository.save(admin);
 	authorityRepository.save(user);
 
-//	BlogAdmin blogAdmin = new BlogAdmin("kuk@huvud.se", passwordEncoder.encode("kukhuve"), admin);
-//	Blog blog = new Blog ();
-//	blogAdmin.addBlog (blog);
-//	blogAdminRepository.save (blogAdmin);
-
-	BlogAdmin blogAdmin = new BlogAdmin("root@root.root", passwordEncoder.encode("root"), admin);
+	BlogAdmin blogAdmin = new BlogAdmin("kuk@huvud.se", passwordEncoder.encode("kukhuve"), admin);
 	Blog blog = new Blog();
+	blogAdmin.addBlog (blog);
+	blogAdminRepository.save (blogAdmin);
+
+	blogAdmin = new BlogAdmin("root@root.root", passwordEncoder.encode("root"), admin);
+	blog = new Blog();
 	blogAdmin.addBlog(blog);
 	blogAdminRepository.save(blogAdmin);
-//
-//	blogAdmin = new BlogAdmin("niklas@niklas.niklas", passwordEncoder.encode("niklas"), admin);
-//	blog = new Blog ();
-//	blogAdmin.addBlog (blog);
-//	blogAdminRepository.save (blogAdmin);
-//
-//	blogAdmin = new BlogAdmin("josef@josef.josef", passwordEncoder.encode("josef"), admin);
-//	blog = new Blog ();
-//	blogAdmin.addBlog (blog);
-//	blogAdminRepository.save (blogAdmin);
-//
-//	blogAdmin = new BlogAdmin("johan@johan.johan", passwordEncoder.encode("johan"), admin);
-//	blog = new Blog ();
-//	blogAdmin.addBlog (blog);
-//	blogAdminRepository.save (blogAdmin);
+
+	blogAdmin = new BlogAdmin("niklas@niklas.niklas", passwordEncoder.encode("niklas"), admin);
+	blog = new Blog ();
+	blogAdmin.addBlog (blog);
+	blogAdminRepository.save (blogAdmin);
+
+	blogAdmin = new BlogAdmin("josef@josef.josef", passwordEncoder.encode("josef"), admin);
+	blog = new Blog ();
+	blogAdmin.addBlog (blog);
+	blogAdminRepository.save (blogAdmin);
+
+	blogAdmin = new BlogAdmin("johan@johan.johan", passwordEncoder.encode("johan"), admin);
+	blog = new Blog ();
+	blogAdmin.addBlog (blog);
+	blogAdminRepository.save (blogAdmin);
 
 }
 }

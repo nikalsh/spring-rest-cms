@@ -1,13 +1,15 @@
 <template>
-  <div>
-    <router-link
-      tag="li"
+  <div id="container">
+    <UserPanel/>
+    <br>
+    <router-link 
+      tag="li" 
       to="/RegisterUser">
       <a>Register Here</a>
 
     </router-link>
-    <router-link
-      tag="li"
+    <router-link 
+      tag="li" 
       to="/Login">
       <a>Login</a>
 
@@ -16,13 +18,14 @@
 </template>
 
 <script>
+import UserPanel from './UserPanel';
 
-  import Navbar from "./Navbar";
-
-  export default {
+export default {
     name: 'LandingPage',
-    components: {Navbar}
-  };
+    components: {
+        UserPanel
+    }
+};
 </script>
 
 <style scoped>
