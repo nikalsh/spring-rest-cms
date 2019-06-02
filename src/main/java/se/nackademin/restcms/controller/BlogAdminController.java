@@ -39,6 +39,7 @@ public class BlogAdminController {
 
     @PutMapping(path = "/update_password")
     public BlogAdmin newPassword(@RequestBody Map<String, Object> password) {
+        log.info("NEW PASSWORD: " + password.get("password"));
         return blogAdminService.updatePassword(password.get("password").toString());
     }
 

@@ -1,5 +1,6 @@
 package se.nackademin.restcms.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -15,6 +16,8 @@ import java.util.Set;
 @ToString(exclude = {"blogAdmin"})
 @NoArgsConstructor
 @Table(name = "blog")
+@JsonIgnoreProperties(value = {"blogAdmin"})
+
 public class Blog {
 
     @Id

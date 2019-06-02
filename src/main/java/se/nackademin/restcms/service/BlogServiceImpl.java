@@ -1,8 +1,10 @@
 package se.nackademin.restcms.service;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import se.nackademin.restcms.crudrepositories.BlogRepository;
 import se.nackademin.restcms.entities.Blog;
+import se.nackademin.restcms.security.UserDetailsImpl;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,7 +21,7 @@ public BlogServiceImpl (BlogRepository blogRepository) {
 // Needs implementation
 @Override
 public List<Blog> findAll () {
-	return null;
+	return blogRepository.findAll();
 }
 
 // Needs implementation
@@ -37,5 +39,11 @@ public void deleteById (Long id) {
 @Override
 public Blog save (Blog blog) {
 	return null;
+}
+
+@Override
+	public Optional<Blog> getCurrentUsersBlog(){
+	UserDetailsImpl user = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	return blogRepository.findById(user.getUser().getBlog().getId());
 }
 }
