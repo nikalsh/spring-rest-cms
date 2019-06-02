@@ -14,71 +14,70 @@
 </template>
 
 <script>
-  import axios from 'axios';
+import axios from 'axios';
 
-  export default {
+export default {
     data() {
-      return {
-        file: ''
-      };
+        return {
+            file: ''
+        };
     },
 
     methods: {
-      submitFile() {
-        let formData = new FormData();
-        formData.append('file', this.file);
+        submitFile() {
+            let formData = new FormData();
+            formData.append('file', this.file);
+            // eslint-disable-next-line no-console
+            console.log(this.file);
 
-        // eslint-disable-next-line no-console
-        console.log(this.file);
+            // let xhr = new XMLHttpRequest()
+            //   xhr.open('POST', '/uploadFile')
+            //
+            //   xhr.onload = function () {
+            //       console.log(xhr.responseText)
+            // var response = JSON.parse(xhr.responseText)
+            // if (xhr.status == 200) {
+            //     singleFileUploadError.style.display = 'none'
+            //     singleFileUploadSuccess.innerHTML = '<p>File Uploaded Successfully.</p><p>DownloadUrl : <a href=\'' + response.fileDownloadUri + '\' target=\'_blank\'>' + response.fileDownloadUri + '</a></p>'
+            //     singleFileUploadSuccess.style.display = 'block'
+            // } else {
+            //     singleFileUploadSuccess.style.display = 'none'
+            //     singleFileUploadError.innerHTML = (response && response.message) || 'Some Error Occurred'
+            // }
+            // }
+            //
+            // xhr.send(formData)
 
-        // let xhr = new XMLHttpRequest()
-        //   xhr.open('POST', '/uploadFile')
-        //
-        //   xhr.onload = function () {
-        //       console.log(xhr.responseText)
-        // var response = JSON.parse(xhr.responseText)
-        // if (xhr.status == 200) {
-        //     singleFileUploadError.style.display = 'none'
-        //     singleFileUploadSuccess.innerHTML = '<p>File Uploaded Successfully.</p><p>DownloadUrl : <a href=\'' + response.fileDownloadUri + '\' target=\'_blank\'>' + response.fileDownloadUri + '</a></p>'
-        //     singleFileUploadSuccess.style.display = 'block'
-        // } else {
-        //     singleFileUploadSuccess.style.display = 'none'
-        //     singleFileUploadError.innerHTML = (response && response.message) || 'Some Error Occurred'
-        // }
-        // }
-        //
-        // xhr.send(formData)
-
-        /*
+            /*
       Make the request to the POST /single-file URL
     */
 
-        axios.post('http://localhost:8080/uploadFile',
+            axios.post('http://localhost:8080/uploadFile',
 
-          formData,
-          {
-            headers: {
-              'Content-Type': 'multipart/form-data'
-            }
-          }
-        ).then(function () {
+                formData,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }
+            ).then(function () {
 
-          // eslint-disable-next-line no-console
-          console.log('SUCCESS!!');
-        })
-          .catch(function () {
+                // eslint-disable-next-line no-console
+                console.log('SUCCESS!!');
+            })
+                .catch(function () {
 
-            // eslint-disable-next-line no-console
-            console.log('FAILURE!!');
-          });
-      },
+                    // eslint-disable-next-line no-console
+                    console.log('FAILURE!!');
+                });
+        },
 
-      /*
+        /*
       Handles a change on the file upload
     */
-      handleFileUpload() {
-        this.file = this.$refs.file.files[0];
-      }
+        handleFileUpload() {
+            this.file = this.$refs.file.files[0];
+        }
     }
-  };
+};
 </script>
