@@ -1,24 +1,25 @@
 <template>
-  <div id="blog">
-    <button @click="onClick">Click to insert</button>
+  <b-container id="blog">
+    <button @click="onClick">New post</button>
     <div ref="container">
-      <cktest 
+      <BlogpostContainer
         v-for="(post, index) in posts" 
         :post="post" 
-        :key="index"/>
+        :key="index">
+      </BlogpostContainer>
     </div>
-  </div>
+  </b-container>
 </template>
 
 <script>
-import CKtest from './blogpost-container';
+import BlogpostContainer from './BlogpostContainer';
 import Vue from 'vue';
 import axios from 'axios';
 
 export default {
     name: 'Blog',
     components: {
-        cktest: CKtest
+        BlogpostContainer: BlogpostContainer
     },
     data: function () {
         return {
@@ -28,7 +29,7 @@ export default {
     methods: {
 
         onClick() {
-            var ComponentClass = Vue.extend(CKtest);
+            var ComponentClass = Vue.extend(BlogpostContainer);
             var instance = new ComponentClass({
                 propsData: {post:{}}
             });

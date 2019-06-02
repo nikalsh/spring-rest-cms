@@ -18,8 +18,10 @@
     "@ckeditor/ckeditor5-editor-inline": "^12.1.0",
     "@ckeditor/ckeditor5-vue": "^1.0.0-beta.2",
     "axios": "^0.18.0",
+    "bootstrap": "^4.3.1",
+    "bootstrap-vue": "^2.0.0-rc.22",
     "raw-loader": "^0.5.1",
-    "vue": "^2.5.2",
+    "vue": "^2.6.10",
     "vue-axios": "^2.1.4",
     "vue-ckeditor5": "^0.4.1",
     "vue-router": "^3.0.1"

@@ -6,9 +6,9 @@ import App from './App'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 
-Vue.use(VueAxios, axios)
+Vue.use(VueAxios, axios);
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 /* eslint-disable */
 /* eslint-disable no-new */
@@ -17,4 +17,4 @@ new Vue({
     router,
     components: { App },
     template: '<App/>'
-})
+});

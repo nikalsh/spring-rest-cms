@@ -1,13 +1,13 @@
 <template>
   <div>
-    <router-link 
-      tag="li" 
+    <router-link
+      tag="li"
       to="/RegisterUser">
       <a>Register Here</a>
 
     </router-link>
-    <router-link 
-      tag="li" 
+    <router-link
+      tag="li"
       to="/Login">
       <a>Login</a>
 
@@ -17,9 +17,12 @@
 
 <script>
 
-export default {
-    name: 'LandingPage'
-};
+  import Navbar from "./Navbar";
+
+  export default {
+    name: 'LandingPage',
+    components: {Navbar}
+  };
 </script>
 
 <style scoped>
