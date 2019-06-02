@@ -9,11 +9,11 @@ export default class UploadAdapter {
     return this.loader.file
       .then(uploadedFile => {
         return new Promise((resolve, reject) => {
-          let image = new FormData();
+          let formData = new FormData();
           let url = 'http://localhost:8080/uploadImage';
-          image.append('file', uploadedFile);
-          console.log(image);
-          axios.post(url, image, {
+          formData.append('file', uploadedFile);
+          console.log(formData);
+          axios.post(url, formData, {
             headers: {
               'Content-Type': 'multipart/form-data'
             }
