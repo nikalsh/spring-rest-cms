@@ -1,9 +1,8 @@
-package se.nackademin.restcms.Security2;
+package se.nackademin.restcms.Security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -15,8 +14,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.provider.error.OAuth2AccessDeniedHandler;
-import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
@@ -51,30 +48,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and()
+        http
+                .cors().and()
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.OPTIONS, "/blogadmin/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/blogadmin/me").hasAnyRole("USER", "ADMIN")
-
-                .antMatchers(HttpMethod.POST, "/blogadmin/**").permitAll()
-                .antMatchers("/blogadmin/**").hasAnyRole("USER", "ADMIN")
-
-                .antMatchers(HttpMethod.GET, "/post/**").hasAnyRole("USER", "ADMIN")
-                .antMatchers("/post/**").hasAnyRole("USER", "ADMIN", "ROLE_USER", "ROLE_ADMIN")
-                .antMatchers(HttpMethod.GET, "/user").permitAll()
-                .antMatchers(HttpMethod.GET, "/blog/**").permitAll()
-                .antMatchers("/blog/**").hasAnyRole("USER", "ADMIN")
-                .antMatchers("/oauth/token").permitAll()
-                .antMatchers("/api-docs/**").permitAll()
+//                .antMatchers(HttpMethod.OPTIONS, "/blogadmin/**").permitAll()
+//                .antMatchers(HttpMethod.POST, "/blogadmin/me").hasAnyRole("USER", "ADMIN")
+//
+//                .antMatchers(HttpMethod.POST, "/blogadmin/**").permitAll()
+//                .antMatchers("/blogadmin/**").hasAnyRole("USER", "ADMIN")
+//
+                .antMatchers(HttpMethod.GET, "/post/**").authenticated()
+//                .antMatchers("/post/**").hasAnyRole("USER", "ADMIN", "ROLE_USER", "ROLE_ADMIN")
+//                .antMatchers(HttpMethod.GET, "/user").permitAll()
+//                .antMatchers(HttpMethod.GET, "/blog/**").permitAll()
+//                .antMatchers("/blog/**").hasAnyRole("USER", "ADMIN")
+//                .antMatchers("/oauth/token").permitAll()
+//                .antMatchers("/api-docs/**").permitAll()
 //                .antMatchers("/**").authenticated()
                 .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
     }
 
-    @Bean
-    public TokenStore tokenStore() {
-        return new InMemoryTokenStore();
-    }
+
 
     @Bean
     public PasswordEncoder encoder() {

@@ -1,4 +1,4 @@
-package se.nackademin.restcms.Security2;
+package se.nackademin.restcms.Security;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,12 +8,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import se.nackademin.restcms.Security2.Entity.CustomUserDetail;
+import se.nackademin.restcms.entities.CustomUserDetail;
 import se.nackademin.restcms.crudrepositories.BlogAdminRepository;
 import se.nackademin.restcms.entities.BlogAdmin;
 
 import java.util.List;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 @Slf4j

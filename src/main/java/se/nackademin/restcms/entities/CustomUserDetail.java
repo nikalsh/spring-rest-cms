@@ -1,4 +1,4 @@
-package se.nackademin.restcms.Security2.Entity;
+package se.nackademin.restcms.entities;
 
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;

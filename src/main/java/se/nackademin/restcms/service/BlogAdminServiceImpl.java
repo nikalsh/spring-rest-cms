@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import se.nackademin.restcms.Security2.Entity.CustomUserDetail;
+import se.nackademin.restcms.entities.CustomUserDetail;
 import se.nackademin.restcms.crudrepositories.AuthorityRepository;
 import se.nackademin.restcms.crudrepositories.BlogAdminRepository;
 import se.nackademin.restcms.entities.*;

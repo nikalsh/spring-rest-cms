@@ -30,7 +30,7 @@
             <b-dropdown-item to="Login">Login</b-dropdown-item>
             <b-dropdown-item to="Profile">Profile (placeholder)</b-dropdown-item>
             <b-dropdown-item to="RegisterUser">Register User</b-dropdown-item>
-            <b-dropdown-item to="LogOut">Log out (placeholder)</b-dropdown-item>
+            <b-dropdown-item @click="logout">Log out</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
       </b-collapse>
@@ -40,7 +40,12 @@
 
 <script>
   export default {
-    name: "Navbar"
+    name: "Navbar",
+    methods:{
+      logout(){
+        localStorage.removeItem('user-token')
+      }
+    }
   }
 </script>
 

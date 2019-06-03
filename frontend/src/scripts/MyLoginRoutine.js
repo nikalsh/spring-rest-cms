@@ -27,16 +27,7 @@ export const myLoginRoutine = user => new Promise((resolve, reject) => {
       console.log(resp.data.access_token);
 
       const token = resp.data.access_token;
-      axios.get('http://localhost:8080/post/downloadPosts/' + '4',{
-                    headers: {
-      'Authorization': 'Bearer '+ token
-                    }
-                }
-                ).then((response => {
-                  console.log(response);
-                })).catch((error => {
-                    console.log(error)
-                }));
+
       localStorage.setItem('user-token', token) // store the token in localstorage
       resolve(resp)
     })

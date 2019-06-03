@@ -3,8 +3,8 @@
     <button @click="onClick">New post</button>
     <div ref="container">
       <BlogpostContainer
-        v-for="(post, index) in posts" 
-        :post="post" 
+        v-for="(post, index) in posts"
+        :post="post"
         :key="index">
       </BlogpostContainer>
     </div>
@@ -38,10 +38,17 @@ export default {
         },
         getPosts() {
             this.now=Date.now();
-            axios.get('http://localhost:8080/post/downloadPosts/' + '4').then(resp => {
-                console.log(resp.data);
-                this.posts = resp.data;
-            });
+          axios.get('http://localhost:8080/post/downloadPosts/' + '4', {
+              headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('user-token')
+              }
+            }
+          ).then((response => {
+            this.posts=response.data;
+            console.log(response);
+          })).catch((error => {
+            console.log(error)
+          }));
         }
     }
 };

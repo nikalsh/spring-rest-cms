@@ -1,5 +1,6 @@
 package se.nackademin.restcms.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ import se.nackademin.restcms.service.ImageFileStorageService;
 import se.nackademin.restcms.service.ImageFileStorageServiceImpl;
 
 import java.security.Principal;
-
+@Slf4j
 @RestController
 public class ImageController {
     private final BlogAdminService blogAdminService;
@@ -39,12 +40,7 @@ public class ImageController {
         return "hi";
     }
 
-    private static final Logger logger = LoggerFactory.getLogger(ImageController.class);
 
-
-//    public ImageController(ImageFileStorageServiceImpl imageFileStorageService) {
-//        this.imageFileStorageService = imageFileStorageService;
-//    }
 
     @CrossOrigin(origins = "http://localhost:8081")
     @PostMapping("/uploadFile")
