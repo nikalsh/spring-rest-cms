@@ -22,10 +22,10 @@ module.exports = {
     'no-console': 'off',
     // 'linebreak-style': [
     //   'error', 'unix'
-    // ],
+    //     // ],
     eqeqeq: 1,
     quotes: ['error', 'single'],
-    semi: ['error', 'never'],
+    semi: ['error', 'always'],
     'generator-star-spacing': 'off',
     'no-debugger': "process.env.NODE_ENV" === 'production' ? 'error' : 'off'
   },

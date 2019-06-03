@@ -54,7 +54,7 @@
 <!--insert into files (blogadmin_id, data, file_name, file_type, id) values (?, ?, ?, ?, ?) [23506-193]-->
 
 <script>
-import axios from 'axios';
+import axios from 'axios'
 
 export default {
     data() {
@@ -63,19 +63,19 @@ export default {
             name: '',
             email: '',
             file: '',
-        };
+        }
     },
     methods: {
         submitFile() {
-            let formData = new FormData();
-            formData.append('file', this.file);
-            formData.append('password', this.password);
-            formData.append('name', this.name);
-            formData.append('email', this.email);
+            let formData = new FormData()
+            formData.append('file', this.file)
+            formData.append('password', this.password)
+            formData.append('name', this.name)
+            formData.append('email', this.email)
             // eslint-disable-next-line no-console
-            console.log(this.file);
+            console.log(this.file)
 
-            axios.post('http://localhost:8080/registerUser',
+            axios.post('http://localhost:8080/blogadmin/registerUser',
 
                 formData,
                 {
@@ -86,20 +86,20 @@ export default {
             ).then(function () {
 
                 // eslint-disable-next-line no-console
-                console.log('SUCCESS!!');
+                console.log('SUCCESS!!')
             })
                 .catch(function () {
 
                     // eslint-disable-next-line no-console
-                    console.log('FAILURE!!');
-                });
+                    console.log('FAILURE!!')
+                })
         },
 
         /*
 */
         handleFileUpload() {
-            this.file = this.$refs.file.files[0];
+            this.file = this.$refs.file.files[0]
         }
     }
-};
+}
 </script>

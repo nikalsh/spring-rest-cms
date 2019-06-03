@@ -67,20 +67,20 @@ ImageFileStorageService imageFileStorageService;
         return getCurrentBlogAdmin();
     }
 
-
-public BlogAdmin registerUser(@RequestParam String email, @RequestParam String name, @RequestParam String password, @RequestParam("file") MultipartFile file) {
-
-    BlogAdmin blogAdmin = new BlogAdmin();
-    
-    
-    blogAdmin.setEmail (email);
-    blogAdmin.setName (name);
-    blogAdmin.setPassword (passwordEncoder.encode(password));
-    
-    saveBlogAdmin (blogAdmin);
-    
-    ImageFile imageFile = imageFileStorageService.storeImageFile (file, blogAdmin);
-    return blogAdmin;
-}
+//
+//public BlogAdmin registerUser(@RequestParam String email, @RequestParam String name, @RequestParam String password, @RequestParam("file") MultipartFile file) {
+//
+//    BlogAdmin blogAdmin = new BlogAdmin();
+//
+//
+//    blogAdmin.setEmail (email);
+//    blogAdmin.setName (name);
+//    blogAdmin.setPassword (passwordEncoder.encode(password));
+//
+//    saveBlogAdmin (blogAdmin);
+//
+//    ImageFile imageFile = imageFileStorageService.storeImageFile (file, blogAdmin);
+//    return blogAdmin;
+//}
 
 }

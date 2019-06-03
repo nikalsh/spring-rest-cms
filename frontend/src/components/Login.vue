@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from 'axios';
 
 
 export default {
@@ -28,14 +28,14 @@ export default {
         return {
             email: '',
             password: '',
-        }
+        };
     },
     methods: {
         login() {
         // eslint-disable-next-line no-console
-            console.log(this.email)
+            console.log(this.email);
             // eslint-disable-next-line no-console
-            console.log(this.password)
+            console.log(this.password);
             if (this.email !== '' && this.password !== '') {
 
                 axios.post('http://localhost:8080/blogadmin/me', {
@@ -48,26 +48,26 @@ export default {
                 }
                 ).then((response => {
                     // eslint-disable-next-line no-console
-                  console.log(response.data)
-                    this.$globalUserDetails.name = response.data.name
-                    this.$globalUserDetails.email = response.data.email
-                    this.$globalUserDetails.img = (response.data.photo == null ? this.$globalUserDetails.img : response.data.photo)
-                    this.$router.push({name: 'LandingPage'})
+                    console.log(response.data);
+                    this.$globalUserDetails.name = response.data.name;
+                    this.$globalUserDetails.email = response.data.email;
+                    this.$globalUserDetails.img = (response.data.photo === null ? this.$globalUserDetails.img : response.data.photo);
+                    this.$router.push({name: 'LandingPage'});
 
                 })).catch((error => {
                     // eslint-disable-next-line no-console
-                    console.log(error)
+                    console.log(error);
 
-                }))
+                }));
 
             }   else {
                 // eslint-disable-next-line no-console
-                console.log('Email eller lösenord kan inte vara tomt')
+                console.log('Email eller lösenord kan inte vara tomt');
             }
         },
 
     }
-}
+};
 </script>
 
 <style scoped>
