@@ -34,17 +34,10 @@ public class ImageController {
         this.imageFileStorageService = imageFileStorageService;
         this.blogAdminService = blogAdminService;
     }
-    @CrossOrigin(origins = "http://localhost:8081")
-    @GetMapping("/user")
-    public String user() {
-        return "hi";
-    }
-
-
 
     @CrossOrigin(origins = "http://localhost:8081")
     @PostMapping("/uploadFile")
-    public UploadedImageResponse uploadFile(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
         ImageFile imageFile = imageFileStorageService.storeImageFile(file);
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
@@ -52,8 +45,9 @@ public class ImageController {
                 .path(imageFile.getId())
                 .toUriString();
 
-        return new UploadedImageResponse(imageFile.getFileName(), fileDownloadUri,
-                file.getContentType(), file.getSize());
+	    return ResponseEntity.ok()
+			    .contentType(MediaType.TEXT_HTML)
+			    .body(fileDownloadUri);
     }
 
     //ta inte bort

@@ -14,6 +14,7 @@ import se.nackademin.restcms.crudrepositories.AuthorityRepository;
 import se.nackademin.restcms.crudrepositories.BlogAdminRepository;
 import se.nackademin.restcms.entities.*;
 //import se.nackademin.restcms.security.UserDetailsImpl;
+import se.nackademin.restcms.security.UserDetailsImpl;
 
 @Service
 public class BlogAdminServiceImpl implements BlogAdminService {
