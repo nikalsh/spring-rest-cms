@@ -19,7 +19,6 @@ public class InitialDBData {
     private final BlogRepository blogRepository;
     private BlogPostRepository blogPostRepository;
     private final BlogPostService blogPostService;
-
     private final AuthorityRepository authorityRepository;
 
     private final PasswordEncoder passwordEncoder;
@@ -30,7 +29,8 @@ public class InitialDBData {
                          PasswordEncoder passwordEncoder,
                          BlogRepository blogRepository,
                          BlogPostService blogPostService,
-                         BlogPostRepository blogPostRepository) {
+                         BlogPostRepository blogPostRepository
+    ) {
         this.blogPostService = blogPostService;
         this.blogAdminRepository = blogAdminRepository;
         this.authorityRepository = authorityRepository;
@@ -43,13 +43,18 @@ public class InitialDBData {
     public void init() {
         Authority admin = new Authority(AuthorityType.ROLE_ADMIN);
         Authority user = new Authority(AuthorityType.ROLE_USER);
+        Authority user2 = new Authority(AuthorityType.USER);
+        Authority admin2 = new Authority(AuthorityType.ADMIN);
+
         authorityRepository.save(admin);
+        authorityRepository.save(admin2);
         authorityRepository.save(user);
-        Blog blog = newAdmin("lorem@lorem.lorem", "lorem", admin);
-        newAdmin("root@root.root", "root", admin);
-        newAdmin("niklas@niklas.niklas", "niklas", admin);
-        newAdmin("josef@josef.josef", "josef", admin);
-        newAdmin("johan@johan.johan", "johan", admin);
+        authorityRepository.save(user2);
+        Blog blog = newAdmin("lorem@lorem.lorem", "lorem", admin,admin2,user,user2);
+        newAdmin("root@root.root", "root", admin,admin2,user,user2);
+        newAdmin("niklas@niklas.niklas", "niklas", admin,admin2,user,user2);
+        newAdmin("josef@josef.josef", "josef", admin,admin2,user,user2);
+        newAdmin("johan@johan.johan", "johan", admin,admin2,user,user2);
 
         newBlogPost(blog,
                 "<h2>Vad är Lorem Ipsum?</h2><p><strong>Lorem Ipsum</strong> är en utfyllnadstext från tryck- och förlagsindustrin. Lorem ipsum har varit standard ända sedan 1500-talet, när en okänd boksättare tog att antal bokstäver och blandade dem för att göra ett provexemplar av en bok. Lorem ipsum har inte bara överlevt fem århundraden, utan även övergången till elektronisk typografi utan större förändringar. Det blev allmänt känt på 1960-talet i samband med lanseringen av Letraset-ark med avsnitt av Lorem Ipsum, och senare med mjukvaror som Aldus PageMaker</p>"
@@ -65,11 +70,16 @@ public class InitialDBData {
         );
     }
 
-    private Blog newAdmin(String email, String rawPassword, Authority admin) {
-        BlogAdmin blogAdmin = new BlogAdmin(email, passwordEncoder.encode(rawPassword), admin);
+    private Blog newAdmin(String email, String rawPassword, Authority admin, Authority admin2, Authority user, Authority user2) {
+        BlogAdmin blogAdmin = new BlogAdmin(email,
+                passwordEncoder.encode
+                        (rawPassword), admin);
         Blog blog = new Blog();
         blogAdmin.addBlog(blog);
         blogAdminRepository.save(blogAdmin);
+        blogAdmin.addRole(admin2);
+        blogAdmin.addRole(user);
+        blogAdmin.addRole(user2);
         return blog;
     }
 

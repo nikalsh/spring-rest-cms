@@ -4,12 +4,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
 @Entity
 @Table(name = "authority")
-public class Authority {
+public class Authority implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

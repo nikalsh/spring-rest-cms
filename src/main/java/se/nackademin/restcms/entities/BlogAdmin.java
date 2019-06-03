@@ -1,13 +1,16 @@
 package se.nackademin.restcms.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import jdk.nashorn.internal.ir.annotations.Ignore;
+import lombok.*;
+import org.h2.result.SearchRow;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+
+import static lombok.AccessLevel.PROTECTED;
 
 @Data
 @NoArgsConstructor
@@ -15,17 +18,24 @@ import java.util.Set;
 @ToString(exclude = {"blog"})
 @Table(name = "blogadmin")
 @JsonIgnoreProperties(value = {"blog"})
-public class BlogAdmin {
+public class BlogAdmin implements Serializable {
+
+    @Getter(PROTECTED)
+    @Setter(PROTECTED)
+    @Ignore
+    protected String _class;
 
     public BlogAdmin(String email, String password, Authority authority) {
         this.role.add(authority);
         this.email = email;
         this.password = password;
+        isEnabled=true;
     }
 
     public BlogAdmin(String email, String password) {
         this.email = email;
         this.password = password;
+        isEnabled=true;
     }
 
 
@@ -38,6 +48,7 @@ public class BlogAdmin {
     private String email;
     private String name;
     private String password;
+    private Boolean isEnabled;
 
     @OneToOne(mappedBy = "blogAdmin", /* referes to the VARIABLE NAME */
             cascade = CascadeType.ALL, orphanRemoval = true)

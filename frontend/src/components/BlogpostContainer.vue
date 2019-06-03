@@ -1,16 +1,16 @@
 <template>
   <div style="padding: 20px 0">
 
-  <div id="blogpost-container">
-    <div ref="contents"
-         class="ck ck-content ck-editor__editable ck-rounded-corners ck-editor__editable_inline ck-blurred"
-         style="border: lightgrey 1px solid; min-height: 3em"
-         @click="setEditor"
-         v-html="post.postData">
-      {{post.postData}}
+    <div id="blogpost-container">
+      <div ref="contents"
+           class="ck ck-content ck-editor__editable ck-rounded-corners ck-editor__editable_inline ck-blurred"
+           style="border: lightgrey 1px solid; min-height: 3em"
+           @click="setEditor"
+           v-html="post.postData">
+        {{post.postData}}
+      </div>
+      <button class="submit-btn" @click="SubmitPost">Submit</button>
     </div>
-    <button class="submit-btn" @click="SubmitPost">Submit</button>
-  </div>
   </div>
 </template>
 
@@ -60,14 +60,15 @@
       SubmitPost() {
         let data = new FormData();
         let url = 'http://localhost:8080/post/uploadPost';
+        console.log(this.editorData);
         data.append('file', this.editorData);
         data.append('id', this.postId);
         axios.post(url, data, {
 
-          withCredentials: true,
+           withCredentials: true,
           auth: {
-             username: 'root@root.root',
-            password: 'root',
+            username: 'lorem@lorem.lorem',
+            password: 'lorem',
           },
 
           headers: {
@@ -75,8 +76,8 @@
           }
         })
           .then(response => {
-            this.postId = response.data.url;
             console.log(response);
+            this.postId = response.data;
           }).catch(error => {
           console.log(error);
         });
@@ -137,7 +138,8 @@
     float: right;
     margin-left: var(--ck-image-style-spacing);
   }
-  .submit-btn{
+
+  .submit-btn {
     position: absolute;
     top: 0%;
     right: 0%;
@@ -151,9 +153,12 @@
     /*cursor: pointer;*/
     /*border-radius: 5px;*/
   }
+
   #blogpost-container {
     position: relative;
   }
-
+  .ck {
+    text-align: center;
+  }
 
 </style>

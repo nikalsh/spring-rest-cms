@@ -15,7 +15,7 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "blogpost")
-@JsonIgnoreProperties(value = { "blog" })
+@JsonIgnoreProperties(value = {"blog"})
 public class BlogPost implements Serializable {
 
     @Id
@@ -26,7 +26,6 @@ public class BlogPost implements Serializable {
     @ManyToOne
     @JoinColumn(name = "blog_id")
     private Blog blog;
-
 
 
     @CreationTimestamp
@@ -47,7 +46,7 @@ public class BlogPost implements Serializable {
     }
 
 
-    public BlogPost(Blog blog,  String postData) {
+    public BlogPost(Blog blog, String postData) {
         this.blog = blog;
         this.postData = postData;
     }

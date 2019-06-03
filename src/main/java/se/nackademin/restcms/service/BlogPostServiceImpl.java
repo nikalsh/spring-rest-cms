@@ -8,7 +8,7 @@ import se.nackademin.restcms.crudrepositories.BlogRepository;
 import se.nackademin.restcms.entities.Blog;
 import se.nackademin.restcms.entities.BlogPost;
 import se.nackademin.restcms.exception.MyFileNotFoundException;
-import se.nackademin.restcms.security.UserDetailsImpl;
+//import se.nackademin.restcms.security.UserDetailsImpl;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -47,8 +47,8 @@ public class BlogPostServiceImpl implements BlogPostService {
     @Override
     public BlogPost storePost(String file, String postId) {
         //get the current authenticated user
-        UserDetailsImpl user = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Blog blog = user.getUser().getBlog();
+//        UserDetailsImpl user = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        Blog blog = user.getUser().getBlog();
 
         //decide if they can create a blogpost
         Optional<BlogPost> blogPostOptional = blogPostRepository.findById(postId);
@@ -58,9 +58,9 @@ public class BlogPostServiceImpl implements BlogPostService {
             blogPost.setPostData(file);
         } else {
             blogPost = new BlogPost(
-                    // blogRepository.getOne(user.getUser().getBlog().getBlogAdmin().getId()),
-                   // blogRepository.getOne(4L),
-                    blog,
+                    // blogRepository.getOne(user.getUser().getBlog().getUser().getId()),
+                    blogRepository.getOne(4L),
+                   // blog,
                     file
             );
         }

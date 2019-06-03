@@ -11,6 +11,7 @@ import se.nackademin.restcms.entities.BlogAdmin;
 import se.nackademin.restcms.service.BlogAdminService;
 import se.nackademin.restcms.service.BlogAdminServiceImpl;
 
+import java.security.Principal;
 import java.util.Map;
 
 @RestController
@@ -35,6 +36,12 @@ public class BlogAdminController {
     @PostMapping(path = "/me")
     public BlogAdmin me() {
         return blogAdminService.getCurrentBlogAdmin();
+    }
+
+
+    @RequestMapping("/user")
+    public Principal home(Principal user) {
+        return user;
     }
 
     @PutMapping(path = "/update_password")
