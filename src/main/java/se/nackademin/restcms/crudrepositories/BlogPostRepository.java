@@ -10,6 +10,6 @@ import java.util.List;
 @RepositoryRestResource(exported = false)
 public interface BlogPostRepository extends JpaRepository<BlogPost, String> {
 
-    List<BlogPost> findByBlogOrderByCreatedDesc(Blog blog);
+    List<BlogPost> findByBlogOrderByDateCreatedDesc(Blog blog);
 
 }

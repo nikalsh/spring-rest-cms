@@ -11,5 +11,6 @@ List<Blog> findAll ();
 Optional<Blog> findById (Long id);
 void deleteById (Long id);
 Blog save (Blog blog);
+Optional<Blog> getCurrentUsersBlog();
 
 }

@@ -1,21 +1,15 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import CKtest from '../components/blogpost-container'
+import BlogpostContainer from '../components/BlogpostContainer'
 import FileUpload from '../components/FileUpload'
-import CKEditor from '@ckeditor/ckeditor5-vue';
 import RegisterUser from "../components/RegisterUser";
 import LandingPage from '../components/LandingPage'
+import CKEditor from '@ckeditor/ckeditor5-vue';
 import Blog from "../components/Blog";
 import Login from '../components/Login'
-// import Autosave from '@ckeditor/ckeditor5-autosave/src/autosave'
-// const options = {
-//
-//   editorConfig:{
-//     extraPlugins:[
-//     Autosave]
-//   },
-//   name: 'ckeditor'
-// }
+import Navbar from '../components/Navbar'
+
+
 
 Vue.use(CKEditor);
 Vue.use(Router);
@@ -25,10 +19,16 @@ export default new Router({
   routes: [
 
     {
-      path: '/CKtest',
-      name: 'CKtest',
-      component: CKtest
-    },{
+      path: '/Navbar',
+      name: 'Navbar',
+      component: Navbar
+    },
+    {
+      path: '/BlogpostContainer',
+      name: 'BlogpostContainer',
+      component: BlogpostContainer
+    },
+    {
       path: '/Blog',
       name: 'Blog',
       component: Blog

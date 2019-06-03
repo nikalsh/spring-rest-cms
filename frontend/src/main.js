@@ -21,7 +21,7 @@ Vue.prototype.$globalUserDetails = {
 
 Vue.use(VueAxios, axios)
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 
 
@@ -33,4 +33,4 @@ new Vue({
     router,
     components: { App },
     template: '<App/>'
-})
+});

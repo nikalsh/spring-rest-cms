@@ -1,4 +1,6 @@
 <template>
+  <div style="padding: 20px 0">
+
   <div id="blogpost-container">
     <div ref="contents"
          class="ck ck-content ck-editor__editable ck-rounded-corners ck-editor__editable_inline ck-blurred"
@@ -9,6 +11,7 @@
     </div>
     <button class="submit-btn" @click="SubmitPost">Submit</button>
   </div>
+  </div>
 </template>
 
 <script>
@@ -18,7 +21,7 @@
 
 
   export default {
-    name: 'CKtest',
+    name: 'BlogpostContainer',
     props: {
       post: Object
     },
@@ -56,10 +59,17 @@
       },
       SubmitPost() {
         let data = new FormData();
-        let url = 'http://localhost:8080/uploadPost';
+        let url = 'http://localhost:8080/post/uploadPost';
         data.append('file', this.editorData);
         data.append('id', this.postId);
         axios.post(url, data, {
+
+          withCredentials: true,
+          auth: {
+             username: 'root@root.root',
+            password: 'root',
+          },
+
           headers: {
             'Content-Type': 'text/html'
           }
@@ -73,7 +83,7 @@
 
       },
       getPost(postId) {
-        axios.get('http://localhost:8080/downloadPost/' + postId).then(resp => {
+        axios.get('http://localhost:8080/post/downloadPost/' + postId).then(resp => {
           this.editorData = resp.data
         });
       }

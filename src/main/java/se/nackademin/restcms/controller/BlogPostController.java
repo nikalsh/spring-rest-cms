@@ -14,6 +14,7 @@ import se.nackademin.restcms.service.BlogService;
 import java.util.List;
 
 @RestController
+@RequestMapping("/post")
 public class BlogPostController {
 
     private static final Logger logger = LoggerFactory.getLogger(BlogPostController.class);
@@ -26,8 +27,8 @@ public class BlogPostController {
         this.blogService = blogService;
     }
 
-    @CrossOrigin(origins = "http://localhost:8081")
-    @PostMapping("/uploadPost")
+//    @CrossOrigin(origins = "http://localhost:8081")
+    @PostMapping(path = "/uploadPost")
     public ResponseEntity<String> uploadPost(@RequestParam("file") String file, @RequestParam("id") String postId) {
 
         BlogPost blogPost = blogPostService.storePost(file, postId);
@@ -42,9 +43,13 @@ public class BlogPostController {
 
     }
 
-    @CrossOrigin(origins = "http://localhost:8081")
+    @PostMapping(path = "/test")
+    public String test(){
+        return "HELLO";
+    }
+
     @GetMapping(value = "/downloadPost/{postId}", produces = MediaType.TEXT_HTML_VALUE)
-    public ResponseEntity<String> downloadFile(@PathVariable String postId) {
+    public ResponseEntity<String> getPostById(@PathVariable String postId) {
         // Load file from database
         BlogPost blogPost = blogPostService.getPost(postId);
         System.out.println(blogPost.getPostData());
@@ -53,10 +58,8 @@ public class BlogPostController {
                 .body(blogPost.getPostData());
     }
 
-    @CrossOrigin(origins = "http://localhost:8081")
-    @GetMapping(value = "/downloadPostIds/{blogId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody
-    ResponseEntity<List<BlogPost>> getPostsByBlog(@PathVariable String blogId) {
+    @GetMapping(value = "/downloadPosts/{blogId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody ResponseEntity<List<BlogPost>> getPostsByBlog(@PathVariable String blogId) {
         List<BlogPost> allPostsForBlog = blogPostService.getAllPostsForBlog(Long.parseLong(blogId));
         return new ResponseEntity<>(allPostsForBlog, HttpStatus.OK);
     }
