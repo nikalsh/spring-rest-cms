@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import se.nackademin.restcms.entities.BlogAdmin;
 import se.nackademin.restcms.entities.ImageFile;
-import se.nackademin.restcms.payload.UserCreatedResponse;
 import se.nackademin.restcms.service.BlogAdminService;
 import se.nackademin.restcms.service.BlogAdminServiceImpl;
 import se.nackademin.restcms.service.ImageFileStorageService;
@@ -68,7 +67,7 @@ ImageFileStorageService imageFileStorageService;
 
 @CrossOrigin(origins = "http://localhost:8081")
 @PostMapping("/registerUser")
-public UserCreatedResponse registerUser(@RequestParam String email, @RequestParam String name, @RequestParam String password, @RequestParam("file") MultipartFile file) {
+public BlogAdmin registerUser(@RequestParam String email, @RequestParam String name, @RequestParam String password, @RequestParam("file") MultipartFile file) {
     
     BlogAdmin blogAdmin = new BlogAdmin();
     
@@ -83,9 +82,9 @@ public UserCreatedResponse registerUser(@RequestParam String email, @RequestPara
     blogAdminService.saveBlogAdmin (blogAdmin);
     ImageFile imageFile = imageFileStorageService.storeImageFile (file, blogAdmin);
     
-    
-    
-    return new UserCreatedResponse (blogAdmin.getId (), blogAdmin.getEmail (), blogAdmin.getName ());
+    return blogAdmin;
+   // return new BlogAdmin ();
+   // return new UserCreatedResponse (blogAdmin.getId (), blogAdmin.getEmail (), blogAdmin.getName ());
 }
 
 

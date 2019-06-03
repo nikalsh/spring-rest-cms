@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import se.nackademin.restcms.entities.ImageFile;
-import se.nackademin.restcms.payload.UploadedImageResponse;
 import se.nackademin.restcms.service.ImageFileStorageServiceImpl;
 
 @RestController
@@ -28,16 +27,17 @@ public class ImageController {
 
     @CrossOrigin(origins = "http://localhost:8081")
     @PostMapping("/uploadFile")
-    public UploadedImageResponse uploadFile(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
         ImageFile imageFile = imageFileStorageService.storeImageFile(file);
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/downloadFile/")
                 .path(imageFile.getId())
                 .toUriString();
-
-        return new UploadedImageResponse(imageFile.getFileName(), fileDownloadUri,
-                file.getContentType(), file.getSize());
+	
+	    return ResponseEntity.ok()
+			    .contentType(MediaType.TEXT_HTML)
+			    .body(fileDownloadUri);
     }
 
     //ta inte bort

@@ -13,7 +13,6 @@ import org.springframework.web.multipart.MultipartFile;
 import se.nackademin.restcms.crudrepositories.AuthorityRepository;
 import se.nackademin.restcms.crudrepositories.BlogAdminRepository;
 import se.nackademin.restcms.entities.*;
-import se.nackademin.restcms.payload.UserCreatedResponse;
 import se.nackademin.restcms.security.UserDetailsImpl;
 
 @Service
@@ -66,21 +65,5 @@ ImageFileStorageService imageFileStorageService;
 
         return getCurrentBlogAdmin();
     }
-
-//
-//public BlogAdmin registerUser(@RequestParam String email, @RequestParam String name, @RequestParam String password, @RequestParam("file") MultipartFile file) {
-//
-//    BlogAdmin blogAdmin = new BlogAdmin();
-//
-//
-//    blogAdmin.setEmail (email);
-//    blogAdmin.setName (name);
-//    blogAdmin.setPassword (passwordEncoder.encode(password));
-//
-//    saveBlogAdmin (blogAdmin);
-//
-//    ImageFile imageFile = imageFileStorageService.storeImageFile (file, blogAdmin);
-//    return blogAdmin;
-//}
 
 }
