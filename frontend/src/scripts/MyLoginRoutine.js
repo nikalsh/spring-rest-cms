@@ -3,12 +3,12 @@ import axios from "axios";
 export const myLoginRoutine = user => new Promise((resolve, reject) => {
   console.log(user);
   var reqData = {
-    "username": user.email,
+    "username": user.username,
     "password": user.password,
     "grant_type": "password"
   };
   var params=new URLSearchParams();
-  params.append("username", user.email);
+  params.append("username", user.username);
   params.append("password", user.password);
   params.append("grant_type", "password");
   axios({
@@ -28,11 +28,11 @@ export const myLoginRoutine = user => new Promise((resolve, reject) => {
 
       const token = resp.data.access_token;
 
-      localStorage.setItem('user-token', token) // store the token in localstorage
+      localStorage.setItem('user-token', token); // store the token in localstorage
       resolve(resp)
     })
     .catch(err => {
-      localStorage.removeItem('user-token') // if the request fails, remove any possible user token if possible
+      localStorage.removeItem('user-token'); // if the request fails, remove any possible user token if possible
       reject(err)
     })
 });

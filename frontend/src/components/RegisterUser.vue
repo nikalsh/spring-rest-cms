@@ -75,7 +75,7 @@ export default {
             // eslint-disable-next-line no-console
             console.log(this.file);
 
-            axios.post('http://localhost:8080/blogadmin/registerUser',
+            axios.post('http://localhost:8080/user/registerUser',
 
                 formData,
                 {

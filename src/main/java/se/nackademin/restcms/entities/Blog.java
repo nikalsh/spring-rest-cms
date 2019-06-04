@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -14,10 +13,10 @@ import java.util.Set;
 
 @Data
 @Entity
-@ToString(exclude = {"blogAdmin"})
+@ToString(exclude = {"user"})
 @NoArgsConstructor
 @Table(name = "blog")
-@JsonIgnoreProperties(value = {"blogAdmin"})
+@JsonIgnoreProperties(value = {"user"})
 
 public class Blog {
 
@@ -33,7 +32,7 @@ public class Blog {
     private Set<BlogPost> blogPosts;
 
     @OneToOne
-    private BlogAdmin blogAdmin;
+    private User user;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)

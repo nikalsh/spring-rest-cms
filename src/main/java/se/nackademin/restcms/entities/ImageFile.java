@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name = "files")
+@Table(name = "images")
 public class ImageFile {
     @Id
     @GeneratedValue(generator = "uuid")
@@ -19,8 +19,8 @@ public class ImageFile {
     private String fileType;
 
     @OneToOne
-    @JoinColumn(name = "blogadmin_id", nullable = false)
-    private BlogAdmin blogAdmin;
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @Lob
     private byte[] data;

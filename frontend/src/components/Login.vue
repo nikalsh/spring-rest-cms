@@ -2,10 +2,10 @@
   <div id="login">
     <h1>Login</h1>
     <input
-      v-model="email"
+      v-model="username"
       type="text"
-      name="email"
-      placeholder="Email">
+      name="Username"
+      placeholder="Username">
     <input
       v-model="password"
       type="password"
@@ -26,14 +26,14 @@ export default {
     name: 'Login',
     data() {
         return {
-            email: '',
+            username: '',
             password: '',
         };
     },
     methods: {
         login() {
-          const { email, password } = this;
-          myLoginRoutine({ email, password }).then(() => {
+          const { username, password } = this;
+          myLoginRoutine({ username, password }).then(() => {
             this.$router.push('/')
           });
         // eslint-disable-next-line no-console

@@ -11,7 +11,14 @@
       <button @click="submitFile()">Submit</button>
     </div>
   </div>
-</template>
+</template>@Override
+//    public UserDetails loadUserByUsername(String email) {
+//        BlogAdmin user = blogAdminRepository.findByEmail(email);
+//        if (user == null) {
+//            throw new UsernameNotFoundException(email);
+//        }
+//        return new UserDetailsImpl(user);
+//    }
 
 <script>
 import axios from 'axios';
@@ -52,7 +59,7 @@ export default {
       Make the request to the POST /single-file URL
     */
 
-            axios.post('http://localhost:8080/uploadFile',
+            axios.post('http://localhost:8080/image/uploadImage',
 
                 formData,
                 {

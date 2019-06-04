@@ -39,9 +39,9 @@ export default {
         getPosts() {
             this.now=Date.now();
           axios.get('http://localhost:8080/post/downloadPosts/' + '4', {
-              headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('user-token')
-              }
+            headers: {
+              'Authorization': 'Bearer ' + localStorage.getItem('user-token')
+            }
             }
           ).then((response => {
             this.posts=response.data;

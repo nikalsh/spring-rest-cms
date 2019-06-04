@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import se.nackademin.restcms.crudrepositories.AuthorityRepository;
-import se.nackademin.restcms.crudrepositories.BlogAdminRepository;
+import se.nackademin.restcms.crudrepositories.UserRepository;
 import se.nackademin.restcms.crudrepositories.BlogPostRepository;
 import se.nackademin.restcms.crudrepositories.BlogRepository;
 import se.nackademin.restcms.entities.*;
@@ -14,7 +14,7 @@ import javax.annotation.PostConstruct;
 @Service
 public class InitialDBData {
 
-    private final BlogAdminRepository blogAdminRepository;
+    private final UserRepository userRepository;
 
     private final BlogRepository blogRepository;
     private BlogPostRepository blogPostRepository;
@@ -24,7 +24,7 @@ public class InitialDBData {
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public InitialDBData(BlogAdminRepository blogAdminRepository,
+    public InitialDBData(UserRepository userRepository,
                          AuthorityRepository authorityRepository,
                          PasswordEncoder passwordEncoder,
                          BlogRepository blogRepository,
@@ -32,7 +32,7 @@ public class InitialDBData {
                          BlogPostRepository blogPostRepository
     ) {
         this.blogPostService = blogPostService;
-        this.blogAdminRepository = blogAdminRepository;
+        this.userRepository = userRepository;
         this.authorityRepository = authorityRepository;
         this.passwordEncoder = passwordEncoder;
         this.blogRepository = blogRepository;
@@ -41,18 +41,16 @@ public class InitialDBData {
 
     @PostConstruct
     public void init() {
-        Authority admin = new Authority(AuthorityType.ROLE_ADMIN);
         Authority user = new Authority(AuthorityType.ROLE_USER);
-        Authority user2 = new Authority(AuthorityType.USER);
-        Authority admin2 = new Authority(AuthorityType.ADMIN);
+        Authority admin = new Authority(AuthorityType.ROLE_ADMIN);
 
         authorityRepository.save(admin);
         authorityRepository.save(user);
-        Blog blog = newAdmin("lorem@lorem.lorem", "lorem", admin);
-        newAdmin("root@root.root", "root", admin);
-        newAdmin("niklas@niklas.niklas", "niklas", admin);
-        newAdmin("josef@josef.josef", "josef", admin);
-        newAdmin("johan@johan.johan", "johan", admin);
+        Blog blog = newAdmin("lorem", "lorem@lorem.lorem", "lorem", user);
+        newAdmin("root", "root@root.root", "root", user);
+        newAdmin("niklas", "niklas@niklas.niklas", "niklas", user);
+        newAdmin("josef", "josef@josef.josef", "josef", user);
+        newAdmin("johan", "johan@johan.johan", "johan", user);
 
         newBlogPost(blog,
                 "<h2>Vad är Lorem Ipsum?</h2><p><strong>Lorem Ipsum</strong> är en utfyllnadstext från tryck- och förlagsindustrin. Lorem ipsum har varit standard ända sedan 1500-talet, när en okänd boksättare tog att antal bokstäver och blandade dem för att göra ett provexemplar av en bok. Lorem ipsum har inte bara överlevt fem århundraden, utan även övergången till elektronisk typografi utan större förändringar. Det blev allmänt känt på 1960-talet i samband med lanseringen av Letraset-ark med avsnitt av Lorem Ipsum, och senare med mjukvaror som Aldus PageMaker</p>"
@@ -68,13 +66,11 @@ public class InitialDBData {
         );
     }
 
-    private Blog newAdmin(String email, String rawPassword, Authority admin) {
-        BlogAdmin blogAdmin = new BlogAdmin(email,
-                passwordEncoder.encode
-                        (rawPassword), admin);
+    private Blog newAdmin(String username, String email, String rawPassword, Authority role) {
+        User user = new User(username, email, passwordEncoder.encode(rawPassword), role);
         Blog blog = new Blog();
-        blogAdmin.addBlog(blog);
-        blogAdminRepository.save(blogAdmin);
+        user.setBlog(blog);
+        userRepository.save(user);
         return blog;
     }
 

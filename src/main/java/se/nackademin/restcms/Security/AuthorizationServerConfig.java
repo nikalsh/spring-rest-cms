@@ -9,27 +9,13 @@ import org.springframework.security.oauth2.config.annotation.configurers.ClientD
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
-import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
-import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
-import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
-import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
+import org.springframework.security.oauth2.provider.token.*;
+import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
-    private static String REALM="MY_OAUTH_REALM";
-    static final String CLIENT_ID = "android-client";
-    static final String CLIENT_SECRET = "android-secret";
-    static final String GRANT_TYPE_PASSWORD = "password";
-    static final String AUTHORIZATION_CODE = "authorization_code";
-    static final String REFRESH_TOKEN = "refresh_token";
-    static final String IMPLICIT = "implicit";
-    static final String SCOPE_READ = "read";
-    static final String SCOPE_WRITE = "write";
-    static final String TRUST = "trust";
-    static final int ACCESS_TOKEN_VALIDITY_SECONDS = 1*60*60;
-    static final int REFRESH_TOKEN_VALIDITY_SECONDS = 6*60*60;
+
     private final CustomUserDetailsService customUserDetailsService;
     private final AuthenticationManager authenticationManager;
     private final PasswordEncoder passwordEncoder;
@@ -45,12 +31,12 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     public void configure(ClientDetailsServiceConfigurer configurer) throws Exception {
         configurer
                 .inMemory()
-                .withClient(CLIENT_ID)
-                .secret(passwordEncoder.encode(CLIENT_SECRET))
-                .authorizedGrantTypes(GRANT_TYPE_PASSWORD, AUTHORIZATION_CODE, REFRESH_TOKEN, IMPLICIT )
-                .scopes(SCOPE_READ, SCOPE_WRITE, TRUST)
-                .accessTokenValiditySeconds(ACCESS_TOKEN_VALIDITY_SECONDS)
-                .refreshTokenValiditySeconds(REFRESH_TOKEN_VALIDITY_SECONDS)
+                .withClient("android-client")
+                .secret(passwordEncoder.encode("android-secret"))
+                .authorizedGrantTypes("password", "authorization_code", "refresh_token", "implicit" )
+                .scopes("read","write")
+                .accessTokenValiditySeconds(360)
+                .refreshTokenValiditySeconds(2160)
                 .resourceIds(ResourceServerConfig.RESOURCE_ID);
     }
     @Override
@@ -66,24 +52,24 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
         defaultTokenServices.setTokenStore(tokenStore());
         defaultTokenServices.setSupportRefreshToken(true);
-        defaultTokenServices.setTokenEnhancer(accessTokenConverter());
         return defaultTokenServices;
     }
     @Bean
     public TokenStore tokenStore() {
-        return new JwtTokenStore(accessTokenConverter());
+        return new InMemoryTokenStore();
     }
 
     @Bean
-    public JwtAccessTokenConverter accessTokenConverter() {
-        final JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-        converter.setSigningKey("secret");
-        return converter;
+    public UserAuthenticationConverter userAuthenticationConverter() {
+        DefaultUserAuthenticationConverter defaultUAC = new DefaultUserAuthenticationConverter();
+        defaultUAC.setUserDetailsService(customUserDetailsService);
+        return defaultUAC;
+    }
+    @Bean
+    public AccessTokenConverter accessTokenConverter() {
+        DefaultAccessTokenConverter defaultATC = new DefaultAccessTokenConverter();
+        defaultATC.setUserTokenConverter(userAuthenticationConverter());
+        return defaultATC;
     }
 
-
-    @Override
-    public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
-        oauthServer.realm(REALM+"/client");
-    }
 }

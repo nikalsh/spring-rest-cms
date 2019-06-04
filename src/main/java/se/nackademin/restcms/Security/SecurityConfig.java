@@ -22,6 +22,7 @@ import org.springframework.web.filter.CorsFilter;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
     private final CustomUserDetailsService customUserDetailsService;
 
     @Autowired
@@ -52,10 +53,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors().and()
                 .csrf().disable()
                 .authorizeRequests()
-//                .antMatchers(HttpMethod.OPTIONS, "/blogadmin/**").permitAll()
+                .antMatchers(HttpMethod.OPTIONS, "/user/**").permitAll()
 //                .antMatchers(HttpMethod.POST, "/blogadmin/me").hasAnyRole("USER", "ADMIN")
 //
-//                .antMatchers(HttpMethod.POST, "/blogadmin/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/user/**").permitAll()
 //                .antMatchers("/blogadmin/**").hasAnyRole("USER", "ADMIN")
 //
                 .antMatchers(HttpMethod.GET, "/post/**").authenticated()
@@ -68,7 +69,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/**").authenticated()
                 .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
     }
-
 
 
     @Bean
@@ -88,5 +88,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }
+
+
 
 }

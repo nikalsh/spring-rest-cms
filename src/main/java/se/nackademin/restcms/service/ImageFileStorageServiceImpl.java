@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
-import se.nackademin.restcms.crudrepositories.BlogAdminRepository;
+import se.nackademin.restcms.crudrepositories.UserRepository;
 import se.nackademin.restcms.crudrepositories.ImageFileRepository;
-import se.nackademin.restcms.entities.BlogAdmin;
+import se.nackademin.restcms.entities.User;
 import se.nackademin.restcms.entities.ImageFile;
 import se.nackademin.restcms.exception.FileStorageException;
 import se.nackademin.restcms.exception.MyFileNotFoundException;
@@ -18,12 +18,12 @@ public class ImageFileStorageServiceImpl implements ImageFileStorageService {
 
 private final ImageFileRepository imageFileRepository;
 
-private final BlogAdminRepository blogAdminRepository;
+private final UserRepository userRepository;
 
 	@Autowired
-	public ImageFileStorageServiceImpl(ImageFileRepository imageFileRepository, BlogAdminRepository blogAdminRepository) {
+	public ImageFileStorageServiceImpl(ImageFileRepository imageFileRepository, UserRepository userRepository) {
 		this.imageFileRepository = imageFileRepository;
-		this.blogAdminRepository = blogAdminRepository;
+		this.userRepository = userRepository;
 	}
 
 	@Override
@@ -36,16 +36,15 @@ public ImageFile storeImageFile (MultipartFile file) {
 		
 		ImageFile imageFile = new ImageFile (fileName, file.getContentType (), file.getBytes ());
 		
-		imageFile.setBlogAdmin (blogAdminRepository.getOne (3L));
+		imageFile.setUser(userRepository.getOne (3L));
 		
 		return imageFileRepository.save (imageFile);
 	} catch (IOException ex) {
 		throw new FileStorageException ("Could not store file " + fileName + ". Please try again!", ex);
 	}
 }
-@SuppressWarnings ("Duplicates")
 @Override
-public ImageFile storeImageFile (MultipartFile file, BlogAdmin blogAdmin) {
+public ImageFile storeImageFile (MultipartFile file, User user) {
 	String fileName = StringUtils.cleanPath (file.getOriginalFilename ());
 	try {
 		if (fileName.contains ("..")) {
@@ -54,7 +53,7 @@ public ImageFile storeImageFile (MultipartFile file, BlogAdmin blogAdmin) {
 		
 		ImageFile imageFile = new ImageFile (fileName, file.getContentType (), file.getBytes ());
 		
-		imageFile.setBlogAdmin (blogAdmin);
+		imageFile.setUser(user);
 		
 		return imageFileRepository.save (imageFile);
 	} catch (IOException ex) {
@@ -69,7 +68,7 @@ public ImageFile getFile (String fileId) {
 }
 
 @Override
-public ImageFile getProfilePicture (BlogAdmin blogAdmin) {
+public ImageFile getProfilePicture (User user) {
 	return null;
 }
 }
