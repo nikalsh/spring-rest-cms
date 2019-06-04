@@ -5,8 +5,7 @@
       <BlogpostContainer
         v-for="(post, index) in posts"
         :post="post"
-        :key="index">
-      </BlogpostContainer>
+        :key="index"/>
     </div>
   </b-container>
 </template>
@@ -38,17 +37,17 @@ export default {
         },
         getPosts() {
             this.now=Date.now();
-          axios.get('http://localhost:8080/post/downloadPosts/' + '4', {
-            headers: {
-              'Authorization': 'Bearer ' + localStorage.getItem('user-token')
+            axios.get('http://localhost:8080/post/downloadPosts/' + '4', {
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('user-token')
+                }
             }
-            }
-          ).then((response => {
-            this.posts=response.data;
-            console.log(response);
-          })).catch((error => {
-            console.log(error)
-          }));
+            ).then((response => {
+                this.posts=response.data;
+                console.log(response);
+            })).catch((error => {
+                console.log(error);
+            }));
         }
     }
 };
