@@ -37,6 +37,14 @@ public class BlogPostServiceImpl implements BlogPostService {
                 .collect(Collectors.toList());
         return l;
     }
+
+    @Override
+    public List<BlogPost> getAllPostsForBlog(String blogName){
+        return blogPostRepository.findAll()
+                .stream()
+                .filter(e -> e.getBlog().getBlogName().equals(blogName))
+                .collect(Collectors.toList());
+    }
     @Override
     public List<BlogPost> getAllPostsForBlog(Long blogId) {
         return blogPostRepository

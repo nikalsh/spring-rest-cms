@@ -1,16 +1,23 @@
 <template>
-<!--  <div id ="blogsPanel" v-for="blog in blogs">-->
 
-<!--    {{ blog.name }}-->
+  <div id="blogsPanel">
+    BLOGSPANEL
+    <p v-for="blog in blogs">
+      {{ blog.blogName }}
+    </p>
+<!--    <div v-for="blog in blogs">-->
+<!--            <router-link :to="{name: blog.blogName}"></router-link>-->
+<!--    </div>-->
 
-  <div>
+
 
   </div>
 
-<!--  </div>-->
+
 </template>
 
 <script>
+
 
   export default {
 
@@ -18,35 +25,35 @@
 
     data() {
       return {
-        blogs: this.getBlogs(),
+        blogs: {},
+
 
       }
     },
 
 
-    methods: {
+    methods: {},
 
-      getBlogs() {
-        this.$http.get("http://localhost:8080/blog/all")
-          .then(response => {
+    async created() {
+      await this.$http.get("http://localhost:8080/blog/all")
+        .then(response => {
+          this.blogs = response.data
+          console.log(response.data)
 
-            console.log(response)
-
-          }).catch(error => {
+        }).catch(error => {
 
           console.log(error)
 
         })
-      }
-
+      console.log(this.$router)
     }
   }
 </script>
 
 <style scoped>
 
-  .blogsPanel{
-    background-color: gray;
+  #blogsPanel {
+    background-color: lightcoral;
   }
 
 </style>

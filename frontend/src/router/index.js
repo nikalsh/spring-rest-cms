@@ -5,16 +5,41 @@ import FileUpload from '../components/FileUpload'
 import RegisterUser from "../components/RegisterUser";
 import LandingPage from '../components/LandingPage'
 import Blog from "../components/Blog";
+import Blogs from '../components/Blogs'
 import Login from '../components/Login'
 import Navbar from '../components/Navbar'
-
-
-
+import axios from 'axios'
 
 Vue.use(Router);
 
 /* eslint-disable */
+
+
+let dynRoutes = []
+
+
+// (async function ()
+// {
+ axios.get("http://localhost:8080/blog/all")
+    .then(response => {
+      response.data.forEach(blog => {
+        dynRoutes.push({
+          name: blog.blogName,
+          path: "/" + blog.blogName,
+          component: BlogTest,
+          props: true,
+          params: {blogId: blog.id}
+        })
+      })
+    }).catch(error => {
+    console.log(error)
+  })
+// })
+
+
 export default new Router({
+
+
   routes: [
 
     {
@@ -46,6 +71,18 @@ export default new Router({
       path: '/Login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/blogs/:blogName',
+      component: Blogs,
+      props: true
     }
-  ]
+    ]
+
+
+
+
+
+
+
 })

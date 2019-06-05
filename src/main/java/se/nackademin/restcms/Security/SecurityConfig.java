@@ -49,12 +49,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
         http
                 .cors().and()
                 .csrf().disable()
                 .authorizeRequests()
+                .antMatchers("/").permitAll()
+                .antMatchers("/h2-console/**").permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "/user/**").permitAll()
 //                .antMatchers(HttpMethod.POST, "/blogadmin/me").hasAnyRole("USER", "ADMIN")
+
 //
                 .antMatchers(HttpMethod.POST, "/user/**").permitAll()
 //                .antMatchers("/blogadmin/**").hasAnyRole("USER", "ADMIN")
@@ -68,6 +72,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/oauth/token").permitAll()
 //                .antMatchers("/api-docs/**").permitAll()
 //                .antMatchers("/**").authenticated()
+//                .antMatchers("/").permitAll()
+//                .antMatchers("/h2-console/**").permitAll()
+
                 .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
     }
 

@@ -7,6 +7,7 @@
         :post="post"
         :key="index"/>
     </div>
+
   </div>
 </template>
 
@@ -19,10 +20,13 @@ export default {
     components: {
         BlogpostContainer: BlogpostContainer
     },
+
     data: function () {
         return {
+            blogName: "",
             posts: this.getPosts()
-        };
+        }
+
     },
     methods: {
 
