@@ -15,26 +15,8 @@ Vue.use(Router);
 /* eslint-disable */
 
 
-let dynRoutes = []
 
 
-// (async function ()
-// {
- axios.get("http://localhost:8080/blog/all")
-    .then(response => {
-      response.data.forEach(blog => {
-        dynRoutes.push({
-          name: blog.blogName,
-          path: "/" + blog.blogName,
-          component: BlogTest,
-          props: true,
-          params: {blogId: blog.id}
-        })
-      })
-    }).catch(error => {
-    console.log(error)
-  })
-// })
 
 
 export default new Router({

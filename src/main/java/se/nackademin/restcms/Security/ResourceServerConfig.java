@@ -39,7 +39,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
 
-//        http.headers().frameOptions().sameOrigin();
+        http.headers().frameOptions().sameOrigin();
         http.authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/user/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/user/**").permitAll()

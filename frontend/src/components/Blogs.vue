@@ -24,7 +24,6 @@
 
     data: function () {
       return {
-        // blogName: "",
         posts: this.getPosts(this.blogName)
       }
 
@@ -50,7 +49,7 @@
         }));
       }
     },
-    beforeRouteUpdate() {
+    beforeRouteLeave() {
       this.posts = "";
     }
   };
