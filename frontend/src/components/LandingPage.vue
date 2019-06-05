@@ -3,14 +3,14 @@
     <UserPanel/>
     <BlogsPanel></BlogsPanel>
     <br>
-    <router-link 
-      tag="li" 
+    <router-link
+      tag="li"
       to="/RegisterUser">
       <a>Register Here</a>
 
     </router-link>
-    <router-link 
-      tag="li" 
+    <router-link
+      tag="li"
       to="/Login">
       <a>Login</a>
 

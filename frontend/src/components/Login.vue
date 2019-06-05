@@ -1,11 +1,14 @@
 <template>
-  <div id="login">
+  <b-container>
     <h1>Login Page</h1>
     <b-form @submit.prevent="login">
+
       <b-form-group
         id="input-group-1"
         label="Username:"
-        label-for="input-1">
+        label-for="input-1"
+        label-cols-sm="3"
+        label-cols-lg="2">
         <b-form-input
           id="input-1"
           v-model="username"
@@ -14,7 +17,11 @@
         ></b-form-input>
       </b-form-group>
 
-      <b-form-group id="input-group-2" label="Your Name:" label-for="input-2">
+      <b-form-group id="input-group-2"
+                    label="Your Name:"
+                    label-for="input-2"
+                    label-cols-sm="3"
+                    label-cols-lg="2">
         <b-form-input
           id="input-2"
           v-model="password"
@@ -25,14 +32,13 @@
       </b-form-group>
 
 
-      <b-button type="submit" variant="primary">Login</b-button>
+      <b-button style="margin: auto; display:block" type="submit" variant="primary">Login</b-button>
       <b-alert v-model="loginFail" variant="danger" dismissible>
         Inloggning misslyckades
       </b-alert>
 
     </b-form>
-
-  </div>
+  </b-container>
 </template>
 
 <script>

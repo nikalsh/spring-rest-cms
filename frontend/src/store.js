@@ -92,6 +92,7 @@ export default new Vuex.Store({
         formData.append('file', user.file);
         formData.append('password', user.password);
         formData.append('username', user.username);
+        formData.append('profile', user.profile);
         formData.append('email', user.email);
 
         axios.post(

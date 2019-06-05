@@ -2,7 +2,8 @@
   <div class="asd">
     <p>{{ this.$store.getters.getUser.email }}</p>
     <p>{{ this.$store.getters.getUser.username }}</p>
-    <img :src="this.$store.getters.getUserImage" alt="profile picture">
+    <b-img fluid :src="this.$store.getters.getUserImage" alt="profile picture"/>
+    <div v-html="this.$store.getters.getUser.profile"></div>
   </div>
 </template>
 
