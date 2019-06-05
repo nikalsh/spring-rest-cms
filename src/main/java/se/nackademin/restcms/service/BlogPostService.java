@@ -13,5 +13,6 @@ public interface BlogPostService {
     BlogPost getPost (String fileId);
     List<BlogPost> getAllPostsForBlog(Long blogId);
     List<String> getAllPostIdsForBlog(Long blogId);
+    List<BlogPost> getAllPostsForBlog(String blogName);
 
 }

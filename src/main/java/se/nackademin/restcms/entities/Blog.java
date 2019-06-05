@@ -16,7 +16,7 @@ import java.util.Set;
 @ToString(exclude = {"user"})
 @NoArgsConstructor
 @Table(name = "blog")
-@JsonIgnoreProperties(value = {"user"})
+@JsonIgnoreProperties(value = {"user", "blogPosts"})
 
 public class Blog {
 

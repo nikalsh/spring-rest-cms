@@ -1,15 +1,14 @@
 <template>
-  <b-container>
-    <div id="blog">
-      <button @click="onClick">New post</button>
-      <div ref="container">
-        <BlogpostContainer
-          v-for="(post, index) in posts"
-          :post="post"
-          :key="index"/>
-      </div>
+  <div id="blogs">
+    <button @click="onClick">New post</button>
+    <div ref="container">
+      <BlogpostContainer
+        v-for="(post, index) in posts"
+        :post="post"
+        :key="index"/>
     </div>
-  </b-container>
+    {{ blogName }}
+  </div>
 </template>
 
 <script>
@@ -17,16 +16,18 @@
   import Vue from 'vue';
 
   export default {
-    name: 'Blog',
+    name: 'Blogs',
     components: {
       BlogpostContainer: BlogpostContainer
     },
+    props: ['blogName'],
 
     data: function () {
       return {
-        blogName: "",
-        posts: this.getPosts()
+        // blogName: "",
+        posts: this.getPosts(this.blogName)
       }
+
     },
     methods: {
 
@@ -38,9 +39,9 @@
         instance.$mount();
         this.$refs.container.insertBefore(instance.$el, this.$refs.container.firstChild);
       },
-      getPosts() {
+      async getPosts(blogName) {
         this.now = Date.now();
-        this.$http.get('http://localhost:8080/post/myBlog', {}
+        await this.$http.get('http://localhost:8080/post/postsByBlogName/' + blogName, {}
         ).then((response => {
           this.posts = response.data;
           console.log(response);
@@ -48,6 +49,9 @@
           console.log(error);
         }));
       }
+    },
+    beforeRouteUpdate() {
+      this.posts = "";
     }
   };
 </script>

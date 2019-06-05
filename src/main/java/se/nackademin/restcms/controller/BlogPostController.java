@@ -6,17 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import se.nackademin.restcms.entities.BlogPost;
 import se.nackademin.restcms.entities.User;
-import se.nackademin.restcms.service.UserService;
 import se.nackademin.restcms.service.BlogPostService;
+import se.nackademin.restcms.service.UserService;
 
-import java.security.Principal;
 import java.util.List;
-import java.util.Set;
 
 @Slf4j
 @RestController
@@ -56,6 +53,18 @@ public class BlogPostController {
         User user=(User)authentication.getPrincipal();
         List<BlogPost> allPostsForBlog = blogPostService.getAllPostsForBlog(user.getBlog().getId());
         return new ResponseEntity<>(allPostsForBlog, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/postsByBlogId/{id}")
+    public ResponseEntity<List<BlogPost>> getBlogPostsForBlogId(@PathVariable Long id) {
+        List<BlogPost> allPostsForBlogId = blogPostService.getAllPostsForBlog(id);
+        return new ResponseEntity<>(allPostsForBlogId, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/postsByBlogName/{name}")
+    public ResponseEntity<List<BlogPost>> getBlogPostsForBlogId(@PathVariable String name) {
+        List<BlogPost> allPostsForBlogId = blogPostService.getAllPostsForBlog(name);
+        return new ResponseEntity<>(allPostsForBlogId, HttpStatus.OK);
     }
 
 }
