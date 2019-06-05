@@ -1,12 +1,15 @@
 package se.nackademin.restcms.entities;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
 @Data
 @Entity
+@NoArgsConstructor
 @Table(name = "images")
 public class ImageFile {
     @Id
@@ -18,15 +21,8 @@ public class ImageFile {
 
     private String fileType;
 
-//    @OneToOne
-//    @JoinColumn(name = "user_id", nullable = false)
-//    private User user;
-
     @Lob
     private byte[] data;
-
-    public ImageFile() {
-    }
 
     public ImageFile(String fileName, String fileType, byte[] data) {
         this.fileName = fileName;
@@ -35,3 +31,4 @@ public class ImageFile {
     }
 
 }
+

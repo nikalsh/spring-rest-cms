@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 
 @Data
 @NoArgsConstructor
+
 @Entity
 @ToString(exclude = {"blog"})
 @Table(name = "user")
@@ -58,7 +59,7 @@ public class User implements UserDetails {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @OneToOne(mappedBy = "user", /* referes to the VARIABLE NAME */
+    @OneToOne(mappedBy = "user",
             cascade = CascadeType.ALL, orphanRemoval = true)
     private Blog blog;
 

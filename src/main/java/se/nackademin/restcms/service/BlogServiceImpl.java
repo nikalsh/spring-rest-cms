@@ -4,6 +4,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import se.nackademin.restcms.crudrepositories.BlogRepository;
 import se.nackademin.restcms.entities.Blog;
+import se.nackademin.restcms.entities.User;
 //import se.nackademin.restcms.security.UserDetailsImpl;
 
 import java.util.List;

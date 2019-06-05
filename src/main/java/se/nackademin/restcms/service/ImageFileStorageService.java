@@ -7,7 +7,7 @@ import se.nackademin.restcms.entities.ImageFile;
 public interface ImageFileStorageService {
 
 ImageFile storeImageFile (MultipartFile file);
-ImageFile storeImageFile (MultipartFile file, User user);
+//ImageFile storeImageFile (MultipartFile file, User user);
 ImageFile getFile (String fileId);
 ImageFile getProfilePicture (User user);
 

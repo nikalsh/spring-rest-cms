@@ -2,17 +2,17 @@ package se.nackademin.restcms.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import se.nackademin.restcms.entities.AuthorityType;
-import se.nackademin.restcms.entities.User;
 import se.nackademin.restcms.crudrepositories.AuthorityRepository;
+import se.nackademin.restcms.crudrepositories.BlogRepository;
 import se.nackademin.restcms.crudrepositories.UserRepository;
-import se.nackademin.restcms.entities.ImageFile;
+import se.nackademin.restcms.entities.Blog;
+import se.nackademin.restcms.entities.User;
+
+import java.io.IOException;
 
 @Slf4j
 @Service
@@ -23,20 +23,19 @@ public class UserServiceImpl implements UserService {
     private final AuthorityRepository authorityRepository;
 
     private final PasswordEncoder passwordEncoder;
-
-    private final ImageFileStorageService imageFileStorageService;
+    private final BlogRepository blogRepository;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, AuthorityRepository authorityRepository, PasswordEncoder passwordEncoder, ImageFileStorageService imageFileStorageService) {
+    public UserServiceImpl(UserRepository userRepository, AuthorityRepository authorityRepository, PasswordEncoder passwordEncoder, ImageFileStorageService imageFileStorageService, BlogRepository blogRepository) {
         this.userRepository = userRepository;
         this.authorityRepository = authorityRepository;
         this.passwordEncoder = passwordEncoder;
-        this.imageFileStorageService = imageFileStorageService;
+        this.blogRepository = blogRepository;
     }
 
 
     @Override
-    public User saveBlogAdmin(User user) {
+    public User saveUser(User user) {
         if (user.getRoles().isEmpty()) {
             user.getRoles().add(authorityRepository.getOne(1));
         }
@@ -57,20 +56,26 @@ public class UserServiceImpl implements UserService {
         return getCurrentUser();
     }
 
-
-    public User registerUser(@RequestParam String email, @RequestParam String name, @RequestParam String password, @RequestParam("file") MultipartFile file) {
-
+    @Override
+    public User registerUser(String email, String username, String password, MultipartFile file){
         User user = new User();
-
-
+        Blog blog = new Blog();
+        user.setUsername(username);
         user.setEmail(email);
-        user.setUsername(name);
         user.setPassword(passwordEncoder.encode(password));
-
-        saveBlogAdmin(user);
-
-        ImageFile imageFile = imageFileStorageService.storeImageFile(file, user);
+        try {
+            user.setPhoto(file.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        user.setBlog(blog);
+        user.getRoles().add(authorityRepository.getOne(1));
+        user.setEnabled(true);
+        userRepository.save(user);
+        blogRepository.save(blog);
         return user;
     }
+
+
 
 }

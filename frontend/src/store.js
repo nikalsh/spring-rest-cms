@@ -23,8 +23,9 @@ export default new Vuex.Store({
     },
     logout(state) {
       state.status = '';
-      state.acess_token = '';
+      state.access_token = '';
       state.currentUser = {};
+
     },
     userdata(state, currentUser) {
       state.currentUser = currentUser;
@@ -90,20 +91,20 @@ export default new Vuex.Store({
         let formData = new FormData();
         formData.append('file', user.file);
         formData.append('password', user.password);
-        formData.append('name', user.username);
+        formData.append('username', user.username);
         formData.append('email', user.email);
 
-        axios({
-          url: 'http://localhost:8080/user/registerUser', data: formData, method: 'POST'
-
-        })
+        axios.post(
+           'http://localhost:8080/user/registerUser',
+           formData
+        )
           .then(resp => {
             console.log(resp);
 
             resolve(resp)
           })
           .catch(err => {
-            commit('auth_error', err);
+            commit('auth_error');
             localStorage.removeItem('access_token');
             reject(err)
           })
@@ -111,7 +112,7 @@ export default new Vuex.Store({
     },
     logout({commit}) {
       return new Promise((resolve, reject) => {
-        commit('logout')
+        commit('logout');
         localStorage.removeItem('access_token')
         delete axios.defaults.headers.common['Authorization']
         resolve()
@@ -122,9 +123,9 @@ export default new Vuex.Store({
   getters: {
     isLoggedIn: state => !!state.access_token,
     authStatus: state => state.status,
-    getUser: state => {
-      return state.currentUser
-    }
+    getUser: state => state.currentUser,
+    getUserImage: state => 'data:;base64,' + state.currentUser.photo
+
   }
 
 

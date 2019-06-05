@@ -55,8 +55,8 @@
           required
         ></b-form-file>
       </b-form-group>
-      
-        <b-button style="margin: auto; display:block" type="submit" variant="primary">Register</b-button>
+
+      <b-button style="margin: auto; display:block" type="submit" variant="primary">Register</b-button>
 
       <b-alert v-model="registerFail" variant="danger" dismissible>
         Registrering misslyckades
@@ -86,7 +86,11 @@
         this.$store.dispatch('register', {username, email, password, file})
           .then(() => {
             this.$store.dispatch('login', {username, password})
-              .then(() => this.$router.push('/'))
+              .then(() => {
+                this.$store.dispatch('downloadUser')
+                  .then(() => this.$router.push('/'))
+                  .catch(() => this.registerFail = true)
+              })
               .catch(() => this.registerFail = true);
           })
           .catch(() => this.registerFail = true)

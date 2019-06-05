@@ -2,10 +2,7 @@
   <div class="asd">
     <p>{{ this.$store.getters.getUser.email }}</p>
     <p>{{ this.$store.getters.getUser.username }}</p>
-    <img :src="img" alt="profile picture">
-    <br>
-    USERPANEL
-
+    <img :src="this.$store.getters.getUserImage" alt="profile picture">
   </div>
 </template>
 
