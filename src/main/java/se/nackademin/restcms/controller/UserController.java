@@ -63,6 +63,7 @@ public class UserController {
         user.setPassword(passwordEncoder.encode(password));
         Blog blog = new Blog();
         user.setBlog(blog);
+        user.setEnabled (true);
         blogAdminService.saveBlogAdmin(user);
         imageFileStorageService.storeImageFile(file, user);
 
