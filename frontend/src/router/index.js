@@ -4,14 +4,13 @@ import BlogpostContainer from '../components/BlogpostContainer'
 import FileUpload from '../components/FileUpload'
 import RegisterUser from "../components/RegisterUser";
 import LandingPage from '../components/LandingPage'
-import CKEditor from '@ckeditor/ckeditor5-vue';
 import Blog from "../components/Blog";
 import Login from '../components/Login'
 import Navbar from '../components/Navbar'
 
 
 
-Vue.use(CKEditor);
+
 Vue.use(Router);
 
 /* eslint-disable */

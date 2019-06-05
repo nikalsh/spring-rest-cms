@@ -38,7 +38,7 @@ public class UserController {
         return blogAdminService.saveBlogAdmin(user);
     }
 
-    @PostMapping(path = "/me")
+    @GetMapping(path = "/me")
     public User me() {
         return blogAdminService.getCurrentUser();
     }

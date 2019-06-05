@@ -28,11 +28,11 @@ export const myLoginRoutine = user => new Promise((resolve, reject) => {
 
       const token = resp.data.access_token;
 
-      localStorage.setItem('user-token', token); // store the token in localstorage
+      localStorage.setItem('access_token', token); // store the token in localstorage
       resolve(resp)
     })
     .catch(err => {
-      localStorage.removeItem('user-token'); // if the request fails, remove any possible user token if possible
+      localStorage.removeItem('access_token'); // if the request fails, remove any possible user token if possible
       reject(err)
     })
 });
