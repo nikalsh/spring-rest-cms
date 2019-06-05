@@ -7,7 +7,7 @@
       indicators
       background="#ababab"
       img-width="1024"
-      img-height="480"
+      img-height="120"
       style="text-shadow: 1px 1px 2px #333;"
 
     >
@@ -20,10 +20,9 @@
       ></b-carousel-slide>
 
     </b-carousel>
-    <BlogsPanel></BlogsPanel>
   </div>
 </template>
-
+them
 
 <script>
   import UserPanel from './UserPanel';

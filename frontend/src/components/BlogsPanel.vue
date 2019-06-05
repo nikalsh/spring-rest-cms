@@ -2,9 +2,9 @@
 
   <div id="blogsPanel">
     BLOGSPANEL
-    <div v-for="blog in blogs">
+    <a class = "text-center" v-for="blog in blogs">
       <b-button :to="'blogs/'+ blog ">{{ blog }}</b-button>
-    </div>
+    </a>
 
 
   </div>
@@ -40,8 +40,9 @@
 
           console.log(error)
 
-        });
-
+        })
+      console.log(this.$router)
+      this.$forceUpdate()
     }
   }
 </script>
@@ -50,6 +51,16 @@
 
   #blogsPanel {
     background-color: lightcoral;
+  }
+
+  #buttons{
+  display: flex;
+  align-items: center;
+  }
+
+  #center{
+    text-align: center;
+    vertical-align: middle;
   }
 
 </style>
