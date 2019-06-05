@@ -2,11 +2,7 @@ import axios from 'axios';
 
 export const myLoginRoutine = user => new Promise((resolve, reject) => {
     console.log(user);
-    var reqData = {
-        'username': user.username,
-        'password': user.password,
-        'grant_type': 'password'
-    };
+
     var params=new URLSearchParams();
     params.append('username', user.username);
     params.append('password', user.password);

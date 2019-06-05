@@ -18,9 +18,9 @@ public class ImageFile {
 
     private String fileType;
 
-    @OneToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+//    @OneToOne
+//    @JoinColumn(name = "user_id", nullable = false)
+//    private User user;
 
     @Lob
     private byte[] data;

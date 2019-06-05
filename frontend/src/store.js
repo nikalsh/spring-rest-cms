@@ -25,8 +25,8 @@ export default new Vuex.Store({
       state.status = '';
       state.acess_token = '';
     },
-    userdata(state, currentUser){
-      state.currentUser=currentUser;
+    userdata(state, currentUser) {
+      state.currentUser = currentUser;
     }
 
   },
@@ -54,13 +54,17 @@ export default new Vuex.Store({
             console.log(resp);
             const access_token = resp.data.access_token;
             localStorage.setItem('access_token', access_token);
-            // Add the following line:
             axios.defaults.headers.common['Authorization'] = 'bearer ' + access_token;
+            //nested axios call to get userdata, better solution?
             axios.get('http://localhost:8080/user/me')
-              .then(  resp=>{
-                commit('userdata',resp.data);
+              .then(resp => {
+                commit('userdata', resp.data);
                 console.log(resp.data);
-              });
+              }).catch(err => {
+              commit('auth_error');
+              localStorage.removeItem('access_token');
+              reject(err)
+            });
             commit('auth_success', access_token);
             resolve(resp)
           })
@@ -74,14 +78,18 @@ export default new Vuex.Store({
     register({commit}, user) {
       return new Promise((resolve, reject) => {
         commit('auth_request');
-        axios({url: 'http://localhost:3000/register', data: user, method: 'POST'})
+        let formData = new FormData();
+        formData.append('file', user.file);
+        formData.append('password', user.password);
+        formData.append('name', user.username);
+        formData.append('email', user.email);
+
+        axios({url: 'http://localhost:8080/user/registerUser', data: formData, method: 'POST'
+
+        })
           .then(resp => {
-            const access_token = resp.data.token;
-            const user = resp.data.user;
-            localStorage.setItem('access_token', access_token);
-            // Add the following line:
-            axios.defaults.headers.common['Authorization'] = access_token;
-            commit('auth_success', access_token, user);
+            console.log(resp);
+
             resolve(resp)
           })
           .catch(err => {
@@ -104,7 +112,7 @@ export default new Vuex.Store({
   getters: {
     isLoggedIn: state => !!state.access_token,
     authStatus: state => state.status,
-    getUser: state=> state.currentUser
+    getUser: state => state.currentUser
   }
 
 

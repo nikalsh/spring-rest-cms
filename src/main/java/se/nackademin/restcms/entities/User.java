@@ -68,11 +68,10 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<SimpleGrantedAuthority> collect = roles
+        return roles
                 .stream()
                 .map(authority -> new SimpleGrantedAuthority(authority.getName()))
                 .collect(Collectors.toList());
-        return collect;
     }
 
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
