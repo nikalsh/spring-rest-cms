@@ -74,6 +74,7 @@ export default new Vuex.Store({
         axios.get('http://localhost:8080/user/me')
           .then(resp => {
             const userdata = resp.data;
+            console.log(resp.data);
             commit('userdata', userdata);
             console.log(resp.data);
             resolve(resp)

@@ -10,6 +10,7 @@ import se.nackademin.restcms.service.BlogServiceImpl;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/blog")
@@ -26,6 +27,13 @@ public class BlogController {
     public @ResponseBody
     ResponseEntity<List<Blog>> getAllBlogs() {
         List<Blog> allBlogs = blogService.findAll();
+        return new ResponseEntity<>(allBlogs, HttpStatus.OK);
+    }
+    @GetMapping(path = "/allnames")
+    public @ResponseBody
+    ResponseEntity<List<String>> getAllBlogNames() {
+        List<String> allBlogs = blogService.findAll().stream().map(Blog::getBlogName).collect(Collectors.toList());
+        System.out.println(allBlogs);
         return new ResponseEntity<>(allBlogs, HttpStatus.OK);
     }
 

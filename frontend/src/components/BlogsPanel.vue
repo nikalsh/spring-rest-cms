@@ -3,7 +3,7 @@
   <div id="blogsPanel">
     BLOGSPANEL
     <div v-for="blog in blogs">
-      <b-button :to="'blogs/'+ blog.blogName ">{{ blog.blogName }}</b-button>
+      <b-button :to="'blogs/'+ blog ">{{ blog }}</b-button>
     </div>
 
 
@@ -31,17 +31,17 @@
     methods: {},
 
     async created() {
-      await this.$http.get("http://localhost:8080/blog/all")
+      await this.$http.get("http://localhost:8080/blog/allnames")
         .then(response => {
-          this.blogs = response.data
+          this.blogs = response.data;
           console.log(response.data)
 
         }).catch(error => {
 
           console.log(error)
 
-        })
-      console.log(this.$router)
+        });
+
     }
   }
 </script>

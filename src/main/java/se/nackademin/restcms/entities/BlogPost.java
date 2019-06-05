@@ -1,8 +1,11 @@
 package se.nackademin.restcms.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -15,13 +18,15 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "blogpost")
-@JsonIgnoreProperties(value = {"blog"})
+@ToString(exclude = {"blog"})
+@JsonIgnoreProperties({"blog", "blog_id"})
 public class BlogPost implements Serializable {
 
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
+
 
     @ManyToOne
     @JoinColumn(name = "blog_id")

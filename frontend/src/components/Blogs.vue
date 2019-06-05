@@ -40,6 +40,7 @@
         this.$refs.container.insertBefore(instance.$el, this.$refs.container.firstChild);
       },
       getPosts(blogName) {
+
         this.now = Date.now();
         this.$http.get('http://localhost:8080/post/postsByBlogName/' + blogName, {}
         ).then((response => {

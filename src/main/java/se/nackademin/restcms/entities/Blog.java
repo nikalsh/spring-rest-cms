@@ -1,6 +1,7 @@
 package se.nackademin.restcms.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnoreType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -16,8 +17,8 @@ import java.util.Set;
 @ToString(exclude = {"user"})
 @NoArgsConstructor
 @Table(name = "blog")
-@JsonIgnoreProperties(value = {"user", "blogPosts"})
-
+@JsonIgnoreProperties(value = {"user","blogPosts"  })
+@JsonIgnoreType
 public class Blog {
 
     @Id
@@ -27,6 +28,7 @@ public class Blog {
 
 
     private String blogName;
+
 
     @OneToMany(mappedBy = "blog", cascade = CascadeType.ALL)
     private Set<BlogPost> blogPosts;
