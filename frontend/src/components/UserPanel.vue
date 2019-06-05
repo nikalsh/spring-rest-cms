@@ -1,49 +1,34 @@
 <template>
   <div class="asd">
-    <p>{{ email }}</p>
-    <img :src="img">
-    <br>
-    USERPANEL
+    <p>{{ this.$store.getters.getUser.email }}</p>
+    <p>{{ this.$store.getters.getUser.username }}</p>
+    <img :src="this.$store.getters.getUserImage" alt="profile picture">
   </div>
 </template>
 
 <script>
 
-export default {
+  export default {
     name: 'UserPanel',
-    // props:{
-    //     email: {
-    //         default: 'asd',
-    //         type: String
-    //
-    //     }
-    // },
 
     data() {
-        return {
-            email: this.$globalUserDetails.email,
-            img: this.$globalUserDetails.img,
-            name: this.$globalUserDetails.name,
-        }
+      return {
+
+      }
 
     },
-
-
-
-
-
     methods: {
 
     },
 
 
-}
+  }
 
 
 </script>
 
 <style scoped>
-.asd {
-  background-color: lightgray;
-}
+  .asd {
+    background-color: lightgray;
+  }
 </style>

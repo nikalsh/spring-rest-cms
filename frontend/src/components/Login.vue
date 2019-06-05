@@ -51,7 +51,15 @@
         const username = this.username;
         const password = this.password;
         this.$store.dispatch('login', {username, password})
+<<<<<<< HEAD
           .then(() => this.$router.push('/'))
+=======
+          .then(() => {
+            this.$store.dispatch('downloadUser')
+              .then(() => this.$router.push('/'))
+              .catch(() => this.loginFail = true);
+          })
+>>>>>>> 7e0b16bf2602b80389b696e2198f262987b189b3
           .catch(() => this.loginFail = true)
       }
     }

@@ -7,11 +7,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import se.nackademin.restcms.entities.*;
+import se.nackademin.restcms.crudrepositories.AuthorityRepository;
+import se.nackademin.restcms.crudrepositories.BlogRepository;
+import se.nackademin.restcms.crudrepositories.UserRepository;
+import se.nackademin.restcms.entities.Blog;
+import se.nackademin.restcms.entities.User;
 import se.nackademin.restcms.service.BlogService;
 import se.nackademin.restcms.service.UserService;
 import se.nackademin.restcms.service.UserServiceImpl;
-import se.nackademin.restcms.service.ImageFileStorageService;
 
 import java.io.IOException;
 import java.security.Principal;
@@ -25,23 +28,25 @@ public class UserController {
 
     private final UserService userService;
     private final BlogService blogService;
-
+    private final AuthorityRepository authorityRepository;
     private final PasswordEncoder passwordEncoder;
 
-    private final ImageFileStorageService imageFileStorageService;
-
+    private final BlogRepository blogRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    public UserController(final UserServiceImpl userService, BlogService blogService, PasswordEncoder passwordEncoder, ImageFileStorageService imageFileStorageService) {
+    public UserController(final UserServiceImpl userService, BlogService blogService, AuthorityRepository authorityRepository, PasswordEncoder passwordEncoder,  BlogRepository blogRepository, UserRepository userRepository) {
         this.userService = userService;
         this.blogService = blogService;
+        this.authorityRepository = authorityRepository;
         this.passwordEncoder = passwordEncoder;
-        this.imageFileStorageService = imageFileStorageService;
+        this.blogRepository = blogRepository;
+        this.userRepository = userRepository;
     }
 
     @PostMapping
     public User newBlogAdmin(@RequestBody User user) {
-        return userService.saveBlogAdmin(user);
+        return userService.saveUser(user);
     }
 
     @GetMapping(path = "/me")
@@ -62,18 +67,8 @@ public class UserController {
 
 
     @PostMapping("/registerUser")
-    public ResponseEntity<String> registerUser(@RequestParam String email, @RequestParam String name, @RequestParam String password, @RequestParam("file") MultipartFile file) throws IOException {
-        User user = new User();
-        user.setEmail(email);
-        user.setUsername(name);
-        user.setPassword(passwordEncoder.encode(password));
-        user.setPhoto(file.getBytes());
-        Blog blog = new Blog();
-        user.setBlog(blog);
-        user.setEnabled(true);
-        blogService.save(blog);
-        userService.saveBlogAdmin(user);
-
+    public ResponseEntity<String> registerUser(@RequestParam String email, @RequestParam String username, @RequestParam String password, @RequestParam("file") MultipartFile file) throws IOException {
+        userService.registerUser(email,username,password,file);
         return new ResponseEntity<>("", HttpStatus.OK);
     }
 

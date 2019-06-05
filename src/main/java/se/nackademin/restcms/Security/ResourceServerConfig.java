@@ -43,6 +43,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/user/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/user/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/post/downloadPost/**").authenticated()
+                .antMatchers(HttpMethod.GET, "/post/**").authenticated()
+                .antMatchers(HttpMethod.GET, "/downloadFile/{fileId}").authenticated()
 
                 .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
     }

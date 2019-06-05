@@ -12,38 +12,24 @@
       <b-collapse
         id="nav-collapse"
         is-nav>
-        <b-navbar-nav>
-          <b-nav-item to="blog">blog</b-nav-item>
-
-          <!--<b-nav-item href="#" disabled>Disabled</b-nav-item>-->
-        </b-navbar-nav>
 
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
-
-          <!--<b-nav-form>-->
-          <!--<b-form-input size="sm" class="mr-sm-2" placeholder="Search"></b-form-input>-->
-          <!--<b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>-->
-          <!--</b-nav-form>-->
-
-          <!--<b-nav-item-dropdown text="Lang" right>-->
-          <!--<b-dropdown-item href="#">EN</b-dropdown-item>-->
-          <!--<b-dropdown-item href="#">ES</b-dropdown-item>-->
-          <!--<b-dropdown-item href="#">RU</b-dropdown-item>-->
-          <!--<b-dropdown-item href="#">FA</b-dropdown-item>-->
-          <!--</b-nav-item-dropdown>-->
+        <b-navbar-nav>
+          <b-nav-item v-show="this.$store.getters.isLoggedIn" to="blog">my blog</b-nav-item>
+        </b-navbar-nav>
 
           <b-nav-item-dropdown right>
             <template slot="button-content">
               <em   >
-                {{this.$store.state.currentUser.username||"User"}}
+                {{this.$store.getters.getUser.username||"New User"}}
               </em>
 
             </template>
-            <b-dropdown-item to="Login">Login</b-dropdown-item>
-            <b-dropdown-item to="Profile">Profile (placeholder)</b-dropdown-item>
-            <b-dropdown-item to="RegisterUser">Register User</b-dropdown-item>
-            <b-dropdown-item @click="logout">Log out</b-dropdown-item>
+            <b-dropdown-item to="Login" v-show="!this.$store.getters.isLoggedIn">Login</b-dropdown-item>
+            <b-dropdown-item to="Profile" v-show="this.$store.getters.isLoggedIn">Profile (placeholder)</b-dropdown-item>
+            <b-dropdown-item to="RegisterUser" v-show="!this.$store.getters.isLoggedIn">Register User</b-dropdown-item>
+            <b-dropdown-item @click="logout" v-show="this.$store.getters.isLoggedIn">Log out</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
       </b-collapse>
@@ -61,7 +47,9 @@ export default {
     },
     methods:{
         logout(){
-            localStorage.removeItem('user-token');
+          this.$store.dispatch('logout')
+            .then(() => this.$router.push('/'))
+            .catch(()=> this.$router.push('/'))
         }
     }
 };

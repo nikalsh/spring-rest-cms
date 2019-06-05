@@ -1,12 +1,15 @@
 package se.nackademin.restcms.service;
 
+import org.springframework.web.multipart.MultipartFile;
 import se.nackademin.restcms.entities.User;
 
 public interface UserService {
 
-    User saveBlogAdmin(User user);
+    User saveUser(User user);
 
     User getCurrentUser();
 
     User updatePassword(String password);
+
+    User registerUser(String email, String username, String password, MultipartFile file);
 }

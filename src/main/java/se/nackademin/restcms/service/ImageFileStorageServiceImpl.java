@@ -43,23 +43,23 @@ public ImageFile storeImageFile (MultipartFile file) {
 		throw new FileStorageException ("Could not store file " + fileName + ". Please try again!", ex);
 	}
 }
-@Override
-public ImageFile storeImageFile (MultipartFile file, User user) {
-	String fileName = StringUtils.cleanPath (file.getOriginalFilename ());
-	try {
-		if (fileName.contains ("..")) {
-			throw new FileStorageException ("Sorry! Filename contains invalid path sequence " + fileName);
-		}
-		
-		ImageFile imageFile = new ImageFile (fileName, file.getContentType (), file.getBytes ());
-		
-//		imageFile.setUser(user);
-		
-		return imageFileRepository.save (imageFile);
-	} catch (IOException ex) {
-		throw new FileStorageException ("Could not store file " + fileName + ". Please try again!", ex);
-	}
-}
+//@Override
+//public ImageFile storeImageFile (MultipartFile file, User user) {
+//	String fileName = StringUtils.cleanPath (file.getOriginalFilename ());
+//	try {
+//		if (fileName.contains ("..")) {
+//			throw new FileStorageException ("Sorry! Filename contains invalid path sequence " + fileName);
+//		}
+//
+//		ImageFile imageFile = new ImageFile (fileName, file.getContentType (), file.getBytes ());
+//
+////		imageFile.setUser(user);
+//
+//		return imageFileRepository.save (imageFile);
+//	} catch (IOException ex) {
+//		throw new FileStorageException ("Could not store file " + fileName + ". Please try again!", ex);
+//	}
+//}
 
 @Override
 public ImageFile getFile (String fileId) {

@@ -1,14 +1,16 @@
 <template>
-  <div id ="blogsPanel" v-for="blog in blogs">
+<!--  <div id ="blogsPanel" v-for="blog in blogs">-->
 
-    {{ blog.name }}
+<!--    {{ blog.name }}-->
 
+  <div>
 
   </div>
+
+<!--  </div>-->
 </template>
 
 <script>
-  import axios from 'axios';
 
   export default {
 
@@ -25,7 +27,7 @@
     methods: {
 
       getBlogs() {
-        axios.get("http://localhost:8080/blog/all")
+        this.$http.get("http://localhost:8080/blog/all")
           .then(response => {
 
             console.log(response)
