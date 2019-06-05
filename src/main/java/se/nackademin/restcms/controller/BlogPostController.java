@@ -51,8 +51,7 @@ public class BlogPostController {
                 .body(blogPost.getPostData());
     }
 
-    @GetMapping(value = "/downloadPosts/myBlog", produces = MediaType.APPLICATION_JSON_VALUE)
-
+    @GetMapping(value = "/myBlog", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<BlogPost>> getBlogForUser(Authentication authentication) {
         User user=(User)authentication.getPrincipal();
         List<BlogPost> allPostsForBlog = blogPostService.getAllPostsForBlog(user.getBlog().getId());

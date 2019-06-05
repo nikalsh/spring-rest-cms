@@ -33,7 +33,7 @@ public class ImageFileController {
     public ResponseEntity<String> uploadImage(@RequestParam("file") MultipartFile file) {
         ImageFile imageFile = imageFileStorageService.storeImageFile(file);
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/downloadFile/")
+                .path("/image/downloadFile/")
                 .path(imageFile.getId())
                 .toUriString();
         return ResponseEntity.ok()
@@ -44,7 +44,6 @@ public class ImageFileController {
 
     @GetMapping("/downloadFile/{fileId}")
     public ResponseEntity<Resource> downloadFile(@PathVariable String fileId) {
-        // Load file from database
         ImageFile imageFile = imageFileStorageService.getFile(fileId);
 
         return ResponseEntity.ok()

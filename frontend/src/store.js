@@ -24,17 +24,20 @@ export default new Vuex.Store({
     logout(state) {
       state.status = '';
       state.acess_token = '';
+      state.currentUser = {};
     },
     userdata(state, currentUser) {
       state.currentUser = currentUser;
-    }
+    },
+
 
   },
   actions: {
     login({commit}, user) {
       return new Promise((resolve, reject) => {
         commit('auth_request');
-        var params = new URLSearchParams();
+        //this is a workaround for formatting purposes
+        let params = new URLSearchParams();
         params.append("username", user.username);
         params.append("password", user.password);
         params.append("grant_type", "password");
@@ -55,16 +58,6 @@ export default new Vuex.Store({
             const access_token = resp.data.access_token;
             localStorage.setItem('access_token', access_token);
             axios.defaults.headers.common['Authorization'] = 'bearer ' + access_token;
-            //nested axios call to get userdata, better solution?
-            axios.get('http://localhost:8080/user/me')
-              .then(resp => {
-                commit('userdata', resp.data);
-                console.log(resp.data);
-              }).catch(err => {
-              commit('auth_error');
-              localStorage.removeItem('access_token');
-              reject(err)
-            });
             commit('auth_success', access_token);
             resolve(resp)
           })
@@ -73,6 +66,22 @@ export default new Vuex.Store({
             localStorage.removeItem('access_token');
             reject(err)
           })
+      })
+    },
+    downloadUser({commit}) {
+      return new Promise((resolve, reject) => {
+        axios.get('http://localhost:8080/user/me')
+          .then(resp => {
+            const userdata = resp.data;
+            commit('userdata', userdata);
+            console.log(resp.data);
+            resolve(resp)
+          })
+          .catch(err => {
+            commit('auth_error');
+            localStorage.removeItem('access_token');
+            reject(err)
+          });
       })
     },
     register({commit}, user) {
@@ -84,7 +93,8 @@ export default new Vuex.Store({
         formData.append('name', user.username);
         formData.append('email', user.email);
 
-        axios({url: 'http://localhost:8080/user/registerUser', data: formData, method: 'POST'
+        axios({
+          url: 'http://localhost:8080/user/registerUser', data: formData, method: 'POST'
 
         })
           .then(resp => {
@@ -112,7 +122,9 @@ export default new Vuex.Store({
   getters: {
     isLoggedIn: state => !!state.access_token,
     authStatus: state => state.status,
-    getUser: state => state.currentUser
+    getUser: state => {
+      return state.currentUser
+    }
   }
 
 

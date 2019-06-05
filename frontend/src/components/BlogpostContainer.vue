@@ -12,92 +12,87 @@
       </div>
       <button
         class="submit-btn"
-        @click="SubmitPost">Submit</button>
+        @click="SubmitPost">Submit
+      </button>
     </div>
   </div>
 </template>
 
 <script>
-import UploadAdapter from '../scripts/UploadAdapter';
-import InlineEditor from '@ckeditor/ckeditor5-build-inline';
+  import UploadAdapter from '../scripts/UploadAdapter';
+  import InlineEditor from '@ckeditor/ckeditor5-build-inline';
 
 
-export default {
+  export default {
     name: 'BlogpostContainer',
     props: {
-        post: Object
+      post: Object
     },
     data: function () {
-        return {
-            bool: true,
-            postId: '',
-            instance: '',
-            editorData: '',
-            editor: InlineEditor
-        };
+      return {
+        bool: true,
+        postId: '',
+        instance: '',
+        editorData: '',
+        editor: InlineEditor
+      };
     },
     created: function () {
-        if (this.post.id != null) {
-            this.postId = this.post.id;
-            this.editorData = this.post.postData;
-        }
+      if (this.post.id != null) {
+        this.postId = this.post.id;
+        this.editorData = this.post.postData;
+      }
     },
     methods: {
-        setEditor() {
-            if (this.bool === true) {
-                this.bool = false;
-                InlineEditor.create(this.$refs.contents,
-                    {
-                        extraPlugins:
+      setEditor() {
+        if (this.bool === true) {
+          this.bool = false;
+          InlineEditor.create(this.$refs.contents,
+            {
+              extraPlugins:
                 [this.MyCustomUploadAdapterPlugin]
-                    }
-                ).then((editor) => {
-                    this.$refs.contents.focus();
-                    this.instance = editor;
-                    editor.model.document.on('change:data', () => {
-                        this.editorData = this.instance.getData();
-                    });
-                });
             }
-        },
-        MyCustomUploadAdapterPlugin(editor) {
-            editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
-                return new UploadAdapter(loader);
-            };
-        },
-        SubmitPost() {
-            let data = new FormData();
-            let url = 'http://localhost:8080/post/uploadPost';
-            console.log(this.editorData);
+          ).then((editor) => {
+            this.$refs.contents.focus();
+            this.instance = editor;
+            editor.model.document.on('change:data', () => {
+              this.editorData = this.instance.getData();
+            });
+          });
+        }
+      },
+      MyCustomUploadAdapterPlugin(editor) {
+        editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+          return new UploadAdapter(loader);
+        };
+      },
+      SubmitPost() {
+        let data = new FormData();
+        let url = 'http://localhost:8080/post/uploadPost';
+        console.log(this.editorData);
         data.append('file', this.editorData);
         data.append('id', this.postId);
-        axios.post(url, data, {
-
-           withCredentials: true,
-          auth: {
-            username: 'lorem@lorem.lorem',
-                    password: 'lorem',
-                },
-
-                headers: {
-                    'Content-Type': 'text/html'
-                }
-            })
-                .then(response => {
-                    console.log(response);
+        this.$http.post(url, data, {
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'text/html'
+          }
+        })
+          .then(response => {
+            console.log(response);
             this.postId = response.data;
-                }).catch(error => {
-                    console.log(error);
-                });
+          }).catch(error => {
+          console.log(error);
+        });
 
-        },
-        getPost(postId) {
-            axios.get('http://localhost:8080/post/downloadPost/' + postId).then(resp => {
-                this.editorData = resp.data;
-            });
-        }
+      },
+      getPost(postId) {
+        this.$http.get('http://localhost:8080/post/downloadPost/' + postId).then(resp => {
+          this.editorData = resp.data;
+        });
+      }
     },
-};
+  };
 </script>
 <style>
 
@@ -159,6 +154,7 @@ export default {
   #blogpost-container {
     position: relative;
   }
+
   .ck {
     text-align: center;
   }

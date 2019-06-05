@@ -11,14 +11,7 @@
       <button @click="submitFile()">Submit</button>
     </div>
   </div>
-</template>@Override
-//    public UserDetails loadUserByUsername(String email) {
-//        BlogAdmin user = blogAdminRepository.findByEmail(email);
-//        if (user == null) {
-//            throw new UsernameNotFoundException(email);
-//        }
-//        return new UserDetailsImpl(user);
-//    }
+</template>
 
 <script>
 import axios from 'axios';

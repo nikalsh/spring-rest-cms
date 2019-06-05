@@ -13,7 +13,6 @@
 <script>
 import BlogpostContainer from './BlogpostContainer';
 import Vue from 'vue';
-import axios from 'axios';
 
 export default {
     name: 'Blog',
@@ -28,8 +27,8 @@ export default {
     methods: {
 
         onClick() {
-            var ComponentClass = Vue.extend(BlogpostContainer);
-            var instance = new ComponentClass({
+            let ComponentClass = Vue.extend(BlogpostContainer);
+            let instance = new ComponentClass({
                 propsData: {post:{}}
             });
             instance.$mount();
@@ -37,11 +36,8 @@ export default {
         },
         getPosts() {
             this.now=Date.now();
-            console.log(localStorage.getItem('access_token'));
-          axios.get('http://localhost:8080/post/downloadPosts/' + '4', {
-            headers: {
-              'Authorization': 'Bearer ' + localStorage.getItem('access_token')
-                }
+          this.$http.get('http://localhost:8080/post/myBlog', {
+
             }
             ).then((response => {
                 this.posts=response.data;
