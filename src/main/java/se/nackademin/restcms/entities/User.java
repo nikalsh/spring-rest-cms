@@ -67,6 +67,10 @@ public class User implements UserDetails {
     @Column(name = "photo", columnDefinition = "BLOB")
     private byte[] photo;
 
+    @Column
+    @Lob
+    private String profile;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles

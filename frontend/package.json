@@ -1,14 +1,14 @@
 {
   "name": "blogportal-frontend",
   "version": "1.0.0",
+  "private": true,
   "description": "A Vue.js project",
   "author": "nikalsh <niklas@helander.se>",
-  "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
-    "start": "npm run dev",
+    "build": "node build/build.js",
     "lint": "eslint --ext .js,.vue src",
-    "build": "node build/build.js"
+    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+    "start": "npm run dev"
   },
   "dependencies": {
     "@ckeditor/ckeditor5-autosave": "^11.0.1",
@@ -17,6 +17,9 @@
     "@ckeditor/ckeditor5-dev-utils": "^12.0.1",
     "@ckeditor/ckeditor5-editor-inline": "^12.1.0",
     "@ckeditor/ckeditor5-vue": "^1.0.0-beta.2",
+    "@fortawesome/fontawesome-svg-core": "^1.2.15",
+    "@fortawesome/free-solid-svg-icons": "^5.7.2",
+    "@fortawesome/vue-fontawesome": "^0.1.5",
     "axios": "^0.18.0",
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.0-rc.22",
@@ -66,6 +69,7 @@
     "shelljs": "^0.7.6",
     "uglifyjs-webpack-plugin": "^1.1.1",
     "url-loader": "^0.5.8",
+    "vue-cli-plugin-fontawesome": "^0.2.0",
     "vue-loader": "^13.3.0",
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.5.2",
@@ -74,13 +78,13 @@
     "webpack-dev-server": "^2.9.1",
     "webpack-merge": "^4.1.0"
   },
-  "engines": {
-    "node": ">= 6.0.0",
-    "npm": ">= 3.0.0"
-  },
   "browserslist": [
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "engines": {
+    "node": ">= 6.0.0",
+    "npm": ">= 3.0.0"
+  }
 }

@@ -1,19 +1,15 @@
 import Vue from 'vue'
-import Router from 'vue-router'
-import BlogpostContainer from '../components/BlogpostContainer'
-import FileUpload from '../components/FileUpload'
-import RegisterUser from "../components/RegisterUser";
-import LandingPage from '../components/LandingPage'
+import Router from 'vue-router';
+import BlogpostContainer from '../components/BlogpostContainer';
+import Register from "../components/Register";
 import Blog from "../components/Blog";
-import Login from '../components/Login'
-import Navbar from '../components/Navbar'
-
-
-
+import Login from '../components/Login';
+import Navbar from '../components/Navbar';
+import Home from '../components/Home';
+import UserPanel from '../components/UserPanel';
 
 Vue.use(Router);
 
-/* eslint-disable */
 export default new Router({
   routes: [
 
@@ -21,6 +17,10 @@ export default new Router({
       path: '/Navbar',
       name: 'Navbar',
       component: Navbar
+    },{
+      path: '/Profile',
+      name: 'Prtofile',
+      component: UserPanel
     },
     {
       path: '/BlogpostContainer',
@@ -33,14 +33,14 @@ export default new Router({
       component: Blog
     },
     {
-      path: '/RegisterUser',
-      name: 'RegisterUser',
-      component: RegisterUser, FileUpload
+      path: '/Register',
+      name: 'Register',
+      component: Register
     },
     {
       path: '/',
-      name: 'LandingPage',
-      component: LandingPage
+      name: 'Home',
+      component: Home
     },
     {
       path: '/Login',

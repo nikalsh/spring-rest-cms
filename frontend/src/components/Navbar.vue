@@ -1,11 +1,12 @@
 <template>
   <b-navbar
-    toggleable="lg"
-    type="dark"
-    variant="info"
+    toggleable="sm"
+    type="light"
+    variant="light"
+
     sticky>
     <b-container>
-      <b-navbar-brand href="/">NavBar</b-navbar-brand>
+      <b-navbar-brand to="/">Bloggportalen</b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"/>
 
@@ -16,7 +17,7 @@
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
         <b-navbar-nav>
-          <b-nav-item v-show="this.$store.getters.isLoggedIn" to="blog">my blog</b-nav-item>
+          <b-nav-item v-show="this.$store.getters.isLoggedIn" to="blog">My Blog</b-nav-item>
         </b-navbar-nav>
 
           <b-nav-item-dropdown right>
@@ -27,8 +28,8 @@
 
             </template>
             <b-dropdown-item to="Login" v-show="!this.$store.getters.isLoggedIn">Login</b-dropdown-item>
-            <b-dropdown-item to="Profile" v-show="this.$store.getters.isLoggedIn">Profile (placeholder)</b-dropdown-item>
-            <b-dropdown-item to="RegisterUser" v-show="!this.$store.getters.isLoggedIn">Register User</b-dropdown-item>
+            <b-dropdown-item to="Profile" v-show="this.$store.getters.isLoggedIn">Profile </b-dropdown-item>
+            <b-dropdown-item to="Register" v-show="!this.$store.getters.isLoggedIn">Register User</b-dropdown-item>
             <b-dropdown-item @click="logout" v-show="this.$store.getters.isLoggedIn">Log out</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>

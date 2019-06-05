@@ -11,9 +11,14 @@
         {{ post.postData }}
       </div>
       <button
+        style="background-color: transparent; border:none"
         class="submit-btn"
-        @click="SubmitPost">Submit
+        @click="SubmitPost"
+      >
+        <font-awesome-icon id="save" icon="file-export"></font-awesome-icon>
       </button>
+
+
     </div>
   </div>
 </template>
@@ -38,6 +43,7 @@
       };
     },
     created: function () {
+
       if (this.post.id != null) {
         this.postId = this.post.id;
         this.editorData = this.post.postData;
@@ -50,7 +56,17 @@
           InlineEditor.create(this.$refs.contents,
             {
               extraPlugins:
-                [this.MyCustomUploadAdapterPlugin]
+                [this.MyCustomUploadAdapterPlugin],
+              image: {
+                toolbar: ['imageTextAlternative', '|', 'imageStyle:alignLeft', 'imageStyle:full', 'imageStyle:alignRight'],
+
+                styles: [
+                  'full',
+                  'alignLeft',
+
+                  'alignRight'
+                ]
+              }
             }
           ).then((editor) => {
             this.$refs.contents.focus();
@@ -158,5 +174,14 @@
   .ck {
     text-align: center;
   }
+
+  .material-design-icon__svg path, .material-design-icon, .content-save-edit-icon {
+    background-color: transparent;
+    color: green;
+    width: 100px;
+    height: 100px;
+
+  }
+
 
 </style>
