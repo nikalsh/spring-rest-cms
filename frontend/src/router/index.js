@@ -1,15 +1,15 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import BlogpostContainer from '../components/BlogpostContainer'
-import FileUpload from '../components/FileUpload'
-import RegisterUser from "../components/RegisterUser";
+
 import LandingPage from '../components/LandingPage'
+import Register from '../components/Register'
 import Blog from "../components/Blog";
 import Blogs from '../components/Blogs'
 import Login from '../components/Login'
 import Navbar from '../components/Navbar'
 import axios from 'axios'
-;
+
 import Home from '../components/Home';
 import UserPanel from '../components/UserPanel';
 
