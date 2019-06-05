@@ -1,5 +1,7 @@
 <template>
   <div id="blogs">
+    <h1> {{ blogName }} </h1>
+
     <button @click="onClick">New post</button>
     <div ref="container">
       <BlogpostContainer
@@ -7,7 +9,6 @@
         :post="post"
         :key="index"/>
     </div>
-    {{ blogName }}
   </div>
 </template>
 
@@ -38,9 +39,9 @@
         instance.$mount();
         this.$refs.container.insertBefore(instance.$el, this.$refs.container.firstChild);
       },
-      async getPosts(blogName) {
+      getPosts(blogName) {
         this.now = Date.now();
-        await this.$http.get('http://localhost:8080/post/postsByBlogName/' + blogName, {}
+        this.$http.get('http://localhost:8080/post/postsByBlogName/' + blogName, {}
         ).then((response => {
           this.posts = response.data;
           console.log(response);
@@ -49,10 +50,10 @@
         }));
       }
     },
-    beforeRouteLeave() {
-      this.posts = "";
-    }
-  };
+
+
+
+  }
 </script>
 
 <style scoped>

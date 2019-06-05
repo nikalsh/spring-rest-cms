@@ -1,6 +1,5 @@
 <template>
   <div id="container">
-    <UserPanel/>
     <BlogsPanel></BlogsPanel>
     <br>
     <router-link
@@ -25,7 +24,6 @@ import BlogsPanel from './BlogsPanel'
 export default {
     name: 'LandingPage',
     components: {
-        UserPanel,
         BlogsPanel
     }
 };

@@ -21,7 +21,6 @@
 
     </b-carousel>
     <BlogsPanel></BlogsPanel>
-    <UserPanel/>
   </div>
 </template>
 
@@ -41,7 +40,6 @@
       };
     },
     components: {
-      UserPanel,
       BlogsPanel
     }
   }

@@ -6,7 +6,7 @@
 
     sticky>
     <b-container>
-      <b-navbar-brand to="/">Bloggportalen</b-navbar-brand>
+      <b-navbar-brand href="/">Bloggportalen</b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"/>
 

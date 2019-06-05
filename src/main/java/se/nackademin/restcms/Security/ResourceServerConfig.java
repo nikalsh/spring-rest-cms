@@ -39,6 +39,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
 
+        //this line is needed to access h2-console with oauth2 enabled
+        //disable for production
         http.headers().frameOptions().sameOrigin();
         http.authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/user/**").permitAll()
@@ -46,8 +48,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/post/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/post/downloadPost/**").authenticated()
                 .antMatchers(HttpMethod.GET, "/downloadFile/{fileId}").authenticated()
-                .antMatchers("/").permitAll()
-                .antMatchers("/h2-console/**").permitAll()
+                .antMatchers("/").permitAll() //disable for production
+                .antMatchers("/h2-console/**").permitAll() //disable for production
                 .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
     }
 

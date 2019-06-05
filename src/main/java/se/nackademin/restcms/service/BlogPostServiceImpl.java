@@ -21,9 +21,12 @@ public class BlogPostServiceImpl implements BlogPostService {
 
     private final BlogRepository blogRepository;
     private final BlogPostRepository blogPostRepository;
+    private final UserService userService;
 
     @Autowired
-    public BlogPostServiceImpl(BlogRepository blogRepository, BlogPostRepository blogPostRepository) {
+    public BlogPostServiceImpl(BlogRepository blogRepository, BlogPostRepository blogPostRepository,
+    UserServiceImpl userService) {
+        this.userService = userService;
         this.blogRepository = blogRepository;
         this.blogPostRepository = blogPostRepository;
     }
@@ -54,11 +57,9 @@ public class BlogPostServiceImpl implements BlogPostService {
 
     @Override
     public BlogPost storePost(String file, String postId) {
-        //get the current authenticated user
-//        UserDetailsImpl user = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        Blog blog = user.getUser().getBlog();
 
-        //decide if they can create a blogpost
+
+
         Optional<BlogPost> blogPostOptional = blogPostRepository.findById(postId);
         BlogPost blogPost;
         if (blogPostOptional.isPresent()) {
@@ -66,9 +67,7 @@ public class BlogPostServiceImpl implements BlogPostService {
             blogPost.setPostData(file);
         } else {
             blogPost = new BlogPost(
-                    // blogRepository.getOne(user.getUser().getBlog().getUser().getId()),
-                    blogRepository.getOne(4L),
-                   // blog,
+                    userService.getCurrentUser().getBlog(),
                     file
             );
         }
