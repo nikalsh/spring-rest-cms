@@ -2,13 +2,9 @@
 
   <div id="blogsPanel">
     BLOGSPANEL
-    <p v-for="blog in blogs">
-      {{ blog.blogName }}
-    </p>
-<!--    <div v-for="blog in blogs">-->
-<!--            <router-link :to="{name: blog.blogName}"></router-link>-->
-<!--    </div>-->
-
+    <div v-for="blog in blogs">
+      <b-button :to="'blogs/'+ blog.blogName ">{{ blog.blogName }}</b-button>
+    </div>
 
 
   </div>

@@ -81,6 +81,7 @@ export default new Router({
     },
     {
       path: '/blogs/:blogName',
+      name: '/blogs/:blogName',
       component: Blogs,
       props: true
     }
