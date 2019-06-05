@@ -36,7 +36,7 @@ public ImageFile storeImageFile (MultipartFile file) {
 		
 		ImageFile imageFile = new ImageFile (fileName, file.getContentType (), file.getBytes ());
 		
-		imageFile.setUser(userRepository.getOne (3L));
+//		imageFile.setUser(userRepository.getOne (3L));
 		
 		return imageFileRepository.save (imageFile);
 	} catch (IOException ex) {
@@ -53,7 +53,7 @@ public ImageFile storeImageFile (MultipartFile file, User user) {
 		
 		ImageFile imageFile = new ImageFile (fileName, file.getContentType (), file.getBytes ());
 		
-		imageFile.setUser(user);
+//		imageFile.setUser(user);
 		
 		return imageFileRepository.save (imageFile);
 	} catch (IOException ex) {

@@ -1,5 +1,5 @@
 <template>
-  <b-container id="blog">
+  <div id="blog">
     <button @click="onClick">New post</button>
     <div ref="container">
       <BlogpostContainer
@@ -7,7 +7,7 @@
         :post="post"
         :key="index"/>
     </div>
-  </b-container>
+  </div>
 </template>
 
 <script>
@@ -37,9 +37,10 @@ export default {
         },
         getPosts() {
             this.now=Date.now();
-            axios.get('http://localhost:8080/post/downloadPosts/' + '4', {
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem('user-token')
+            console.log(localStorage.getItem('access_token'));
+          axios.get('http://localhost:8080/post/downloadPosts/' + '4', {
+            headers: {
+              'Authorization': 'Bearer ' + localStorage.getItem('access_token')
                 }
             }
             ).then((response => {

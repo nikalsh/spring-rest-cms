@@ -18,7 +18,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import UploadAdapter from '../scripts/UploadAdapter';
 import InlineEditor from '@ckeditor/ckeditor5-build-inline';
 

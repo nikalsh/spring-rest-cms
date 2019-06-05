@@ -73,6 +73,8 @@ public class InitialDBData {
         blog.setBlogName(blogName);
         user.setBlog(blog);
         userRepository.save(user);
+        blog.setUser(user);
+        blogRepository.save(blog);
         return blog;
     }
 
