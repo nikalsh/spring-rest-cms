@@ -68,9 +68,9 @@ public class UserController {
 
 
     @PostMapping("/registerUser")
-    public ResponseEntity<String> registerUser(@RequestParam String email,@RequestParam String profile, @RequestParam String username, @RequestParam String password, @RequestParam("file") MultipartFile file) throws IOException {
-        userService.registerUser(email,username,password,profile, file);
-        return new ResponseEntity<>("", HttpStatus.OK);
+    public ResponseEntity<User> registerUser(@RequestParam String email,@RequestParam String profile, @RequestParam String username, @RequestParam String password, @RequestParam("file") MultipartFile file) throws IOException {
+        User user = userService.registerUser(email,username,password,profile, file);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
 
