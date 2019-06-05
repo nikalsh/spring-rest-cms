@@ -47,7 +47,7 @@ public class InitialDBData {
         authorityRepository.save(admin);
         authorityRepository.save(user);
         Blog blog = newAdmin("lorem", "lorem", "lorem@lorem.lorem", "lorem", user);
-        newAdmin("Root-bloggen", "root", "root@root.root", "root", user);
+        newAdmin("root", "root", "root@root.root", "root", user);
         newAdmin("NIKLAS BLOGG", "niklas", "niklas@niklas.niklas", "niklas", user);
         newAdmin("JOSEF BLOGG", "josef", "josef@josef.josef", "josef", user);
         newAdmin("JOHAN BLOGG", "johan", "johan@johan.johan", "johan", user);
