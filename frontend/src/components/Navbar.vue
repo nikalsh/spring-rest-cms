@@ -5,7 +5,7 @@
     variant="info" 
     sticky>
     <b-container>
-      <b-navbar-brand href="#">NavBar</b-navbar-brand>
+      <b-navbar-brand href="/">NavBar</b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"/>
 
