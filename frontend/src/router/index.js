@@ -24,9 +24,11 @@ Vue.use(Router);
 
 export default new Router({
 
+  mode: 'history',
+  hash: false,
 
   routes: [
-
+    { path: '*', redirect: '/' }, // catch all use case
     {
       path: '/Navbar',
       name: 'Navbar',
@@ -62,11 +64,12 @@ export default new Router({
       component: Login
     },
     {
-      path: '/blogs/:blogName',
-      name: '/blogs/:blogName',
+      path: '/:blogName',
+      name: '/:blogName',
       component: Blogs,
       props: true
-    }
+    },
+
     ]
 
 

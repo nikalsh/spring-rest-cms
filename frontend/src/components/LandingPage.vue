@@ -1,6 +1,5 @@
 <template>
   <div id="container">
-    <BlogsPanel></BlogsPanel>
     <br>
     <router-link
       tag="li"
@@ -19,12 +18,10 @@
 
 <script>
 import UserPanel from './UserPanel';
-import BlogsPanel from './BlogsPanel'
 
 export default {
     name: 'LandingPage',
     components: {
-        BlogsPanel
     }
 };
 </script>

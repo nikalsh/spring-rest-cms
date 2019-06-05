@@ -29,6 +29,7 @@
       }
 
     },
+
     methods: {
 
       onClick() {
@@ -50,6 +51,14 @@
         }));
       }
     },
+    watch: {
+
+      '$route.params.blogName' : function(blogName){
+        this.posts = this.getPosts(this.blogName)
+      }
+
+  }
+
 
 
 

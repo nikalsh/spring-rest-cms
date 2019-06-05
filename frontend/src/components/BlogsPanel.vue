@@ -1,10 +1,13 @@
 <template>
 
   <div id="blogsPanel">
-    BLOGSPANEL
-    <div v-for="blog in blogs">
-      <b-button :to="'blogs/'+ blog.blogName ">{{ blog.blogName }}</b-button>
-    </div>
+
+
+    <a class = "text-center"  v-for="blog in blogs">
+      <b-button :to="blog.blogName">{{ blog.blogName }}</b-button>
+
+
+    </a>
 
 
   </div>
@@ -42,6 +45,7 @@
 
         })
       console.log(this.$router)
+      this.$forceUpdate()
     }
   }
 </script>
@@ -50,6 +54,16 @@
 
   #blogsPanel {
     background-color: lightcoral;
+  }
+
+  #buttons{
+  display: flex;
+  align-items: center;
+  }
+
+  #center{
+    text-align: center;
+    vertical-align: middle;
   }
 
 </style>
