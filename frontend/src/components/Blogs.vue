@@ -1,5 +1,5 @@
 <template>
-  <div id="blogs">
+  <b-container id="blogs">
     <h1 > {{ blogName }} </h1>
 
     <button @click="newPost" v-show="isOwner">New post</button>
@@ -10,7 +10,7 @@
         :isOwner="isOwner"
         :key="index"/>
     </div>
-  </div>
+  </b-container>
 </template>
 
 <script>
@@ -25,10 +25,12 @@
 
     data: function () {
       return {
-        posts: this.getPosts(this.blogName),
+        posts: '',
         isOwner:false
       }
-
+    },
+    created(){
+      this.getPosts(this.blogName)
     },
 
     methods: {
@@ -47,9 +49,7 @@
         }));
         this.$http.get('http://localhost:8080/blog/isOwner/'+blogName,'')
           .then((response => {
-            // console.log(response.data);
             this.isOwner = response.data;
-               console.log(this.isOwner);
           })).catch((error => {
           console.log(error);
         }));
@@ -58,9 +58,8 @@
       }
     },
     watch: {
-
-      '$route.params.blogName' : function(blogName){
-        this.posts = this.getPosts(this.blogName)
+      '$route.params.blogName' : function(){
+         this.getPosts(this.blogName)
       }
 
   }

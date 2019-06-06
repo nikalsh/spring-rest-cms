@@ -1,7 +1,7 @@
 <template>
-  <div style="border: lightgrey 1px solid;  margin: 20px 0; position:relative;">
+  <div id="blogpost-container" class="ck">
     <div @click.once="swap">
-      <div ref="contents" :is="currentComponent" :post="post"></div>
+      <div  ref="contents" :is="currentComponent" :post="post"></div>
     </div>
   </div>
 </template>
@@ -37,55 +37,9 @@
     },
   };
 </script>
-<style>
-
-
-  :root {
-    --ck-image-style-spacing: 1.5em;
-  }
-
-
-  .image-style-side {
-    max-width: 50%;
-  }
-
-
-  .image-style-side {
-    float: right;
-    margin-left: var(--ck-image-style-spacing);
-  }
-
-  .image-style-side > img {
-    max-width: 100%;
-    height: auto;
-    margin: 0 auto;
-  }
-
-
-  .image-style-align-left {
-    float: left;
-    margin-right: var(--ck-image-style-spacing);
-  }
-
-
-  .image-style-align-center {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-
-  .image-style-align-right {
-    float: right;
-    margin-left: var(--ck-image-style-spacing);
-  }
-
-
+<style scoped>
   #blogpost-container {
+    margin: 20px 0;
     position: relative;
   }
-
-  .ck {
-    text-align: center;
-  }
-
 </style>

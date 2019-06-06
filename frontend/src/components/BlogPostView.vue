@@ -1,11 +1,10 @@
 <template>
-      <div
-        style="min-height: 4em"
-        ref="contents"
-        class="ck ck-content ck-editor__editable ck-rounded-corners ck-editor__editable_inline ck-blurred"
-        v-html="post.postData">
-        {{ post.postData }}
-      </div>
+  <div style="min-height: 4em"
+       ref="contents"
+       class="ck ck-content ck-editor__editable ck-rounded-corners ck-editor__editable_inline ck-blurred"
+       v-html="post.postData">
+    {{ post.postData }}
+  </div>
 </template>
 
 <script>
@@ -19,9 +18,7 @@
         editorData: '',
       };
     },
-    methods: {
-
-    },
+    methods: {},
     created: function () {
       this.editorData = this.post.postData;
     }

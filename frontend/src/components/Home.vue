@@ -24,7 +24,6 @@
 </template>
 
 <script>
-  import UserPanel from './UserPanel';
   import BlogsPanel from './BlogsPanel'
   export default {
     name: "Home",

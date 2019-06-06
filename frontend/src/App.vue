@@ -7,8 +7,6 @@
 </template>
 
 <script>
-/* eslint-disable */
-import Vue from 'vue'
 
 import Navbar from "./components/Navbar";
 import BlogsPanel from "./components/BlogsPanel";
@@ -20,19 +18,5 @@ import BlogsPanel from "./components/BlogsPanel";
 </script>
 
 <style>
-#app {
-
-}
-
-body {
-  padding: 0;
-  margin: 0;
-
-}
-
-html {
-  overflow-y:scroll;
-}
-
 
 </style>

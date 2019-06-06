@@ -1,16 +1,18 @@
 <template>
   <div ref="contents">
     <ckeditor
-
-       style="min-height: 4em" :editor="editor" :config="editorConfig" v-model="editorData" ></ckeditor>
-    <button
-      style="background-color: transparent; border:none"
-      class="submit-btn"
-      @click="SubmitPost"
-    >
-      <font-awesome-icon id="save" icon="file-export"></font-awesome-icon>
-
-    </button>
+              style="min-height: 4em; text-align: center;"
+              :editor="editor"
+              :config="editorConfig"
+              v-model="editorData">
+    </ckeditor>
+    <b-button id="submit-btn"
+              class="submit-btn transparent-button"
+              @click="SubmitPost">
+      <font-awesome-icon id="save"
+                         icon="file-export">
+      </font-awesome-icon>
+    </b-button>
   </div>
 </template>
 
@@ -46,15 +48,20 @@
         },
       };
     },
+
     created: function () {
       this.postId = this.post.id;
-      this.editorData = this.post.postData||'';
-      setTimeout(()=>{
-        this.$refs.contents.firstChild.focus()
-      }, 1000);
-
+      this.editorData = this.post.postData || '';
+      let counter = 0;
+      let interval = setInterval(() => {
+        counter++;
+        if (this.$refs.contents !== undefined || counter > 100) {
+          this.$refs.contents.firstChild.focus();
+          clearInterval(interval);
+        }
+      }, 50);
     },
-    methods:{
+    methods: {
       MyCustomUploadAdapterPlugin(editor) {
         editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
           return new UploadAdapter(loader);
@@ -62,13 +69,10 @@
       },
       SubmitPost() {
         let data = new FormData();
-        let url = 'http://localhost:8080/post/uploadPost';
         console.log(this.editorData);
         data.append('file', this.editorData);
         data.append('id', this.postId);
-        this.$http.post(url, data, {
-
-        })
+        this.$http.post('http://localhost:8080/post/uploadPost', data)
           .then(response => {
             console.log(response);
             this.postId = response.data;
@@ -82,9 +86,16 @@
 </script>
 
 <style scoped>
-  .submit-btn {
+  #submit-btn:focus {
+    box-shadow: none;
+  }
+
+  #submit-btn {
+    background-color: transparent;
+    border:none;
+    color: black;
     position: absolute;
-    top: 0%;
-    right: 0%;
+    top: 0;
+    right: 0;
   }
 </style>

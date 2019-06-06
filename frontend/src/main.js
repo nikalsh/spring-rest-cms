@@ -4,7 +4,7 @@ import Vue from 'vue'
 import router from './router'
 import App from './App'
 import axios from 'axios'
-
+import './style/style.css'
 import store from './store'
 import CKEditor from '@ckeditor/ckeditor5-vue';
 import BootstrapVue from 'bootstrap-vue'

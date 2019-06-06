@@ -3,27 +3,24 @@
     <h1>Login Page</h1>
     <b-form @submit.prevent="login">
 
-      <b-form-group
-        id="input-group-1"
-        label="Username:"
-        label-for="input-1"
-        label-cols-sm="3"
-        label-cols-lg="2">
+      <b-form-group label="Username:"
+                    label-for="login-username"
+                    label-cols-sm="3"
+                    label-cols-lg="2">
         <b-form-input
-          id="input-1"
+          id="login-username"
           v-model="username"
           required
           placeholder="Enter username"
         ></b-form-input>
       </b-form-group>
 
-      <b-form-group id="input-group-2"
-                    label="Your Name:"
-                    label-for="input-2"
+      <b-form-group label="Password:"
+                    label-for="login-password"
                     label-cols-sm="3"
                     label-cols-lg="2">
         <b-form-input
-          id="input-2"
+          id="login-password"
           v-model="password"
           type="password"
           required
@@ -32,7 +29,7 @@
       </b-form-group>
 
 
-      <b-button style="margin: auto; display:block" type="submit" variant="primary">Login</b-button>
+      <b-button id="center-button" type="submit" variant="primary">Login</b-button>
       <b-alert v-model="loginFail" variant="danger" dismissible>
         Inloggning misslyckades
       </b-alert>

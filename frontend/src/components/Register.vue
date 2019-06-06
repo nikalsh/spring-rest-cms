@@ -3,52 +3,48 @@
     <b-form @submit.prevent="register">
       <b-container fluid style="padding: 0">
         <b-form-group
-          id="input-group-1"
+
           label="Your Username:"
-          label-for="input-1"
+          label-for="input-username"
           label-cols-sm="3"
           label-cols-lg="2">
           <b-form-input
-            id="input-1"
+            id="input-username"
             v-model="username"
             type="text"
             required
             placeholder="Enter username"
           ></b-form-input>
         </b-form-group>
-        <b-form-group id="input-group-2"
-                      label="Your Email:"
-                      label-for="input-2"
+        <b-form-group label="Your Email:"
+                      label-for="input-email"
                       label-cols-sm="3"
                       label-cols-lg="2">
-          <b-form-input
-            id="input-2"
-            v-model="email"
-            type="email"
-            required
-            placeholder="Enter Email"
+          <b-form-input id="input-email"
+                        v-model="email"
+                        type="email"
+                        required
+                        placeholder="Enter Email"
           ></b-form-input>
         </b-form-group>
-        <b-form-group id="input-group-3"
-                      label="Your Password:"
-                      label-for="input-3"
+        <b-form-group label="Your Password:"
+                      label-for="input-password"
                       label-cols-sm="3"
                       label-cols-lg="2">
           <b-form-input
-            id="input-3"
+            id="input-password"
             v-model="password"
             type="password"
             required
             placeholder="Enter password"
           ></b-form-input>
         </b-form-group>
-        <b-form-group id="input-group-4"
-                      label="Your Face:"
-                      label-for="input-3"
+        <b-form-group label="Your Face:"
+                      label-for="input-face"
                       label-cols-sm="3"
                       label-cols-lg="2">
           <b-form-file
-            id="input-4"
+            id="input-face"
             v-model="file"
             accept="image/*"
             placeholder="Choose a file..."
@@ -56,18 +52,22 @@
             required
           ></b-form-file>
         </b-form-group>
-        <b-form-group id="input-group-5"
-                      label="Your Profile:"
-                      label-for="input-5"
+        <b-form-group label="Your Profile:"
+                      label-for="input-profile"
                       label-cols-sm="3"
                       label-cols-lg="2">
 
-          <ckeditor id="input-5" :editor="editor" v-model="profile" :config="editorConfig"></ckeditor>
+          <ckeditor class="ck"
+                    id="input-profile"
+                    :editor="editor"
+                    v-model="profile"
+                    :config="editorConfig"></ckeditor>
         </b-form-group>
 
-        <b-button style="margin: auto; display:block"
+        <b-button id="center-button"
                   type="submit"
-                  variant="primary">Register</b-button>
+                  variant="primary">Register
+        </b-button>
 
         <b-alert v-model="registerFail" variant="danger" dismissible>
           Registrering misslyckades
@@ -103,9 +103,9 @@
         const username = this.username;
         const email = this.email;
         const password = this.password;
-        const profile=this.profile;
+        const profile = this.profile;
         const file = this.file;
-        this.$store.dispatch('register', {username, email, password,profile, file})
+        this.$store.dispatch('register', {username, email, password, profile, file})
           .then(() => {
             this.$store.dispatch('login', {username, password})
               .then(() => {
@@ -123,9 +123,5 @@
 
 <style scoped>
 
-  #input-5 {
-    text-align: center;
-    border: lightgrey 1px solid;
-    min-height: 8em
-  }
+
 </style>
