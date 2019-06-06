@@ -1,12 +1,13 @@
 <template>
   <div id="blogs">
-    <h1> {{ blogName }} </h1>
+    <h1 > {{ blogName }} </h1>
 
-    <button @click="onClick">New post</button>
+    <button @click="newPost" v-show="isOwner">New post</button>
     <div ref="container">
       <BlogpostContainer
         v-for="(post, index) in posts"
         :post="post"
+        :isOwner="isOwner"
         :key="index"/>
     </div>
   </div>
@@ -14,7 +15,6 @@
 
 <script>
   import BlogpostContainer from './BlogpostContainer';
-  import Vue from 'vue';
 
   export default {
     name: 'Blogs',
@@ -25,31 +25,36 @@
 
     data: function () {
       return {
-        posts: this.getPosts(this.blogName)
+        posts: this.getPosts(this.blogName),
+        isOwner:false
       }
 
     },
 
     methods: {
-
-      onClick() {
-        let ComponentClass = Vue.extend(BlogpostContainer);
-        let instance = new ComponentClass({
-          propsData: {post: {}}
-        });
-        instance.$mount();
-        this.$refs.container.insertBefore(instance.$el, this.$refs.container.firstChild);
+      newPost() {
+        this.posts.unshift({});
       },
-      getPosts(blogName) {
+      getPosts:function(blogName) {
 
         this.now = Date.now();
-        this.$http.get('http://localhost:8080/post/postsByBlogName/' + blogName, {}
-        ).then((response => {
-          this.posts = response.data;
+        this.$http.get('http://localhost:8080/post/postsByBlogName/' + blogName,'')
+          .then((response => {
           console.log(response);
+          this.posts= response.data;
         })).catch((error => {
           console.log(error);
         }));
+        this.$http.get('http://localhost:8080/blog/isOwner/'+blogName,'')
+          .then((response => {
+            // console.log(response.data);
+            this.isOwner = response.data;
+               console.log(this.isOwner);
+          })).catch((error => {
+          console.log(error);
+        }));
+
+
       }
     },
     watch: {

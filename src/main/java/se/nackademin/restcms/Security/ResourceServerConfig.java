@@ -46,6 +46,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/user/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/user/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/post/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/blog/**").permitAll()
+
                 .antMatchers(HttpMethod.GET, "/post/downloadPost/**").authenticated()
                 .antMatchers(HttpMethod.GET, "/downloadFile/{fileId}").authenticated()
                 .antMatchers("/").permitAll() //disable for production

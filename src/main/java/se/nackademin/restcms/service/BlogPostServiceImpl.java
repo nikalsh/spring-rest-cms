@@ -25,7 +25,7 @@ public class BlogPostServiceImpl implements BlogPostService {
 
     @Autowired
     public BlogPostServiceImpl(BlogRepository blogRepository, BlogPostRepository blogPostRepository,
-    UserServiceImpl userService) {
+                               UserServiceImpl userService) {
         this.userService = userService;
         this.blogRepository = blogRepository;
         this.blogPostRepository = blogPostRepository;
@@ -33,21 +33,20 @@ public class BlogPostServiceImpl implements BlogPostService {
 
     @Override
     public List<String> getAllPostIdsForBlog(Long blogId) {
-        List<String> l=blogPostRepository
+        return blogPostRepository
                 .findByBlogOrderByDateCreatedDesc(blogRepository.getOne(blogId))
                 .stream()
                 .map(BlogPost::getId)
                 .collect(Collectors.toList());
-        return l;
     }
 
     @Override
-    public List<BlogPost> getAllPostsForBlog(String blogName){
-        return blogPostRepository.findAll()
-                .stream()
-                .filter(e -> e.getBlog().getBlogName().equals(blogName))
-                .collect(Collectors.toList());
+    public List<BlogPost> getAllPostsForBlog(String blogName) {
+        return blogPostRepository
+                .findByBlogOrderByDateCreatedDesc(blogRepository.findByBlogName(blogName))
+                ;
     }
+
     @Override
     public List<BlogPost> getAllPostsForBlog(Long blogId) {
         return blogPostRepository
@@ -57,7 +56,6 @@ public class BlogPostServiceImpl implements BlogPostService {
 
     @Override
     public BlogPost storePost(String file, String postId) {
-
 
 
         Optional<BlogPost> blogPostOptional = blogPostRepository.findById(postId);

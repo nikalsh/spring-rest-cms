@@ -17,7 +17,7 @@
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
         <b-navbar-nav>
-          <b-nav-item v-show="this.$store.getters.isLoggedIn" href="#/blog">My Blog</b-nav-item>
+          <b-nav-item v-show="this.$store.getters.isLoggedIn" :to="this.$store.getters.getUser.username">My Blog</b-nav-item>
         </b-navbar-nav>
 
           <b-nav-item-dropdown right>

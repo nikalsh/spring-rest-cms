@@ -3,7 +3,7 @@
   <div id="blogsPanel">
     BLOGSPANEL
     <a class = "text-center" v-for="blog in blogs">
-      <b-button :to="'blogs/'+ blog ">{{ blog }}</b-button>
+      <b-button :to="blog">{{ blog }}</b-button>
     </a>
 
 

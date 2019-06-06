@@ -96,6 +96,7 @@
         registerFail: false
       };
     },
+
     methods: {
       register: function () {
         console.log(this.file);

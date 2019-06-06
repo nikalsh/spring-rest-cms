@@ -22,7 +22,6 @@
     </b-carousel>
   </div>
 </template>
-them
 
 <script>
   import UserPanel from './UserPanel';
