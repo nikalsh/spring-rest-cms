@@ -1,10 +1,11 @@
 <template>
   <div ref="contents">
-    <ckeditor
+    <ckeditor ref="contents"
+              @ready="onEditorReady"
               style="min-height: 4em; text-align: center;"
               :editor="editor"
-              :config="editorConfig"
-              v-model="editorData">
+              :config="editorConfig">
+
     </ckeditor>
     <b-button id="submit-btn"
               class="submit-btn transparent-button"
@@ -49,19 +50,16 @@
       };
     },
 
-    created: function () {
-      this.postId = this.post.id;
-      this.editorData = this.post.postData || '';
-      let counter = 0;
-      let interval = setInterval(() => {
-        counter++;
-        if (this.$refs.contents !== undefined || counter > 100) {
-          this.$refs.contents.firstChild.focus();
-          clearInterval(interval);
-        }
-      }, 50);
-    },
     methods: {
+      onEditorReady(editor) {
+        this.postId = this.post.id;
+        this.editorData = this.post.postData;
+        editor.setData(this.post.postData || '');
+        editor.model.document.on('change:data', () => {
+          this.editorData = editor.getData()
+        });
+        this.$refs.contents.firstChild.focus();
+      },
       MyCustomUploadAdapterPlugin(editor) {
         editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
           return new UploadAdapter(loader);
@@ -92,7 +90,7 @@
 
   #submit-btn {
     background-color: transparent;
-    border:none;
+    border: none;
     color: black;
     position: absolute;
     top: 0;
