@@ -61,8 +61,15 @@ public class BlogPostServiceImpl implements BlogPostService {
         Optional<BlogPost> blogPostOptional = blogPostRepository.findById(postId);
         BlogPost blogPost;
         if (blogPostOptional.isPresent()) {
+            Blog blog = userService.getCurrentUser().getBlog();
             blogPost = blogPostOptional.get();
+            if (blogPost.getBlog().getId().equals(blog.getId())){
+
             blogPost.setPostData(file);
+            }else {
+                return null;
+            }
+
         } else {
             blogPost = new BlogPost(
                     userService.getCurrentUser().getBlog(),
