@@ -2,13 +2,13 @@
   <div id="content" v-bind:class="{openContent: isOpen, closeContent: !isOpen}">
 
 
-    <b-button @click="isOpen=!isOpen" class="icon-btn menu-btn"  >
+    <b-button @click="isOpen=!isOpen" class="icon-btn menu-btn">
       <font-awesome-icon icon="bars"/>
     </b-button>
 
 
     <div id="menu" class="nav boring" v-bind:class="{openMenu: isOpen, closeMenu: !isOpen}">
-    <VuePerfectScrollbar class="scroll-area" :settings="settings">
+      <VuePerfectScrollbar class="scroll-area" :settings="settings">
         <b-card
           :title="user.username"
           :img-src="'data:;base64,'+user.photo"
@@ -23,7 +23,7 @@
           </b-card-text>
         </b-card>
 
-    </VuePerfectScrollbar>
+      </VuePerfectScrollbar>
     </div>
 
   </div>
@@ -31,9 +31,10 @@
 
 <script>
   import VuePerfectScrollbar from 'vue-perfect-scrollbar'
+
   export default {
     name: "SideMenu",
-    components:{
+    components: {
       VuePerfectScrollbar
     },
     props: ['user'],
@@ -41,15 +42,15 @@
       return {
         isOpen: false,
         imgurl: '',
-        username:'',
-        profile:'',
+        username: '',
+        profile: '',
         settings: {
           maxScrollbarLength: 60
         }
       };
     },
     created() {
-      this.username=this.user.username;
+      this.username = this.user.username;
 
     }
   }
@@ -58,10 +59,10 @@
 <style scoped>
   .scroll-area {
     position: relative;
-
     height: 100%;
-    padding:15px;
+    padding: 15px;
   }
+
   #menu {
     width: 300px;
     height: 100%;
@@ -92,7 +93,6 @@
     transform: translate3d(300px, 0, 0);
   }
 
-
   #content {
     box-shadow: inset -5px 0 5px -5px rgba(0, 0, 0, 0.2);
     overflow: hidden;
@@ -100,25 +100,16 @@
     background-color: white;
   }
 
-
-
-
   .nav {
     height: 100%;
     display: block;
     position: fixed;
-    /*z-index: 1;*/
-    /*top: 0;*/
-    /*left: -2px;*/
     background-color: white;
     overflow-x: hidden;
-    /*transition: 0.7s;*/
     border-right: 2px solid lightgrey;
   }
 
-
-
-.profile{
-  border:none;
-}
+  .profile {
+    border: none;
+  }
 </style>

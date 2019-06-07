@@ -50,7 +50,7 @@
     },
     methods: {
       logout() {
-        console.log(this.$store.getters.getUser);
+        // console.log(this.$store.getters.getUser);
         this.$store.dispatch('logout')
           .then(() => this.$router.push('/'))
           .catch(() => this.$router.push('/'))

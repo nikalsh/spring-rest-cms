@@ -1,10 +1,7 @@
 <template>
   <div>
-    <!--<SideMenu></SideMenu>-->
     <b-container style="width:auto">
-
       <div class="asd" style="height:1000px">
-
         <p>{{ this.$store.getters.getUser.email }}</p>
         <p>{{ this.$store.getters.getUser.username }}</p>
         <b-img fluid :src="this.$store.getters.getUserImage" alt="profile picture"/>
@@ -15,24 +12,14 @@
 </template>
 
 <script>
-  import SideMenu from '../components/SideMenu';
 
   export default {
     name: 'UserPanel',
-    components: {
-      SideMenu: SideMenu
-    },
-
     data() {
       return {}
-
     },
     methods: {},
-
-
   }
-
-
 </script>
 
 <style scoped>

@@ -43,6 +43,8 @@ public class UserController {
         this.userRepository = userRepository;
     }
 
+
+    //not used
     @PostMapping
     public User newBlogAdmin(@RequestBody User user) {
         return userService.saveUser(user);
@@ -61,11 +63,7 @@ public class UserController {
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-//    @RequestMapping("/getUser")
-//    public Principal home(Principal user) {
-//        return user;
-//    }
-
+//not used
     @PutMapping(path = "/update_password")
     public User newPassword(@RequestBody Map<String, Object> password) {
         log.info("NEW PASSWORD: " + password.get("password"));

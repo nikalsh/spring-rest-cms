@@ -24,23 +24,26 @@
         </b-button>
         <b-tooltip triggers="hover" target="img-btn" title="edit image" placement="left"></b-tooltip>
       </div>
-      <b-img fluid-grow :src="url" v-show="url"></b-img>
-    </div>
-    <b-container style="text-align:right">
-      <h1 style="text-align: center"> {{ blogName }} </h1>
+      <b-img fluid-grow :src="url" v-show="url">
 
-      <b-button @click="newPost" v-show="isOwner" >New post</b-button>
-      <div ref="container">
+      </b-img>
+      <h1 class="title"> {{ blogName }} </h1>
+    </div>
+    <b-container ref="container" style="text-align:right">
+
+      <b-button @click="newPost" v-if="isOwner">New post</b-button>
+
+      <div v-for="(post, index) in posts" >
+
         <BlogpostContainer
-          v-for="(post, index) in posts"
           :post="post"
           :index="index"
           :isOwner="isOwner"
-          :key="index">
-
+          :key="post.dateCreated">
         </BlogpostContainer>
-
       </div>
+
+
     </b-container>
   </div>
 </template>
@@ -53,7 +56,7 @@
     name: 'Blogs',
     components: {
       BlogpostContainer: BlogpostContainer,
-      SideMenu:SideMenu,
+      SideMenu: SideMenu,
     },
     props: ['blogName'],
 
@@ -66,7 +69,7 @@
         selectImage: false,
         blog: '',
         headerImage: '',
-        blogUser:null,
+        blogUser: null,
       }
     },
     created() {
@@ -90,13 +93,14 @@
           })
       },
       newPost() {
-        this.posts.unshift({});
+        this.posts.unshift({dateCreated:Date.now()});
+        // this.posts.sort();
       },
       getBlog: function (blogName) {
 
         this.$http.get('http://localhost:8080/post/postsByBlogName/' + blogName)
           .then(response => {
-            console.log(response);
+            // console.log(response);
             this.posts = response.data;
           }).catch(error => {
           console.log(error);
@@ -109,12 +113,12 @@
         });
         this.$http.get('http://localhost:8080/blog/getBlog/' + blogName)
           .then(response => {
-            console.log(response);
+            // console.log(response);
             this.blog = response.data;
             if (response.data.headerImage !== null) {
               this.url = 'data:;base64,' + response.data.headerImage
-            }else{
-              this.url=''
+            } else {
+              this.url = ''
             }
           })
           .catch(error => {
@@ -122,7 +126,7 @@
           });
         this.$http.get('http://localhost:8080/user/getUser/' + blogName)
           .then(response => {
-            console.log(response.data);
+            // console.log(response.data);
             this.blogUser = response.data;
           })
           .catch(error => {
@@ -142,5 +146,14 @@
 </script>
 
 <style scoped>
-
+  .title {
+    text-align: center;
+    text-shadow: 2px 2px 3px #333;
+    color: white;
+    position: absolute;
+    right: 0;
+    bottom: 20px;
+    left: 0;
+    z-index: 10;
+  }
 </style>

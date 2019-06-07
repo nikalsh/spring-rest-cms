@@ -5,7 +5,7 @@
         <font-awesome-icon icon="edit"/>
       </b-button>
       <b-tooltip triggers="hover" v-if="isOwner&&!isOpen" :target="'edit-btn'+index" title="edit post" placement="left"></b-tooltip>
-      <div ref="contents" :is="currentComponent" :post="post"></div>
+      <div ref="contents" :is="currentComponent" :post="post" ></div>
 
     </div>
   </div>

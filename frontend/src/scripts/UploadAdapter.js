@@ -19,14 +19,9 @@ export default class UploadAdapter {
             }
           })
             .then(response => {
-              //console.log(response);
-               // if (true) {
                 resolve({
                   default: response.data,
                 });
-              // } else {
-              //   reject(response.data.error.message);
-              // }
             }).catch(error => {
             console.log(error);
           });

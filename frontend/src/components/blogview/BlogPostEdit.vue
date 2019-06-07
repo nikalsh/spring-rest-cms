@@ -57,7 +57,7 @@
         this.editorData = this.post.postData;
         editor.setData(this.post.postData || '');
         editor.model.document.on('change:data', () => {
-          this.editorData = editor.getData();
+          this.post.postData = editor.getData();
           this.submitPost(editor.getData())
         });
         this.$refs.contents.firstChild.focus();
@@ -78,7 +78,7 @@
           formData.append('id', this.postId);
           this.$http.post('http://localhost:8080/post/uploadPost', formData)
             .then(response => {
-              console.log(response);
+              // console.log(response);
               this.postId = response.data;
               this.spin('success')
             }).catch(error => {

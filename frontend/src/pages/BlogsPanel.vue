@@ -29,7 +29,7 @@
       await this.$http.get("http://localhost:8080/blog/allnames")
         .then(response => {
           this.blogs = response.data;
-          console.log(response.data)
+          // console.log(response.data)
         }).catch(error => {
           console.log(error)
         })

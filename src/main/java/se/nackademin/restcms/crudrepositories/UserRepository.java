@@ -11,10 +11,6 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User, Long> {
 
 
-
-
-    User findByEmail(@Param("email") String email);
-
     User findByUsername(@Param("username") String username);
     List<User> findFirst4By();
 

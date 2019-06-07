@@ -3,7 +3,7 @@
     <h1 style="text-align: center">Registration Page</h1>
     <b-form @submit.prevent="register">
       <b-container fluid style="padding: 0">
-        <b-form-group label="Your Username:"
+        <b-form-group label="Username:"
                       label-for="input-username"
                       label-cols="3">
           <b-form-input id="input-username"
@@ -13,7 +13,7 @@
                         placeholder="Enter username"
           ></b-form-input>
         </b-form-group>
-        <b-form-group label="Your Email:"
+        <b-form-group label="Email:"
                       label-for="input-email"
                       label-cols="3">
           <b-form-input id="input-email"
@@ -23,7 +23,7 @@
                         placeholder="Enter Email"
           ></b-form-input>
         </b-form-group>
-        <b-form-group label="Your Blogs Name:"
+        <b-form-group label="Blog Title:"
                       label-for="input-blogname"
                       label-cols="3">
           <b-form-input id="input-blogname"
@@ -33,7 +33,7 @@
                         placeholder="Enter Blog Name"
           ></b-form-input>
         </b-form-group>
-        <b-form-group label="Your Password:"
+        <b-form-group label="Password:"
                       label-for="input-password"
                       label-cols="3">
           <b-form-input
@@ -44,7 +44,7 @@
             placeholder="Enter password"
           ></b-form-input>
         </b-form-group>
-        <b-form-group label="Your Face:"
+        <b-form-group label="Profile Picture:"
                       label-for="input-face"
                       label-cols="3">
           <b-form-file
@@ -60,7 +60,7 @@
           <b-row>
             <b-col cols="3" style="width: 100%;padding:0">
 
-              <b-form-group label="Your Profile:"
+              <b-form-group label="Profile text:"
                             label-for="input-profile"
                             label-cols-md="12"
                             label-cols-lg="12">
@@ -121,7 +121,7 @@
 
     methods: {
       register: function () {
-        console.log(this.file);
+        // console.log(this.file);
         const username = this.username;
         const email = this.email;
         const blogname = this.blogname;

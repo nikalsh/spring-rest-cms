@@ -16,23 +16,20 @@ Vue.use(Router);
 let dynRoutes = [];
 
 
-// (async function ()
-// {
- axios.get("http://localhost:8080/blog/allnames")
-    .then(response => {
-      response.data.forEach(blog => {
-        console.log(blog);
-        dynRoutes.push({
-          name: blog,
-          path: "/" + blog,
-          props: true,
-          params: {blogId: blog}
-        })
+axios.get("http://localhost:8080/blog/allnames")
+  .then(response => {
+    response.data.forEach(blog => {
+      console.log(blog);
+      dynRoutes.push({
+        name: blog,
+        path: "/" + blog,
+        props: true,
+        params: {blogId: blog}
       })
-    }).catch(error => {
-    console.log(error)
-  });
-// })
+    })
+  }).catch(error => {
+  console.log(error)
+});
 
 
 export default new Router({
@@ -41,7 +38,6 @@ export default new Router({
   hash: false,
 
   routes: [
-   // { path: '*', redirect: '/' }, // catch all use case
 
     {
       path: '/Profile',
@@ -74,13 +70,5 @@ export default new Router({
       component: Blogs,
       props: true
     },
-
-    ]
-
-
-
-
-
-
-
+  ]
 })

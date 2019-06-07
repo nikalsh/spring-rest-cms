@@ -1,6 +1,7 @@
 <template>
   <div class="ck-border">
     <div
+      style="min-height: 8em"
       ref="contents"
       class="ck ck-content ck-editor__editable ck-rounded-corners ck-editor__editable_inline ck-blurred"
       v-html="post.postData">

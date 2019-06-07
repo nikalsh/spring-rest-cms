@@ -5,10 +5,9 @@
       :interval="4000"
       controls
       indicators
+      no-hover-pause
       background="#ababab"
-      img-width="1024"
-      img-height="120"
-      style="text-shadow: 1px 1px 2px #333;"
+      style="text-shadow: 2px 2px 3px #333;"
 
     >
       <b-carousel-slide
@@ -61,8 +60,8 @@
          this.$http.get('http://localhost:8080/user/getFour')
           .then(response => {
             this.topUsers=response.data;
-            console.log(this.topUsers[0].blog);
-            console.log(response);
+            // console.log(this.topUsers[0].blog);
+            // console.log(response);
             this.isReady=true
           }).catch(error => {
           console.log(error);

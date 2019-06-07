@@ -7,14 +7,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import se.nackademin.restcms.crudrepositories.BlogRepository;
-import se.nackademin.restcms.crudrepositories.UserRepository;
 import se.nackademin.restcms.entities.Blog;
 import se.nackademin.restcms.entities.User;
 import se.nackademin.restcms.service.BlogService;
-import se.nackademin.restcms.service.BlogServiceImpl;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -23,13 +20,11 @@ public class BlogController {
 
     private final BlogService blogService;
     private final BlogRepository blogRepository;
-    private final UserRepository userRepository;
 
     @Autowired
-    public BlogController( BlogService blogService, BlogRepository blogRepository, UserRepository userRepository) {
+    public BlogController( BlogService blogService, BlogRepository blogRepository) {
         this.blogService = blogService;
         this.blogRepository = blogRepository;
-        this.userRepository = userRepository;
     }
 
     @GetMapping(path = "/all")
@@ -45,18 +40,6 @@ public class BlogController {
         List<String> allBlogs = blogService.findAll().stream().map(Blog::getBlogName).collect(Collectors.toList());
 
         return new ResponseEntity<>(allBlogs, HttpStatus.OK);
-    }
-    @GetMapping(path = "/getFour")
-    public @ResponseBody
-    ResponseEntity<List<Blog>> getFour() {
-        List<Blog> blogs = blogRepository.findFirst4By();
-
-        return new ResponseEntity<>(blogs, HttpStatus.OK);
-    }
-
-    @PostMapping(path = "/me")
-    public Optional<Blog> me() {
-        return blogService.getCurrentUsersBlog();
     }
 
     @GetMapping(path = "/isOwner/{blogName}")

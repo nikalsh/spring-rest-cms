@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import se.nackademin.restcms.entities.BlogPost;
 import se.nackademin.restcms.entities.User;
 import se.nackademin.restcms.service.BlogPostService;
-import se.nackademin.restcms.service.UserService;
 
 import java.util.List;
 
@@ -20,13 +19,10 @@ import java.util.List;
 @RequestMapping("/post")
 public class BlogPostController {
 
-    private final UserService blogAdminService;
-
     private final BlogPostService blogPostService;
 
     @Autowired
-    public BlogPostController(UserService blogAdminService, BlogPostService blogPostService) {
-        this.blogAdminService = blogAdminService;
+    public BlogPostController( BlogPostService blogPostService) {
         this.blogPostService = blogPostService;
     }
 
