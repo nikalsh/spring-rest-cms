@@ -58,7 +58,6 @@ public class UserController {
     @GetMapping(path = "/getUser/{blogName}")
     public @ResponseBody
     ResponseEntity<User> getUserByBlogName(@PathVariable String blogName) {
-        System.out.println(blogName+"wtf");
         User user = blogRepository.findByBlogName(blogName).getUser();
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
