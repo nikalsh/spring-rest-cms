@@ -57,10 +57,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "/user/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/user/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/user/**").permitAll()
 //                .antMatchers(HttpMethod.POST, "/blogadmin/me").hasAnyRole("USER", "ADMIN")
                 .antMatchers(HttpMethod.GET, "/blog/**").permitAll()
+                .antMatchers(HttpMethod.PUT, "/blog/**").authenticated()
+                .antMatchers(HttpMethod.POST, "/blog/**").authenticated()
 //
-                .antMatchers(HttpMethod.POST, "/user/**").permitAll()
 //                .antMatchers("/blogadmin/**").hasAnyRole("USER", "ADMIN")
 //
                 .antMatchers(HttpMethod.GET, "/post/**").authenticated()

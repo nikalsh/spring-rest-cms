@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
@@ -18,8 +20,10 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "blogpost")
+@NoArgsConstructor
 @ToString(exclude = {"blog"})
-@JsonIgnoreProperties({"blog", "blog_id"})
+@JsonIgnoreProperties({"blog"})
+@EqualsAndHashCode(exclude={"blog"})
 public class BlogPost implements Serializable {
 
     @Id
@@ -31,6 +35,9 @@ public class BlogPost implements Serializable {
     @ManyToOne
     @JoinColumn(name = "blog_id")
     private Blog blog;
+
+//    @Column
+//    private Boolean published;
 
 
     @CreationTimestamp
@@ -46,9 +53,6 @@ public class BlogPost implements Serializable {
     @Column
     @Lob
     private String postData;
-
-    public BlogPost() {
-    }
 
 
     public BlogPost(Blog blog, String postData) {

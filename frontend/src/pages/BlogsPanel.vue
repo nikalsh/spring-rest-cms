@@ -1,11 +1,19 @@
 <template>
   <div id="blogsPanel">
     <b-container>
+      <b-container class="bv-example-row">
+        <b-row class="justify-content-md-center">
+          <b-col  md="auto">
+            <b-list-group class="text-center" v-for="blog in blogs" :key="blog">
+              <b-list-group-item :to="blog">{{ blog }}
 
-      BLOGSPANEL
-      <a class="text-center" v-for="blog in blogs">
-        <b-button :to="blog">{{ blog }}</b-button>
-      </a>
+              </b-list-group-item>
+            </b-list-group>
+          </b-col>
+        </b-row>
+
+      </b-container>
+
     </b-container>
   </div>
 </template>
@@ -39,13 +47,13 @@
   }
 
   /*#buttons {*/
-    /*display: flex;*/
-    /*align-items: center;*/
+  /*display: flex;*/
+  /*align-items: center;*/
   /*}*/
 
   /*.text-center {*/
-    /*text-align: center;*/
-    /*vertical-align: middle;*/
+  /*text-align: center;*/
+  /*vertical-align: middle;*/
   /*}*/
 
 </style>

@@ -14,4 +14,5 @@ public interface BlogPostRepository extends JpaRepository<BlogPost, String> {
     @Nullable
     List<BlogPost> findByBlogOrderByDateCreatedDesc(Blog blog);
 
+
 }

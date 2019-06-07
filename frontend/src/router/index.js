@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Register from '../components/Register'
-import Blogs from '../components/Blogs'
-import Login from '../components/Login'
 import axios from 'axios'
-
-import Home from '../components/Home';
-import UserPanel from '../components/UserPanel';
+import Register from '../pages/Register'
+import Blogs from '../pages/Blogs'
+import Login from '../pages/Login'
+import Home from '../pages/Home';
+import UserPanel from '../pages/UserPanel';
+import BlogsPanel from '../pages/BlogsPanel';
 
 Vue.use(Router);
 
@@ -45,12 +45,12 @@ export default new Router({
 
     {
       path: '/Profile',
-      name: 'Profile',
+      name: '/Profile',
       component: UserPanel
     },
     {
       path: '/Register',
-      name: 'Register',
+      name: '/Register',
       component: Register
     },
     {
@@ -62,6 +62,11 @@ export default new Router({
       path: '/Login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/BlogsPanel',
+      name: '/BlogsPanel',
+      component: BlogsPanel,
     },
     {
       path: '/:blogName',

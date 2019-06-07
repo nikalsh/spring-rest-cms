@@ -5,7 +5,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-import se.nackademin.restcms.entities.Authority;
+import org.springframework.web.multipart.MultipartFile;
+import se.nackademin.restcms.crudrepositories.BlogRepository;
+import se.nackademin.restcms.crudrepositories.UserRepository;
 import se.nackademin.restcms.entities.Blog;
 import se.nackademin.restcms.entities.User;
 import se.nackademin.restcms.service.BlogService;
@@ -20,10 +22,14 @@ import java.util.stream.Collectors;
 public class BlogController {
 
     private final BlogService blogService;
+    private final BlogRepository blogRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    public BlogController(final BlogServiceImpl blogService) {
+    public BlogController(final BlogServiceImpl blogService, BlogRepository blogRepository, UserRepository userRepository) {
         this.blogService = blogService;
+        this.blogRepository = blogRepository;
+        this.userRepository = userRepository;
     }
 
     @GetMapping(path = "/all")
@@ -55,6 +61,28 @@ public class BlogController {
             match = user.getBlog().getBlogName().equals(blogName);
         }
         return new ResponseEntity<>(match, HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/getBlog/{blogName}")
+    public @ResponseBody
+    ResponseEntity<Blog> getBlogByName(@PathVariable String blogName) {
+        Blog blog = blogRepository.findByBlogName(blogName);
+        return new ResponseEntity<>(blog, HttpStatus.OK);
+    }
+
+    @PutMapping(path = "/saveImage")
+    public @ResponseBody
+    ResponseEntity<Void> saveBlogImage(Authentication auth, @RequestParam("file") MultipartFile file) {
+        User user = (User) auth.getPrincipal();
+        Blog blog=user.getBlog();
+        try {
+            blog.setHeaderImage(file.getBytes());
+            blogRepository.save(blog);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.I_AM_A_TEAPOT);
+        }
     }
 
 }

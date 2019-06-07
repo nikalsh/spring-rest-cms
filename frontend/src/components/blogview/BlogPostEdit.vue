@@ -8,8 +8,9 @@
 
     </ckeditor>
     <b-button id="submit-btn"
-              class="submit-btn transparent-button"
-              @click="SubmitPost">
+              style="z-index:10"
+              class="transparent-button"
+              @click="submitPost">
       <font-awesome-icon id="save"
                          icon="file-export">
       </font-awesome-icon>
@@ -18,7 +19,7 @@
 </template>
 
 <script>
-  import UploadAdapter from '../scripts/UploadAdapter';
+  import UploadAdapter from '../../scripts/UploadAdapter';
   import InlineEditor from '@ckeditor/ckeditor5-build-inline';
 
   export default {
@@ -32,11 +33,12 @@
         postId: '',
         instance: '',
         editorData: '',
+        timeoutId:'',
         editor: InlineEditor,
         editorConfig: {
 
           extraPlugins:
-            [this.MyCustomUploadAdapterPlugin],
+            [this.myCustomUploadAdapterPlugin],
           image: {
             toolbar: ['imageTextAlternative', '|', 'imageStyle:alignLeft', 'imageStyle:full', 'imageStyle:alignRight'],
 
@@ -56,27 +58,35 @@
         this.editorData = this.post.postData;
         editor.setData(this.post.postData || '');
         editor.model.document.on('change:data', () => {
-          this.editorData = editor.getData()
+          this.editorData = editor.getData();
+          this.submitPost(editor.getData())
         });
         this.$refs.contents.firstChild.focus();
       },
-      MyCustomUploadAdapterPlugin(editor) {
+      myCustomUploadAdapterPlugin(editor) {
         editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
           return new UploadAdapter(loader);
         };
       },
-      SubmitPost() {
-        let data = new FormData();
-        console.log(this.editorData);
-        data.append('file', this.editorData);
-        data.append('id', this.postId);
-        this.$http.post('http://localhost:8080/post/uploadPost', data)
-          .then(response => {
-            console.log(response);
-            this.postId = response.data;
-          }).catch(error => {
-          console.log(error);
-        });
+      submitPost(data) {
+        if (this.timeoutId) {
+          clearTimeout(this.timeoutId);
+        }
+
+        this.timeoutId = setTimeout( ()=> {
+          let formData = new FormData();
+          console.log(data);
+          formData.append('file', data);
+          formData.append('id', this.postId);
+          this.$http.post('http://localhost:8080/post/uploadPost', formData)
+            .then(response => {
+              console.log(response);
+              this.postId = response.data;
+            }).catch(error => {
+            console.log(error);
+          });
+        }, 1000);
+
 
       },
     }
@@ -84,16 +94,6 @@
 </script>
 
 <style scoped>
-  #submit-btn:focus {
-    box-shadow: none;
-  }
 
-  #submit-btn {
-    background-color: transparent;
-    border: none;
-    color: black;
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
+
 </style>

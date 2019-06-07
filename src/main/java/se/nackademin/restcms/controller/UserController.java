@@ -35,7 +35,7 @@ public class UserController {
     private final UserRepository userRepository;
 
     @Autowired
-    public UserController(final UserServiceImpl userService, BlogService blogService, AuthorityRepository authorityRepository, PasswordEncoder passwordEncoder,  BlogRepository blogRepository, UserRepository userRepository) {
+    public UserController(final UserServiceImpl userService, BlogService blogService, AuthorityRepository authorityRepository, PasswordEncoder passwordEncoder, BlogRepository blogRepository, UserRepository userRepository) {
         this.userService = userService;
         this.blogService = blogService;
         this.authorityRepository = authorityRepository;
@@ -54,10 +54,19 @@ public class UserController {
         return userService.getCurrentUser();
     }
 
-    @RequestMapping("/getUser")
-    public Principal home(Principal user) {
-        return user;
+
+    @GetMapping(path = "/getUser/{blogName}")
+    public @ResponseBody
+    ResponseEntity<User> getUserByBlogName(@PathVariable String blogName) {
+        System.out.println(blogName+"wtf");
+        User user = blogRepository.findByBlogName(blogName).getUser();
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
+
+//    @RequestMapping("/getUser")
+//    public Principal home(Principal user) {
+//        return user;
+//    }
 
     @PutMapping(path = "/update_password")
     public User newPassword(@RequestBody Map<String, Object> password) {
@@ -66,10 +75,9 @@ public class UserController {
     }
 
 
-
     @PostMapping("/registerUser")
-    public ResponseEntity<User> registerUser(@RequestParam String email,@RequestParam String profile, @RequestParam String username, @RequestParam String password, @RequestParam("file") MultipartFile file) throws IOException {
-        User user = userService.registerUser(email,username,password,profile, file);
+    public ResponseEntity<User> registerUser(@RequestParam String email, @RequestParam String profile, @RequestParam String blogname, @RequestParam String username, @RequestParam String password, @RequestParam("file") MultipartFile file) throws IOException {
+        User user = userService.registerUser(email, username, blogname, password, profile, file);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 

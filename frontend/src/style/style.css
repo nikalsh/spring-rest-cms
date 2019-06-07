@@ -1,6 +1,7 @@
 #input-profile {
   min-height: 8em
 }
+
 .ck {
 
   border: lightgrey 1px solid;
@@ -14,59 +15,82 @@ body {
 }
 
 html {
-  overflow-y:scroll;
+  overflow-y: scroll;
+
+
+  overflow-x: hidden;
+
 }
 
-#center-button{
+#center-button {
   margin: auto;
-  display:block;
+  display: block;
 }
 
-.transparent-button{
-  background-color: transparent;
-  border:none
-}
 
 :root {
---ck-image-style-spacing: 1.5em;
+  --ck-image-style-spacing: 1.5em;
 }
 
 
 .image-style-side {
-max-width: 50%;
+  max-width: 50%;
 }
 
 
 .image-style-side {
-float: right;
-margin-left: var(--ck-image-style-spacing);
+  float: right;
+  margin-left: var(--ck-image-style-spacing);
 }
 
 .image-style-side > img {
-max-width: 100%;
-height: auto;
-margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
 }
 
 
 .image-style-align-left {
-float: left;
-margin-right: var(--ck-image-style-spacing);
+  float: left;
+  margin-right: var(--ck-image-style-spacing);
 }
 
 
 .image-style-align-center {
-margin-left: auto;
-margin-right: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 
 .image-style-align-right {
-float: right;
-margin-left: var(--ck-image-style-spacing);
+  float: right;
+  margin-left: var(--ck-image-style-spacing);
 }
 
 
 #blogpost-container {
-position: relative;
+  position: relative;
 }
+
+
+.transparent-button {
+  height:37px;
+  width:37px;
+  background-color: transparent ;
+  color: black ;
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: none;
+  border-radius: 50%;
+}
+
+.transparent-button:focus, .transparent-button:hover {
+  box-shadow: none;
+}
+.transparent-button:hover{
+  background-color: black ;
+  /*color: black ;*/
+
+}
+

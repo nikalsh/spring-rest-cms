@@ -10,6 +10,11 @@ import se.nackademin.restcms.crudrepositories.BlogRepository;
 import se.nackademin.restcms.entities.*;
 
 import javax.annotation.PostConstruct;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Base64;
 
 @Service
 public class InitialDBData {
@@ -47,7 +52,6 @@ public class InitialDBData {
         authorityRepository.save(admin);
         authorityRepository.save(user);
         Blog blog = newAdmin("lorem", "lorem", "lorem@lorem.lorem", "lorem", user);
-        newAdmin("root", "root", "root@root.root", "root", user);
         newAdmin("NIKLAS BLOGG", "niklas", "niklas@niklas.niklas", "niklas", user);
         newAdmin("JOSEF BLOGG", "josef", "josef@josef.josef", "josef", user);
         newAdmin("JOHAN BLOGG", "johan", "johan@johan.johan", "johan", user);
@@ -65,17 +69,36 @@ public class InitialDBData {
                 "<h2>Var får jag tag i det?</h2><p>Det finns många olika varianter av Lorem Ipsum, men majoriteten av dessa har ändrats på någotvis. Antingen med inslag av humor, eller med inlägg av ord som knappast ser trovärdiga ut. Skall man använda långa stycken av Lorem Ipsum bör man försäkra sig om att det inte gömmer sig något pinsamt mitt i texten. Lorem Ipsum-generatorer på internet tenderar att repetera Lorem Ipsum-texten styckvis efter behov, något som gör denna sidan till den första riktiga Lorem Ipsum-generatorn på internet. Den använder ett ordförråd på över 200 ord, kombinerat med ett antal meningsbyggnadsstrukturer som tillsamman genererar Lorem Ipsum som ser ut som en normal mening. Lorem Ipsum genererad på denna sidan är därför alltid fri från repetitioner, humorinslag, märkliga ordformationer osv.</p>"
         );
     }
-
     private Blog newAdmin(String blogName, String username, String email, String rawPassword, Authority role) {
         User user = new User(username, email, passwordEncoder.encode(rawPassword), role);
         Blog blog = new Blog();
         blog.setActive(true);
         blog.setBlogName(blogName);
+//        blog.setHeaderImage(encoder(""));
         user.setBlog(blog);
-        userRepository.save(user);
         blog.setUser(user);
-        blogRepository.save(blog);
+        userRepository.save(user);
+//        blogRepository.save(blog);
+        File directory = new File("./");
+        System.out.println(directory.getAbsolutePath());
         return blog;
+    }
+
+    private byte[] encoder(String imagePath) {
+        String base64Image = "";
+        File file = new File(".\\src\\main\\java\\se\\nackademin\\restcms\\images\\front1.jpg");
+            byte[] imageData = new byte[(int) file.length()];
+        try (FileInputStream imageInFile = new FileInputStream(file)) {
+            // Reading a Image file from file system
+            int read = imageInFile.read(imageData);
+            base64Image = Base64.getEncoder().encodeToString(imageData);
+        } catch (FileNotFoundException e) {
+            System.out.println("Image not found" + e);
+        } catch (IOException ioe) {
+            System.out.println("Exception while reading the Image " + ioe);
+        }
+        return imageData;
+
     }
 
     private void newBlogPost(Blog blog, String data) {

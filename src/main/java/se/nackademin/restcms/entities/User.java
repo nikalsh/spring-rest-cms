@@ -2,6 +2,7 @@ package se.nackademin.restcms.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
@@ -20,7 +21,8 @@ import java.util.stream.Collectors;
 @Entity
 @ToString(exclude = {"blog"})
 @Table(name = "user")
-@JsonIgnoreProperties(value = {"blog"})
+@JsonIgnoreProperties(value = { "password"})
+@EqualsAndHashCode(exclude="blog")
 public class User implements UserDetails {
     public User(String username, String email, String password, Authority authority) {
         this.roles.add(authority);

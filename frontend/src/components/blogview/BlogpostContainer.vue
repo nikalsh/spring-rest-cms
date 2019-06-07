@@ -1,11 +1,11 @@
-<template> <div>
-
-  <div id="blogpost-container" class="ck">
-    <div @click.once="swap">
-      <div  ref="contents" :is="currentComponent" :post="post"></div>
+<template>
+  <div>
+    <div id="blogpost-container" class="ck">
+      <div @click.once="swap">
+        <div ref="contents" :is="currentComponent" :post="post"></div>
+      </div>
     </div>
   </div>
-</div>
 </template>
 
 <script>

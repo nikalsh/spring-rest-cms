@@ -16,6 +16,7 @@
     "@ckeditor/ckeditor5-build-inline": "^12.1.0",
     "@ckeditor/ckeditor5-dev-utils": "^12.0.1",
     "@ckeditor/ckeditor5-editor-inline": "^12.1.0",
+    "@ckeditor/ckeditor5-font": "^11.1.1",
     "@ckeditor/ckeditor5-vue": "^1.0.0-beta.2",
     "@fortawesome/fontawesome-svg-core": "^1.2.15",
     "@fortawesome/free-solid-svg-icons": "^5.7.2",
@@ -26,7 +27,9 @@
     "raw-loader": "^0.5.1",
     "vue": "^2.6.10",
     "vue-axios": "^2.1.4",
+    "vue-button-spinner": "^2.2.1",
     "vue-ckeditor5": "^0.4.1",
+    "vue-perfect-scrollbar": "^0.1.0",
     "vue-router": "^3.0.1",
     "vuex": "^3.1.1"
   },

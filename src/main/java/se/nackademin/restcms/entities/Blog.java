@@ -3,6 +3,7 @@ package se.nackademin.restcms.entities;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonIgnoreType;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
@@ -14,11 +15,11 @@ import java.util.Set;
 
 @Data
 @Entity
-@ToString(exclude = {"user"})
+@ToString(exclude = {"user", "blogPosts", "headerImage"})
 @NoArgsConstructor
 @Table(name = "blog")
-@JsonIgnoreProperties(value = {"user","blogPosts"  })
-@JsonIgnoreType
+@JsonIgnoreProperties(value = {"user", "blogPosts"})
+@EqualsAndHashCode(exclude = {"blogPosts", "user"})
 public class Blog {
 
     @Id
@@ -26,8 +27,12 @@ public class Blog {
     @Column(name = "blog_id")
     private Long id;
 
-
+    @Column(name = "blogName", nullable = false, unique = true)
     private String blogName;
+
+    @Lob
+    @Column(name = "headerImage", columnDefinition = "BLOB")
+    private byte[] headerImage;
 
 
     @OneToMany(mappedBy = "blog", cascade = CascadeType.ALL)

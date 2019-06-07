@@ -11,5 +11,5 @@ public interface UserService {
 
     User updatePassword(String password);
 
-    User registerUser(String email, String username, String password,String profile, MultipartFile file);
+    User registerUser(String email, String username,String blogname, String password,String profile, MultipartFile file);
 }

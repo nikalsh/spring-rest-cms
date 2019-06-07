@@ -57,12 +57,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User registerUser(String email, String username, String password, String profile, MultipartFile file){
+    public User registerUser(String email, String username,String blogname, String password, String profile, MultipartFile file){
         User user = new User();
         Blog blog = new Blog();
         blog.setUser(user);
         blog.setActive(true);
-        blog.setBlogName(username);
+        blog.setBlogName(blogname);
         user.setUsername(username);
         user.setEmail(email);
         user.setPassword(passwordEncoder.encode(password));

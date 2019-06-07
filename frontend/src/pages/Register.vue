@@ -6,7 +6,7 @@
 
           label="Your Username:"
           label-for="input-username"
-          label-cols-sm="3"
+          label-cols-md="3"
           label-cols-lg="2">
           <b-form-input
             id="input-username"
@@ -18,7 +18,7 @@
         </b-form-group>
         <b-form-group label="Your Email:"
                       label-for="input-email"
-                      label-cols-sm="3"
+                      label-cols-md="3"
                       label-cols-lg="2">
           <b-form-input id="input-email"
                         v-model="email"
@@ -27,9 +27,20 @@
                         placeholder="Enter Email"
           ></b-form-input>
         </b-form-group>
+        <b-form-group label="Your Blogs Name:"
+                      label-for="input-blogname"
+                      label-cols-md="3"
+                      label-cols-lg="2">
+          <b-form-input id="input-blogname"
+                        v-model="blogname"
+                        type="text"
+                        required
+                        placeholder="Enter Blog Name"
+          ></b-form-input>
+        </b-form-group>
         <b-form-group label="Your Password:"
                       label-for="input-password"
-                      label-cols-sm="3"
+                      label-cols-md="3"
                       label-cols-lg="2">
           <b-form-input
             id="input-password"
@@ -41,7 +52,7 @@
         </b-form-group>
         <b-form-group label="Your Face:"
                       label-for="input-face"
-                      label-cols-sm="3"
+                      label-cols-md="3"
                       label-cols-lg="2">
           <b-form-file
             id="input-face"
@@ -52,17 +63,22 @@
             required
           ></b-form-file>
         </b-form-group>
+<div style="display:grid; grid-template-columns:25% 25% 25% 25%">
         <b-form-group label="Your Profile:"
                       label-for="input-profile"
-                      label-cols-sm="3"
+                      label-cols-md="3"
                       label-cols-lg="2">
 
-          <ckeditor class="ck"
-                    id="input-profile"
-                    :editor="editor"
-                    v-model="profile"
-                    :config="editorConfig"></ckeditor>
+
+
         </b-form-group>
+            <ckeditor
+              class="ck"
+                      :editor="editor"
+                      style="border: lightgrey 1px solid; grid-column: 2 / span 3;"
+                      v-model="profile"
+                      :config="editorConfig"></ckeditor>
+</div>
 
         <b-button id="center-button"
                   type="submit"
@@ -86,11 +102,18 @@
         editor: InlineEditor,
         profile: '<p>Your profile</p>',
         editorConfig: {
-
+          fontFamily: {
+            options: [
+              'default',
+              'Ubuntu, Arial, sans-serif',
+              'Ubuntu Mono, Courier New, Courier, monospace'
+            ]
+          },
           toolbar: ['heading', 'bold', 'italic']
         },
         username: '',
         email: '',
+        blogname: '',
         password: '',
         file: '',
         registerFail: false
@@ -102,10 +125,11 @@
         console.log(this.file);
         const username = this.username;
         const email = this.email;
+        const blogname = this.blogname;
         const password = this.password;
         const profile = this.profile;
         const file = this.file;
-        this.$store.dispatch('register', {username, email, password, profile, file})
+        this.$store.dispatch('register', {username, email, blogname, password, profile, file})
           .then(() => {
             this.$store.dispatch('login', {username, password})
               .then(() => {
@@ -122,6 +146,9 @@
 </script>
 
 <style scoped>
-
+  .ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline  {
+    width: 100%;
+  height:6em
+  }
 
 </style>

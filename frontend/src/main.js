@@ -4,21 +4,22 @@ import Vue from 'vue'
 import router from './router'
 import App from './App'
 import axios from 'axios'
-import './style/style.css'
 import store from './store'
 import CKEditor from '@ckeditor/ckeditor5-vue';
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+
 Vue.use(BootstrapVue);
 Vue.use(CKEditor);
+import './style/style.css'
 
 
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { fas } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import {library} from '@fortawesome/fontawesome-svg-core'
+import {fas} from '@fortawesome/free-solid-svg-icons'
+import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
 
-library.add(fas)
+library.add(fas);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.config.productionTip = false;

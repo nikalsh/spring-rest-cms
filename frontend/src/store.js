@@ -55,7 +55,7 @@ export default new Vuex.Store({
           }
         )
           .then(resp => {
-            console.log(resp);
+            // console.log(resp);
             const access_token = resp.data.access_token;
             localStorage.setItem('access_token', access_token);
             axios.defaults.headers.common['Authorization'] = 'bearer ' + access_token;
@@ -74,9 +74,9 @@ export default new Vuex.Store({
         axios.get('http://localhost:8080/user/me')
           .then(resp => {
             const userdata = resp.data;
-            console.log(resp.data);
+            // console.log(resp.data);
             commit('userdata', userdata);
-            console.log(resp.data);
+            // console.log(resp.data);
             resolve(resp)
           })
           .catch(err => {
@@ -90,19 +90,19 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         commit('auth_request');
         let formData = new FormData();
-        formData.append('file', user.file);
-        formData.append('password', user.password);
         formData.append('username', user.username);
-        formData.append('profile', user.profile);
         formData.append('email', user.email);
+        formData.append('blogname', user.blogname);
+        formData.append('password', user.password);
+        formData.append('profile', user.profile);
+        formData.append('file', user.file);
 
         axios.post(
-           'http://localhost:8080/user/registerUser',
-           formData
+          'http://localhost:8080/user/registerUser',
+          formData
         )
           .then(resp => {
-            console.log(resp);
-
+            // console.log(resp);
             resolve(resp)
           })
           .catch(err => {
@@ -126,8 +126,13 @@ export default new Vuex.Store({
     isLoggedIn: state => !!state.access_token,
     authStatus: state => state.status,
     getUser: state => state.currentUser,
-    getUserImage: state => 'data:;base64,' + state.currentUser.photo
-
+    getUserImage: state => 'data:;base64,' + state.currentUser.photo,
+    getBlogName: (state => {
+      console.log(state.currentUser.blog);
+      if (state.currentUser.blog !== undefined) {
+        return state.currentUser.blog.blogName
+      } else return ''
+    })
   }
 
 
