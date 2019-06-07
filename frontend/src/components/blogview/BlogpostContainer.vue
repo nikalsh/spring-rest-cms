@@ -1,9 +1,12 @@
 <template>
   <div>
-    <div id="blogpost-container" class="ck">
-      <div @click.once="swap">
-        <div ref="contents" :is="currentComponent" :post="post"></div>
-      </div>
+    <div id="blogpost-container" >
+      <b-button :id="'edit-btn'+index" v-if="isOwner&&!isOpen" class=" icon-btn blog-btn" @click.once="swap">
+        <font-awesome-icon icon="edit"/>
+      </b-button>
+      <b-tooltip triggers="hover" v-if="isOwner&&!isOpen" :target="'edit-btn'+index" title="edit post" placement="left"></b-tooltip>
+      <div ref="contents" :is="currentComponent" :post="post"></div>
+
     </div>
   </div>
 </template>
@@ -15,11 +18,13 @@
   export default {
     name: 'BlogpostContainer',
     props: {
+      index:'',
       post: Object,
       isOwner: Boolean
     },
     data: function () {
       return {
+        isOpen:false,
         currentComponent: 'BlogPostView',
         MyEditor: 'BlogPostEdit',
 
@@ -32,7 +37,7 @@
     methods: {
       swap() {
         if (this.isOwner) {
-          console.log(this.isOwner);
+          this.isOpen=true;
           this.currentComponent = 'BlogPostEdit';
         }
       }
@@ -41,48 +46,7 @@
 </script>
 <style>
   #blogpost-container {
-    margin: 20px 0;
+    margin: 40px 0;
     position: relative;
   }
-
-  :root {
-    --ck-image-style-spacing: 1.5em;
-  }
-
-
-  .image-style-side {
-    max-width: 50%;
-  }
-
-
-  .image-style-side {
-    float: right;
-    margin-left: var(--ck-image-style-spacing);
-  }
-
-  .image-style-side > img {
-    max-width: 100%;
-    height: auto;
-    margin: 0 auto;
-  }
-
-
-  .image-style-align-left {
-    float: left;
-    margin-right: var(--ck-image-style-spacing);
-  }
-
-
-  .image-style-align-center {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-
-  .image-style-align-right {
-    float: right;
-    margin-left: var(--ck-image-style-spacing);
-  }
-
-
 </style>

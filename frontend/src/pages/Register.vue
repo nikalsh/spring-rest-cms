@@ -1,25 +1,21 @@
 <template>
-  <b-container>
+  <b-container style="max-width: 600px">
+    <h1 style="text-align: center">Registration Page</h1>
     <b-form @submit.prevent="register">
       <b-container fluid style="padding: 0">
-        <b-form-group
-
-          label="Your Username:"
-          label-for="input-username"
-          label-cols-md="3"
-          label-cols-lg="2">
-          <b-form-input
-            id="input-username"
-            v-model="username"
-            type="text"
-            required
-            placeholder="Enter username"
+        <b-form-group label="Your Username:"
+                      label-for="input-username"
+                      label-cols="3">
+          <b-form-input id="input-username"
+                        v-model="username"
+                        type="text"
+                        required
+                        placeholder="Enter username"
           ></b-form-input>
         </b-form-group>
         <b-form-group label="Your Email:"
                       label-for="input-email"
-                      label-cols-md="3"
-                      label-cols-lg="2">
+                      label-cols="3">
           <b-form-input id="input-email"
                         v-model="email"
                         type="email"
@@ -29,8 +25,7 @@
         </b-form-group>
         <b-form-group label="Your Blogs Name:"
                       label-for="input-blogname"
-                      label-cols-md="3"
-                      label-cols-lg="2">
+                      label-cols="3">
           <b-form-input id="input-blogname"
                         v-model="blogname"
                         type="text"
@@ -40,8 +35,7 @@
         </b-form-group>
         <b-form-group label="Your Password:"
                       label-for="input-password"
-                      label-cols-md="3"
-                      label-cols-lg="2">
+                      label-cols="3">
           <b-form-input
             id="input-password"
             v-model="password"
@@ -52,8 +46,7 @@
         </b-form-group>
         <b-form-group label="Your Face:"
                       label-for="input-face"
-                      label-cols-md="3"
-                      label-cols-lg="2">
+                      label-cols="3">
           <b-form-file
             id="input-face"
             v-model="file"
@@ -63,26 +56,32 @@
             required
           ></b-form-file>
         </b-form-group>
-<div style="display:grid; grid-template-columns:25% 25% 25% 25%">
-        <b-form-group label="Your Profile:"
-                      label-for="input-profile"
-                      label-cols-md="3"
-                      label-cols-lg="2">
+        <b-container fluid>
+          <b-row>
+            <b-col cols="3" style="width: 100%;padding:0">
 
+              <b-form-group label="Your Profile:"
+                            label-for="input-profile"
+                            label-cols-md="12"
+                            label-cols-lg="12">
+              </b-form-group>
+            </b-col>
 
+            <b-col cols="9" style="width: 100%;padding:0">
 
-        </b-form-group>
-            <ckeditor
-              class="ck"
-                      :editor="editor"
-                      style="border: lightgrey 1px solid; grid-column: 2 / span 3;"
-                      v-model="profile"
-                      :config="editorConfig"></ckeditor>
-</div>
+              <ckeditor
+                class="ck"
+                :editor="editor"
+                style="width:250px;min-height: 8em;"
+                v-model="profile"
+                :config="editorConfig"></ckeditor>
+            </b-col>
+          </b-row>
+        </b-container>
 
         <b-button id="center-button"
-                  type="submit"
-                  variant="primary">Register
+                  style="margin-top:15px"
+                  type="submit">Register
         </b-button>
 
         <b-alert v-model="registerFail" variant="danger" dismissible>
@@ -146,9 +145,9 @@
 </script>
 
 <style scoped>
-  .ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline  {
+  .ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline {
     width: 100%;
-  height:6em
+    border: lightgrey 1px solid;
   }
 
 </style>

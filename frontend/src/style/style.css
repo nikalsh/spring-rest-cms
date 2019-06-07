@@ -4,8 +4,11 @@
 
 .ck {
 
-  border: lightgrey 1px solid;
+
   text-align: center;
+}
+.ck-border{
+  border: lightgrey 1px solid;
 }
 
 body {
@@ -73,24 +76,30 @@ html {
 }
 
 
-.transparent-button {
-  height:37px;
-  width:37px;
-  background-color: transparent ;
-  color: black ;
+
+
+.icon-btn, .icon-btn:focus, .icon-btn:hover, .btn.btn-secondary.icon-btn:active {
+  color: #000;
+
+  background: rgba(255, 255, 255, .5);
+  border: none;
+  border-radius: 10%;
+  box-shadow: none !important;
+  z-index:11;
+}
+.btn.btn-secondary.icon-btn:active{
+  background: rgba(222, 222, 222, .3);
+}
+.menu-btn {
+  font-size: 30px;
+  position:fixed;
+  margin: 10px;
+}
+.blog-btn {
+  font-size: 20px;
   position: absolute;
   top: 0;
   right: 0;
-  border: none;
-  border-radius: 50%;
+  margin: 2px;
+  z-index:11;
 }
-
-.transparent-button:focus, .transparent-button:hover {
-  box-shadow: none;
-}
-.transparent-button:hover{
-  background-color: black ;
-  /*color: black ;*/
-
-}
-

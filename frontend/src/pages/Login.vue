@@ -1,12 +1,11 @@
 <template>
-  <b-container>
-    <h1>Login Page</h1>
+  <b-container style="max-width: 600px">
+    <h1 style="text-align: center">Login Page</h1>
     <b-form @submit.prevent="login">
 
       <b-form-group label="Username:"
                     label-for="login-username"
-                    label-cols-sm="3"
-                    label-cols-lg="2">
+                    label-cols="3">
         <b-form-input
           id="login-username"
           v-model="username"
@@ -17,8 +16,7 @@
 
       <b-form-group label="Password:"
                     label-for="login-password"
-                    label-cols-sm="3"
-                    label-cols-lg="2">
+                    label-cols="3">
         <b-form-input
           id="login-password"
           v-model="password"
@@ -29,7 +27,7 @@
       </b-form-group>
 
 
-      <b-button id="center-button" type="submit" variant="primary">Login</b-button>
+      <b-button id="center-button" type="submit" >Login</b-button>
       <b-alert v-model="loginFail" variant="danger" dismissible>
         Inloggning misslyckades
       </b-alert>

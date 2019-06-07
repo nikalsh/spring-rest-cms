@@ -126,9 +126,12 @@ export default new Vuex.Store({
     isLoggedIn: state => !!state.access_token,
     authStatus: state => state.status,
     getUser: state => state.currentUser,
-    getUserImage: state => 'data:;base64,' + state.currentUser.photo,
+    getUserImage: (state => {
+      if (state.currentUser.photo) {
+        return 'data:;base64,' + state.currentUser.photo
+      }
+    }),
     getBlogName: (state => {
-      console.log(state.currentUser.blog);
       if (state.currentUser.blog !== undefined) {
         return state.currentUser.blog.blogName
       } else return ''

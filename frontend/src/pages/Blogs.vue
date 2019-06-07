@@ -3,7 +3,7 @@
     <SideMenu :user="blogUser" v-if="blogUser"/>
     <div id="blog-header" style="position: relative;">
 
-      <div v-show="isOwner">
+      <div v-if="isOwner">
 
         <b-form-file
           style="position: absolute; width: 200px;top: 0;right: 40px;"
@@ -12,37 +12,34 @@
           accept="image/*"
           drop-placeholder="Drop file here..."
           required
-          v-show="selectImage"
+          v-if="selectImage"
           @input="submitImage"
           plain
         ></b-form-file>
-        <b-button id="submit-btn"
-                  class="transparent-button"
-                  style="z-index:10"
+        <b-button id="img-btn"
+                  class="blog-btn icon-btn"
                   v-show="isOwner"
-                  @click="selectImage=!selectImage"
-        >
-          <font-awesome-icon id="save"
-                             icon="file-export">
-          </font-awesome-icon>
-
+                  @click="selectImage=!selectImage">
+          <font-awesome-icon icon="edit"/>
         </b-button>
-
+        <b-tooltip triggers="hover" target="img-btn" title="edit image" placement="left"></b-tooltip>
       </div>
       <b-img fluid-grow :src="url" v-show="url"></b-img>
     </div>
-    <b-container>
-
-      <div></div>
+    <b-container style="text-align:right">
       <h1 style="text-align: center"> {{ blogName }} </h1>
 
-      <button @click="newPost" v-show="isOwner">New post</button>
+      <b-button @click="newPost" v-show="isOwner" >New post</b-button>
       <div ref="container">
         <BlogpostContainer
           v-for="(post, index) in posts"
           :post="post"
+          :index="index"
           :isOwner="isOwner"
-          :key="index"/>
+          :key="index">
+
+        </BlogpostContainer>
+
       </div>
     </b-container>
   </div>
@@ -96,7 +93,6 @@
         this.posts.unshift({});
       },
       getBlog: function (blogName) {
-        console.log(blogName+123);
 
         this.$http.get('http://localhost:8080/post/postsByBlogName/' + blogName)
           .then(response => {

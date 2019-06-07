@@ -1,20 +1,17 @@
 <template>
-  <div ref="contents">
-    <ckeditor ref="contents"
+  <div ref="contents" class="ck-border">
+    <ckeditor
+              style="min-height: 8em;"
+              class="ck"
               @ready="onEditorReady"
-              style="min-height: 4em; text-align: center;"
               :editor="editor"
               :config="editorConfig">
-
     </ckeditor>
-    <b-button id="submit-btn"
-              style="z-index:10"
-              class="transparent-button"
-              @click="submitPost">
-      <font-awesome-icon id="save"
-                         icon="file-export">
-      </font-awesome-icon>
-    </b-button>
+    <b-spinner class="blog-btn"
+               type="grow"
+               :variant="spinnerVariant"
+               v-if="spinnerOn"></b-spinner>
+
   </div>
 </template>
 
@@ -33,7 +30,9 @@
         postId: '',
         instance: '',
         editorData: '',
-        timeoutId:'',
+        timeoutId: '',
+        spinnerOn: false,
+        spinnerVariant: '',
         editor: InlineEditor,
         editorConfig: {
 
@@ -73,22 +72,29 @@
           clearTimeout(this.timeoutId);
         }
 
-        this.timeoutId = setTimeout( ()=> {
+        this.timeoutId = setTimeout(() => {
           let formData = new FormData();
-          console.log(data);
           formData.append('file', data);
           formData.append('id', this.postId);
           this.$http.post('http://localhost:8080/post/uploadPost', formData)
             .then(response => {
               console.log(response);
               this.postId = response.data;
+              this.spin('success')
             }).catch(error => {
+            this.spin('danger');
             console.log(error);
           });
         }, 1000);
 
-
       },
+      spin(type) {
+        this.spinnerOn = true;
+        this.spinnerVariant = type;
+        setTimeout(() => {
+          this.spinnerOn = false;
+        }, 1500)
+      }
     }
   }
 </script>

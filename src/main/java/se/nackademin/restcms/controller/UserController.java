@@ -15,9 +15,8 @@ import se.nackademin.restcms.entities.User;
 import se.nackademin.restcms.service.BlogService;
 import se.nackademin.restcms.service.UserService;
 import se.nackademin.restcms.service.UserServiceImpl;
-
 import java.io.IOException;
-import java.security.Principal;
+import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -78,6 +77,13 @@ public class UserController {
     public ResponseEntity<User> registerUser(@RequestParam String email, @RequestParam String profile, @RequestParam String blogname, @RequestParam String username, @RequestParam String password, @RequestParam("file") MultipartFile file) throws IOException {
         User user = userService.registerUser(email, username, blogname, password, profile, file);
         return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+    @GetMapping(path = "/getFour")
+    public @ResponseBody
+    ResponseEntity<List<User>> getFour() {
+        List<User> blogs = userRepository.findFirst4By();
+
+        return new ResponseEntity<>(blogs, HttpStatus.OK);
     }
 
 

@@ -26,7 +26,7 @@ public class BlogController {
     private final UserRepository userRepository;
 
     @Autowired
-    public BlogController(final BlogServiceImpl blogService, BlogRepository blogRepository, UserRepository userRepository) {
+    public BlogController( BlogService blogService, BlogRepository blogRepository, UserRepository userRepository) {
         this.blogService = blogService;
         this.blogRepository = blogRepository;
         this.userRepository = userRepository;
@@ -45,6 +45,13 @@ public class BlogController {
         List<String> allBlogs = blogService.findAll().stream().map(Blog::getBlogName).collect(Collectors.toList());
 
         return new ResponseEntity<>(allBlogs, HttpStatus.OK);
+    }
+    @GetMapping(path = "/getFour")
+    public @ResponseBody
+    ResponseEntity<List<Blog>> getFour() {
+        List<Blog> blogs = blogRepository.findFirst4By();
+
+        return new ResponseEntity<>(blogs, HttpStatus.OK);
     }
 
     @PostMapping(path = "/me")

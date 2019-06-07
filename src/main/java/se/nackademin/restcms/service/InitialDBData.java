@@ -4,9 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import se.nackademin.restcms.crudrepositories.AuthorityRepository;
-import se.nackademin.restcms.crudrepositories.UserRepository;
 import se.nackademin.restcms.crudrepositories.BlogPostRepository;
-import se.nackademin.restcms.crudrepositories.BlogRepository;
+import se.nackademin.restcms.crudrepositories.UserRepository;
 import se.nackademin.restcms.entities.*;
 
 import javax.annotation.PostConstruct;
@@ -14,16 +13,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Base64;
 
 @Service
 public class InitialDBData {
 
     private final UserRepository userRepository;
 
-    private final BlogRepository blogRepository;
     private BlogPostRepository blogPostRepository;
-    private final BlogPostService blogPostService;
     private final AuthorityRepository authorityRepository;
 
     private final PasswordEncoder passwordEncoder;
@@ -32,15 +28,11 @@ public class InitialDBData {
     public InitialDBData(UserRepository userRepository,
                          AuthorityRepository authorityRepository,
                          PasswordEncoder passwordEncoder,
-                         BlogRepository blogRepository,
-                         BlogPostService blogPostService,
                          BlogPostRepository blogPostRepository
     ) {
-        this.blogPostService = blogPostService;
         this.userRepository = userRepository;
         this.authorityRepository = authorityRepository;
         this.passwordEncoder = passwordEncoder;
-        this.blogRepository = blogRepository;
         this.blogPostRepository = blogPostRepository;
     }
 
@@ -51,11 +43,26 @@ public class InitialDBData {
 
         authorityRepository.save(admin);
         authorityRepository.save(user);
-        Blog blog = newAdmin("lorem", "lorem", "lorem@lorem.lorem", "lorem", user);
-        newAdmin("NIKLAS BLOGG", "niklas", "niklas@niklas.niklas", "niklas", user);
-        newAdmin("JOSEF BLOGG", "josef", "josef@josef.josef", "josef", user);
-        newAdmin("JOHAN BLOGG", "johan", "johan@johan.johan", "johan", user);
+        String p1 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pellentesque habitant morbi tristique senectus et netus et. Lacus vel facilisis volutpat est velit egestas dui. Amet consectetur adipiscing elit duis. Amet massa vitae tortor condimentum.";
+        String p2 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Viverra suspendisse potenti nullam ac tortor. Morbi tristique senectus et netus. Condimentum lacinia quis vel eros donec. Aenean euismod elementum nisi quis eleifend quam adipiscing vitae.";
+        String p3 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Diam maecenas sed enim ut sem. Pellentesque adipiscing commodo elit at imperdiet dui accumsan sit. Sed arcu non odio euismod lacinia at quis risus. Eget nunc scelerisque viverra mauris in aliquam sem.";
+        String p4 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nulla facilisi nullam vehicula ipsum a arcu cursus vitae. Magna eget est lorem ipsum dolor sit amet consectetur. Luctus venenatis lectus magna fringilla. Quam elementum pulvinar etiam non quam.";
+        Blog blog1 = newAdmin("Lorems blogg", "lorem", "lorem@lorem.lorem", "lorem",
+                user, "header1.jpg", p1, "face1.jpg");
+        Blog blog2 = newAdmin("Niklas blogg", "niklas", "niklas@niklas.niklas", "niklas",
+                user, "header2.jpg", p2, "face2.jpg");
+        Blog blog3 = newAdmin("Josefs blogg", "josef", "josef@josef.josef", "josef",
+                user, "header3.jpg", p3, "face3.jpg");
+        Blog blog4 = newAdmin("Johans blogg", "johan", "johan@johan.johan", "johan",
+                user, "header4.jpg", p4, "face4.jpg");
 
+        myMethod(blog1);
+        myMethod(blog2);
+        myMethod(blog3);
+        myMethod(blog4);
+    }
+
+    private void myMethod(Blog blog) {
         newBlogPost(blog,
                 "<h2>Vad är Lorem Ipsum?</h2><p><strong>Lorem Ipsum</strong> är en utfyllnadstext från tryck- och förlagsindustrin. Lorem ipsum har varit standard ända sedan 1500-talet, när en okänd boksättare tog att antal bokstäver och blandade dem för att göra ett provexemplar av en bok. Lorem ipsum har inte bara överlevt fem århundraden, utan även övergången till elektronisk typografi utan större förändringar. Det blev allmänt känt på 1960-talet i samband med lanseringen av Letraset-ark med avsnitt av Lorem Ipsum, och senare med mjukvaror som Aldus PageMaker</p>"
         );
@@ -68,30 +75,28 @@ public class InitialDBData {
         newBlogPost(blog,
                 "<h2>Var får jag tag i det?</h2><p>Det finns många olika varianter av Lorem Ipsum, men majoriteten av dessa har ändrats på någotvis. Antingen med inslag av humor, eller med inlägg av ord som knappast ser trovärdiga ut. Skall man använda långa stycken av Lorem Ipsum bör man försäkra sig om att det inte gömmer sig något pinsamt mitt i texten. Lorem Ipsum-generatorer på internet tenderar att repetera Lorem Ipsum-texten styckvis efter behov, något som gör denna sidan till den första riktiga Lorem Ipsum-generatorn på internet. Den använder ett ordförråd på över 200 ord, kombinerat med ett antal meningsbyggnadsstrukturer som tillsamman genererar Lorem Ipsum som ser ut som en normal mening. Lorem Ipsum genererad på denna sidan är därför alltid fri från repetitioner, humorinslag, märkliga ordformationer osv.</p>"
         );
+
     }
-    private Blog newAdmin(String blogName, String username, String email, String rawPassword, Authority role) {
+
+    private Blog newAdmin(String blogName, String username, String email, String rawPassword, Authority role, String header, String profile, String face) {
         User user = new User(username, email, passwordEncoder.encode(rawPassword), role);
         Blog blog = new Blog();
         blog.setActive(true);
         blog.setBlogName(blogName);
-//        blog.setHeaderImage(encoder(""));
+        user.setProfile(profile);
+        blog.setHeaderImage(encoder(header));
+        user.setPhoto(encoder(face));
         user.setBlog(blog);
         blog.setUser(user);
         userRepository.save(user);
-//        blogRepository.save(blog);
-        File directory = new File("./");
-        System.out.println(directory.getAbsolutePath());
         return blog;
     }
 
     private byte[] encoder(String imagePath) {
-        String base64Image = "";
-        File file = new File(".\\src\\main\\java\\se\\nackademin\\restcms\\images\\front1.jpg");
-            byte[] imageData = new byte[(int) file.length()];
+        File file = new File(".\\src\\main\\java\\se\\nackademin\\restcms\\images\\" + imagePath);
+        byte[] imageData = new byte[(int) file.length()];
         try (FileInputStream imageInFile = new FileInputStream(file)) {
-            // Reading a Image file from file system
-            int read = imageInFile.read(imageData);
-            base64Image = Base64.getEncoder().encodeToString(imageData);
+            imageInFile.read(imageData);
         } catch (FileNotFoundException e) {
             System.out.println("Image not found" + e);
         } catch (IOException ioe) {

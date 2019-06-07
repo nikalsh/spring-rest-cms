@@ -1,7 +1,7 @@
 <template>
   <div id="blogsPanel">
     <b-container>
-      <b-container class="bv-example-row">
+
         <b-row class="justify-content-md-center">
           <b-col  md="auto">
             <b-list-group class="text-center" v-for="blog in blogs" :key="blog">
@@ -12,7 +12,6 @@
           </b-col>
         </b-row>
 
-      </b-container>
 
     </b-container>
   </div>
@@ -41,19 +40,5 @@
 </script>
 
 <style scoped>
-
-  #blogsPanel {
-    background-color: lightcoral;
-  }
-
-  /*#buttons {*/
-  /*display: flex;*/
-  /*align-items: center;*/
-  /*}*/
-
-  /*.text-center {*/
-  /*text-align: center;*/
-  /*vertical-align: middle;*/
-  /*}*/
 
 </style>

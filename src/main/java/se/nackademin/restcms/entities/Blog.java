@@ -43,15 +43,15 @@ public class Blog {
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "create_date")
-    private Date createDate;
+    @Column
+    private Date dateCreated;
 
     @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "modify_date")
-    private Date updateDate;
+    @Column
+    private Date dateUpdated;
 
-    @Column(name = "is_active", columnDefinition = "boolean default true")
+    @Column(name = "active", columnDefinition = "boolean default true")
     private boolean active;
 
 

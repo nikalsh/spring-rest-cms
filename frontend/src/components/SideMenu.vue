@@ -2,7 +2,7 @@
   <div id="content" v-bind:class="{openContent: isOpen, closeContent: !isOpen}">
 
 
-    <b-button @click="isOpen=!isOpen" class="menu-btn" style="z-index:1000; position:fixed; ">
+    <b-button @click="isOpen=!isOpen" class="icon-btn menu-btn"  >
       <font-awesome-icon icon="bars"/>
     </b-button>
 
@@ -17,7 +17,9 @@
           class="profile"
           style="text-align:center"
         >
-          <b-card-text v-html="user.profile"  >
+          <b-card-text v-html="user.profile"
+                       style="padding: 0"
+                       class=" ck ck-content ck-editor__editable ck-rounded-corners ck-editor__editable_inline ck-blurred">
           </b-card-text>
         </b-card>
 
@@ -98,15 +100,7 @@
     background-color: white;
   }
 
-  .menu-btn, .menu-btn:focus, .menu-btn:hover, #content .menu-btn:active {
-    color: #000;
-    margin: 10px;
-    font-size: 30px;
-    background: rgba(255, 255, 255, .5);
-    border: none;
-    border-radius: 10%;
-    box-shadow: none;
-  }
+
 
 
   .nav {
@@ -122,52 +116,7 @@
     border-right: 2px solid lightgrey;
   }
 
-  .nav a.item {
-    display: flex;
-    flex-direction: row;
-    padding: 18px 30px;
-    font-size: 30px;
-    text-decoration: none;
-    color: #ccc;
-    background-color: #3d3d3d;
-    border-top: 1px solid #ccc;
-  }
 
-  .nav .last {
-    border-bottom: 1px solid #ccc;
-  }
-
-  .nav a.item:hover {
-    color: #fff;
-    background-color: #cf0000;
-    transition: 0.4s;
-  }
-
-  .nav .icon {
-    padding-right: 10px;
-    font-size: 35px;
-  }
-
-  .nav ul {
-    display: flex;
-    position: absolute;
-    width: 100%;
-    margin-top: 50px;
-  }
-
-  .nav ul li {
-    list-style: none;
-  }
-
-  .nav ul li a.inline {
-    font-size: 26px;
-    color: #ccc;
-    padding: 6px 5px 3px;
-  }
-
-  .nav ul li a.inline:hover {
-    color: #cf0000;
-  }
 
 .profile{
   border:none;
