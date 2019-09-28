@@ -1,7 +1,6 @@
 package se.nackademin.restcms.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonIgnoreType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -31,7 +30,7 @@ public class Blog {
     private String blogName;
 
     @Lob
-    @Column(name = "headerImage", columnDefinition = "BLOB")
+    @Column(name = "headerImage")
     private byte[] headerImage;
 
 

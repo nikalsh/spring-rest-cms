@@ -67,7 +67,7 @@ public class User implements UserDetails {
     private Blog blog;
 
     @Lob
-    @Column(name = "photo", columnDefinition = "BLOB")
+    @Column(name = "photo")
     private byte[] photo;
 
     @Column
