@@ -10,11 +10,11 @@ import org.springframework.web.multipart.MultipartFile;
 import se.nackademin.restcms.crudrepositories.AuthorityRepository;
 import se.nackademin.restcms.crudrepositories.BlogRepository;
 import se.nackademin.restcms.crudrepositories.UserRepository;
-import se.nackademin.restcms.entities.Blog;
 import se.nackademin.restcms.entities.User;
 import se.nackademin.restcms.service.BlogService;
 import se.nackademin.restcms.service.UserService;
 import se.nackademin.restcms.service.UserServiceImpl;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
