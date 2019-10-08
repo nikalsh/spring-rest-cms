@@ -76,7 +76,7 @@
           let formData = new FormData();
           formData.append('file', data);
           formData.append('id', this.postId);
-          this.$http.post('http://localhost:8080/post/uploadPost', formData)
+          this.$http.post('http://localhost:9090/post/uploadPost', formData)
             .then(response => {
               // console.log(response);
               this.postId = response.data;

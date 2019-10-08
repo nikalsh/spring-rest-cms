@@ -57,7 +57,7 @@
       },
       getFour() {
         this.isReady=false
-         this.$http.get('http://localhost:8080/user/getFour')
+         this.$http.get('http://localhost:9090/user/getFour')
           .then(response => {
             this.topUsers=response.data;
             // console.log(this.topUsers[0].blog);
