@@ -1,6 +1,8 @@
 package se.nackademin.restcms.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import se.nackademin.restcms.crudrepositories.AuthorityRepository;
@@ -10,9 +12,9 @@ import se.nackademin.restcms.entities.*;
 
 import javax.annotation.PostConstruct;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 
 @Service
 public class InitialDBData {
@@ -93,17 +95,25 @@ public class InitialDBData {
     }
 
     private byte[] encoder(String imagePath) {
-        File file = new File(".\\src\\main\\java\\se\\nackademin\\restcms\\images\\" + imagePath);
-        byte[] imageData = new byte[(int) file.length()];
-        try (FileInputStream imageInFile = new FileInputStream(file)) {
-            imageInFile.read(imageData);
-        } catch (FileNotFoundException e) {
-            System.out.println("Image not found" + e);
-        } catch (IOException ioe) {
-            System.out.println("Exception while reading the Image " + ioe);
-        }
-        return imageData;
+        Resource resource = new ClassPathResource("images/" + imagePath);
 
+        InputStream is = null;
+        byte[] imageData = null;
+
+        try {
+            is = resource.getInputStream();
+            imageData = new byte[is.available()];
+
+            try (InputStream input = resource.getInputStream()) {
+                input.read(imageData);
+            } catch (FileNotFoundException e) {
+                System.out.println("Image not found" + e);
+            } catch (IOException ioe) {
+                System.out.println("Exception while reading the Image " + ioe);
+            }
+        } finally {
+            return imageData;
+        }
     }
 
     private void newBlogPost(Blog blog, String data) {
