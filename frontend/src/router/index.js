@@ -16,7 +16,7 @@ Vue.use(Router);
 let dynRoutes = [];
 
 
-axios.get("http://localhost:9090/blog/allnames")
+axios.get("api/blog/allnames")
   .then(response => {
     response.data.forEach(blog => {
       console.log(blog);

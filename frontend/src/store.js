@@ -44,7 +44,7 @@ export default new Vuex.Store({
         params.append("grant_type", "password");
         axios({
             method: 'post',
-            url: 'http://localhost:9090/oauth/token',
+            url: 'api/oauth/token',
             withCredentials: true,
             crossdomain: true,
             data: params,
@@ -71,7 +71,7 @@ export default new Vuex.Store({
     },
     downloadUser({commit}) {
       return new Promise((resolve, reject) => {
-        axios.get('http://localhost:9090/user/me')
+        axios.get('api/user/me')
           .then(resp => {
             const userdata = resp.data;
             // console.log(resp.data);
@@ -98,7 +98,7 @@ export default new Vuex.Store({
         formData.append('file', user.file);
 
         axios.post(
-          'http://localhost:9090/user/registerUser',
+          'api/user/registerUser',
           formData
         )
           .then(resp => {

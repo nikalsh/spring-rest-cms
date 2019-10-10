@@ -84,7 +84,7 @@
         this.url = URL.createObjectURL(this.file);
         let formData = new FormData();
         formData.append('file', input);
-        this.$http.put('http://localhost:9090/blog/saveImage', formData)
+        this.$http.put('api/blog/saveImage', formData)
           .then(resp => {
             console.log(resp);
           })
@@ -98,20 +98,20 @@
       },
       getBlog: function (blogName) {
 
-        this.$http.get('http://localhost:9090/post/postsByBlogName/' + blogName)
+        this.$http.get('api/post/postsByBlogName/' + blogName)
           .then(response => {
             // console.log(response);
             this.posts = response.data;
           }).catch(error => {
           console.log(error);
         });
-        this.$http.get('http://localhost:9090/blog/isOwner/' + blogName)
+        this.$http.get('api/blog/isOwner/' + blogName)
           .then(response => {
             this.isOwner = response.data;
           }).catch(error => {
           console.log(error);
         });
-        this.$http.get('http://localhost:9090/blog/getBlog/' + blogName)
+        this.$http.get('api/blog/getBlog/' + blogName)
           .then(response => {
             // console.log(response);
             this.blog = response.data;
@@ -124,7 +124,7 @@
           .catch(error => {
             console.log(error);
           });
-        this.$http.get('http://localhost:9090/user/getUser/' + blogName)
+        this.$http.get('api/user/getUser/' + blogName)
           .then(response => {
             // console.log(response.data);
             this.blogUser = response.data;

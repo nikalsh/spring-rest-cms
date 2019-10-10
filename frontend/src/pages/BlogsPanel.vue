@@ -26,7 +26,7 @@
     },
     methods: {},
     async created() {
-      await this.$http.get("http://localhost:9090/blog/allnames")
+      await this.$http.get("api/blog/allnames")
         .then(response => {
           this.blogs = response.data;
           // console.log(response.data)
