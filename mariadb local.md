@@ -1,4 +1,4 @@
-##Lokal MySQL MariaDB
+## Lokal MySQL MariaDB
 0. Ladda ner och installera MariaDB 10.1
 https://downloads.mariadb.org/mariadb/10.1.41/
 
