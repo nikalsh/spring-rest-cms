@@ -11,7 +11,6 @@ import se.nackademin.restcms.crudrepositories.UserRepository;
 import se.nackademin.restcms.entities.*;
 
 import javax.annotation.PostConstruct;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,6 +24,7 @@ public class InitialDBData {
     private final AuthorityRepository authorityRepository;
 
     private final PasswordEncoder passwordEncoder;
+    private final boolean createEntryData = false;
 
     @Autowired
     public InitialDBData(UserRepository userRepository,
@@ -40,28 +40,30 @@ public class InitialDBData {
 
     @PostConstruct
     public void init() {
-        Authority user = new Authority(AuthorityType.ROLE_USER);
-        Authority admin = new Authority(AuthorityType.ROLE_ADMIN);
+        if (createEntryData) {
+            Authority user = new Authority(AuthorityType.ROLE_USER);
+            Authority admin = new Authority(AuthorityType.ROLE_ADMIN);
 
-        authorityRepository.save(admin);
-        authorityRepository.save(user);
-        String p1 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pellentesque habitant morbi tristique senectus et netus et. Lacus vel facilisis volutpat est velit egestas dui. Amet consectetur adipiscing elit duis. Amet massa vitae tortor condimentum.";
-        String p2 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Viverra suspendisse potenti nullam ac tortor. Morbi tristique senectus et netus. Condimentum lacinia quis vel eros donec. Aenean euismod elementum nisi quis eleifend quam adipiscing vitae.";
-        String p3 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Diam maecenas sed enim ut sem. Pellentesque adipiscing commodo elit at imperdiet dui accumsan sit. Sed arcu non odio euismod lacinia at quis risus. Eget nunc scelerisque viverra mauris in aliquam sem.";
-        String p4 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nulla facilisi nullam vehicula ipsum a arcu cursus vitae. Magna eget est lorem ipsum dolor sit amet consectetur. Luctus venenatis lectus magna fringilla. Quam elementum pulvinar etiam non quam.";
-        Blog blog1 = newAdmin("Lorems blogg", "lorem", "lorem@lorem.lorem", "lorem",
-                user, "header1.jpg", p1, "face1.jpg");
-        Blog blog2 = newAdmin("Niklas blogg", "niklas", "niklas@niklas.niklas", "niklas",
-                user, "header2.jpg", p2, "face2.jpg");
-        Blog blog3 = newAdmin("Josefs blogg", "josef", "josef@josef.josef", "josef",
-                user, "header3.jpg", p3, "face3.jpg");
-        Blog blog4 = newAdmin("Johans blogg", "johan", "johan@johan.johan", "johan",
-                user, "header4.jpg", p4, "face4.jpg");
+            authorityRepository.save(admin);
+            authorityRepository.save(user);
+            String p1 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pellentesque habitant morbi tristique senectus et netus et. Lacus vel facilisis volutpat est velit egestas dui. Amet consectetur adipiscing elit duis. Amet massa vitae tortor condimentum.";
+            String p2 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Viverra suspendisse potenti nullam ac tortor. Morbi tristique senectus et netus. Condimentum lacinia quis vel eros donec. Aenean euismod elementum nisi quis eleifend quam adipiscing vitae.";
+            String p3 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Diam maecenas sed enim ut sem. Pellentesque adipiscing commodo elit at imperdiet dui accumsan sit. Sed arcu non odio euismod lacinia at quis risus. Eget nunc scelerisque viverra mauris in aliquam sem.";
+            String p4 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nulla facilisi nullam vehicula ipsum a arcu cursus vitae. Magna eget est lorem ipsum dolor sit amet consectetur. Luctus venenatis lectus magna fringilla. Quam elementum pulvinar etiam non quam.";
+            Blog blog1 = newAdmin("Lorems blogg", "lorem", "lorem@lorem.lorem", "lorem",
+                    user, "header1.jpg", p1, "face1.jpg");
+            Blog blog2 = newAdmin("Niklas blogg", "niklas", "niklas@niklas.niklas", "niklas",
+                    user, "header2.jpg", p2, "face2.jpg");
+            Blog blog3 = newAdmin("Josefs blogg", "josef", "josef@josef.josef", "josef",
+                    user, "header3.jpg", p3, "face3.jpg");
+            Blog blog4 = newAdmin("Johans blogg", "johan", "johan@johan.johan", "johan",
+                    user, "header4.jpg", p4, "face4.jpg");
 
-        myMethod(blog1);
-        myMethod(blog2);
-        myMethod(blog3);
-        myMethod(blog4);
+            myMethod(blog1);
+            myMethod(blog2);
+            myMethod(blog3);
+            myMethod(blog4);
+        }
     }
 
     private void myMethod(Blog blog) {
