@@ -29,6 +29,7 @@ pipeline {
         stage('Deploying artifacts to selected target') {
         agent any
             steps {
+            sh '/scripts/stop.sh'
             sh '/scripts/silent_start.sh'
             }
         }
