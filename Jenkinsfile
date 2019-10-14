@@ -21,7 +21,7 @@ pipeline {
                     ])
                 }
                 success {
-                    archive "target/restcms-0.0.1-SNAPSHOT.jar"
+                    archiveArtifacts(artifacts: 'target/restcms-0.0.1-SNAPSHOT.jar', onlyIfSuccessful: true)
                 }
             }
         }
@@ -29,7 +29,7 @@ pipeline {
         stage('Deploying artifacts to selected target') {
         agent any
             steps {
-            sh "java -jar target/restcms-0.0.1-SNAPSHOT.jar"
+            sh "java -jar /target/restcms-0.0.1-SNAPSHOT.jar"
             }
         }
     }
