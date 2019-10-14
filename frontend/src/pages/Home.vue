@@ -27,6 +27,11 @@
       </b-carousel-slide>
 
     </b-carousel>
+    <a class="center"
+      href="https://test-www.payson.se/pay?De=K%c3%b6p+av+luft&Se=niklas%40helander.se&Cost=0&Currency=SEK&Sp=1&Lang=SE"
+      title="Payson internetbetalningar"
+      style="width: 170px; height: 70px; background: url('https://www.payson.se/sites/all/files/images/external/PayBtn_BgImg.png') no-repeat scroll 0% 0% transparent; display: block; text-indent: 75px; padding-top: 15px; text-decoration: none; font-size: 16px; font-family: Arial; font-weight: bold; color: #00245D;">Köp
+      luft</a>
   </div>
 </template>
 
@@ -72,5 +77,14 @@
 </script>
 
 <style scoped>
+
+  .center {
+    display: inline-block;
+    text-align: center;
+    margin-left: 46%;
+    /*margin-right: 30%;*/
+    overflow: visible;
+
+  }
 
 </style>

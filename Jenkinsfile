@@ -31,9 +31,6 @@ pipeline {
             steps {
             sh 'scripts/silent_start.sh'
             }
-
         }
-
-
-
+    }
 }
