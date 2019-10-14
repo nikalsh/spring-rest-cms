@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import axios from 'axios'
 import Register from '../pages/Register'
 import Blogs from '../pages/Blogs'
 import Login from '../pages/Login'
@@ -12,30 +11,7 @@ Vue.use(Router);
 
 /* eslint-disable */
 
-
-let dynRoutes = [];
-
-
-axios.get("api/blog/allnames")
-  .then(response => {
-    response.data.forEach(blog => {
-      console.log(blog);
-      dynRoutes.push({
-        name: blog,
-        path: "/" + blog,
-        props: true,
-        params: {blogId: blog}
-      })
-    })
-  }).catch(error => {
-  console.log(error)
-});
-
-
 export default new Router({
-
-  mode: 'history',
-  hash: false,
 
   routes: [
 
