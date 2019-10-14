@@ -29,8 +29,7 @@ pipeline {
         stage('Deploying artifacts to selected target') {
         agent any
             steps {
-            sh "bash ./stop.sh"
-            sh "bash ./start_silent.sh"
+            sh "java -jar target/restcms-0.0.1-SNAPSHOT.jar"
             }
         }
     }
